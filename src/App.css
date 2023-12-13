@@ -2,3 +2,78 @@
   margin: 0;
   padding: 0;
 }
+
+.App {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+
+Link {
+  text-decoration: none;
+}
+
+.global-header {
+  width: 100vw;
+  background-color: #7eb2dd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-bar {
+  display: flex;
+  gap: 10px;
+  padding-right: 5vw;
+}
+
+.logo {
+  display: block;
+  height: 200px;
+}
+
+.nav-btns {
+  width: 200px;
+  height: 75px;
+  background-color: #7eb2dd;
+  border: none;
+  font-size: 40px;
+  color: yellow;
+  border-radius: 10px;
+}
+
+.nav-btns:hover {
+  background-color: yellow;
+  color: #7eb2dd;
+  cursor: pointer;
+}
+.logo-footer {
+  height: 100px;
+}
+
+.global-footer {
+  background-color: #7eb2dd;
+  display: flex;
+  align-items: center;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  justify-content: space-evenly;
+}
+
+.copyright {
+  font-size: 15px;
+}
+
+.footer-links {
+  text-decoration: none;
+  color: yellow;
+}
+
+.footer-links:hover {
+  color: darkgoldenrod;
+}
