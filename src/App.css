@@ -34,7 +34,7 @@ Link {
 
 .logo {
   display: block;
-  height: 200px;
+  height: 100px;
 }
 
 .nav-btns {
@@ -76,4 +76,29 @@ Link {
 
 .footer-links:hover {
   color: darkgoldenrod;
+}
+
+input {
+  display: block;
+}
+
+.create-submit {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+}
+
+.create-account-page {
+  padding-top: 15vh;
+}
+
+.form-container {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
