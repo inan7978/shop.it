@@ -3,18 +3,19 @@ function CreateAccountPage() {
     <>
       <div className="create-account-page" style={{ background: "#7eb2dd" }}>
         <div className="form-container">
+          <h3 className="heading-bold">Create Account!</h3>
           <form className="register-form">
-            <label>
+            <label className="field-label">
               Email:
-              <input type="email" />
+              <input className="input-single" type="email" />
             </label>
-            <label>
+            <label className="field-label">
               Password:
-              <input type="password" />
+              <input className="input-single" type="password" />
             </label>
-            <label>
+            <label className="field-label">
               Re-Enter Password:
-              <input type="password" />
+              <input className="input-single" type="password" />
             </label>
             <input className="create-submit" type="submit" />
           </form>

@@ -86,10 +86,22 @@ input {
   margin-left: auto;
   margin-right: auto;
   margin-top: 25px;
+  height: 50px;
+  width: 200px;
+  background-color: #1fd694;
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 24px;
 }
 
 .create-account-page {
   padding-top: 15vh;
+}
+
+.register-form {
+  border-top: 5px solid black;
+  padding-top: 3vh;
 }
 
 .form-container {
@@ -101,4 +113,37 @@ input {
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
+}
+
+.input-single {
+  border: none;
+  height: 5vh;
+  width: 15vw;
+  border-radius: 10px;
+  background-color: #d9d9d9;
+}
+
+.field-label {
+  font-size: 32px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.heading-bold {
+  font-size: 36px;
+  color: white;
+}
+
+input[type="email"] {
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+input[type="password"] {
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 16px;
+  font-weight: 600;
 }
