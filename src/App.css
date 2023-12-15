@@ -95,11 +95,33 @@ input {
   font-size: 24px;
 }
 
+.login-submit {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  height: 50px;
+  width: 200px;
+  background-color: #1fd694;
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 24px;
+}
+
 .create-account-page {
   padding-top: 15vh;
 }
 
+.login-page {
+  padding-top: 15vh;
+}
+
 .register-form {
+  border-top: 5px solid black;
+  padding-top: 3vh;
+}
+
+.login-form {
   border-top: 5px solid black;
   padding-top: 3vh;
 }
@@ -132,6 +154,7 @@ input {
 .heading-bold {
   font-size: 36px;
   color: white;
+  margin-bottom: 20px;
 }
 
 input[type="email"] {
