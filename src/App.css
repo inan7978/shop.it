@@ -82,7 +82,7 @@ input {
   display: block;
 }
 
-.create-submit {
+.btn-submit {
   margin-left: auto;
   margin-right: auto;
   margin-top: 25px;
@@ -93,19 +93,12 @@ input {
   color: white;
   font-weight: 700;
   font-size: 24px;
+  border-radius: 15px;
 }
 
-.login-submit {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 25px;
-  height: 50px;
-  width: 200px;
-  background-color: #1fd694;
-  border: none;
-  color: white;
-  font-weight: 700;
-  font-size: 24px;
+.btn-submit:hover {
+  cursor: pointer;
+  background-color: #17a873;
 }
 
 .create-account-page {

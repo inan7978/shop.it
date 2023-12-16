@@ -1,6 +1,5 @@
 import "./App.css";
-import shopItlogo from "./images/shopitLogo.png";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Collaborations from "./pages/Collaborations";
