@@ -3,14 +3,25 @@ import { createContext, useState } from "react";
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(69);
+  const [user, setUser] = useState({});
 
-  function addOne() {
-    setUser(user + 1);
+  function loginUser(email, pass) {
+    if (email === "inan7978@outlook.com" && pass === "password")
+      setUser({
+        fname: "inan",
+        lname: "ismailov",
+        email: "inan7978@outlook.com",
+      });
+
+    console.log("Context feedback: Logged in as: " + email);
+  }
+
+  function logOutUser() {
+    setUser({});
   }
 
   return (
-    <UserContext.Provider value={{ user, addOne }}>
+    <UserContext.Provider value={{ user, loginUser, logOutUser }}>
       {children}
     </UserContext.Provider>
   );

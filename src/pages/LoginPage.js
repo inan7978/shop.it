@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useContext } from "react";
+import UserContext from "../context/UserContext";
 
 function LoginPage() {
+  const { loginUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
@@ -11,6 +14,8 @@ function LoginPage() {
     Email: ${email}
     
     Password: ${pass}`);
+
+    loginUser(email, pass);
 
     setEmail("");
     setPass("");
