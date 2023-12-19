@@ -13,7 +13,13 @@ export function CartProvider({ children }) {
     { item: 7324435, itemName: "Apple", Price: 1.5 },
   ]);
 
-  function loadCart() {}
+  function loadCart() {
+    if (user.fname === "inan") {
+      return cart;
+    } else {
+      return [];
+    }
+  }
 
   function addToCart() {}
 

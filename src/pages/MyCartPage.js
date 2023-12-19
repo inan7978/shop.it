@@ -2,7 +2,9 @@ import UserContext from "../context/UserContext";
 import CartContext from "../context/CartContext";
 import { useContext } from "react";
 function MyCartPage() {
-  const { cart } = useContext(CartContext);
+  const { loadCart } = useContext(CartContext);
+
+  const cart = loadCart();
 
   const cartItems = cart.map((item) => {
     return <h2 key={item.item}>{item.itemName}</h2>;
