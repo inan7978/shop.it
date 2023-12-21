@@ -17,12 +17,13 @@ function MyCartPage() {
         <div className="cart-page-container">
           <div className="item-cards-container">{cartItems}</div>
           <div className="total-costs">
-            <h3>Sub Total:</h3>
-            <h3>Tax:</h3>
-            <h3>Rewards:</h3>
-            <h3>Fees:</h3>
-            <h3>Shipping:</h3>
-            <h2>Grand Total:</h2>
+            <h3>Sub Total: $45.11</h3>
+            <h3>Tax: $1.54</h3>
+            <h3>Rewards: $0.00</h3>
+            <h3>Fees: $0.00</h3>
+            <h3>Shipping: $4.94</h3>
+            <h2>Grand Total: $51.59</h2>
+            <button className="order-btn btn-submit">Place Order!</button>
           </div>
         </div>
       ) : (
