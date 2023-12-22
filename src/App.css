@@ -172,13 +172,21 @@ input[type="password"] {
   justify-content: center;
   width: 40vw;
   height: 65vh;
-  overflow-y: auto;
-  gap: 15px;
+  overflow-y: scroll;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10px,
+    black calc(100% - 30px),
+    transparent 100%
+  );
+  gap: 20px;
 }
 
 .item-cards-container::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
+  display: none;
 }
 
 .item-cards-container::-webkit-scrollbar-thumb {
@@ -188,12 +196,13 @@ input[type="password"] {
 
 .item-card {
   width: 80%;
-  height: 100px;
+  height: 80px;
   background-color: rgb(233, 252, 152);
   border-radius: 15px;
   padding: 10px;
   display: flex;
   align-items: center;
+  gap: 8%;
 }
 
 .card-title {
@@ -209,8 +218,8 @@ input[type="password"] {
 }
 
 .item-card-img {
-  height: 100px;
-  width: 100px;
+  height: 75px;
+  width: 75px;
   border-radius: 5px;
 }
 
@@ -218,7 +227,7 @@ input[type="password"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 100px;
+  gap: 75px;
 }
 
 .total-costs {
