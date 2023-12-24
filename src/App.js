@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { UserProvider } from "./context/UserContext";
 import { CartProvider } from "./context/CartContext";
 import ContactUs from "./pages/ContactUs";
+import StorePage from "./pages/StorePage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Collaborations from "./pages/Collaborations";
 import CreateListingPage from "./pages/CreateListingPage";
@@ -18,7 +19,7 @@ function App() {
         <div className="App">
           <Header />
           <Routes>
-            <Route path="/" element={<LoginPage />} />
+            <Route path="/" element={<StorePage />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/my-cart" element={<MyCartPage />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />

@@ -1,0 +1,17 @@
+each user will have:
+
+user id (mongo will generate this)
+email
+password (can be plaintext for now)
+first name
+last name
+items in their cart (and how many of them)
+
+
+each item will have
+
+item id (mongo will generate this)
+Title
+Description
+Price
+Picture

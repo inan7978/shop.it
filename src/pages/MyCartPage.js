@@ -8,7 +8,6 @@ function MyCartPage() {
   const cart = loadCart();
 
   const cartItems = cart.map((item) => {
-    // return <h2 key={item.item}>{item.itemName}</h2>;
     return <ItemCard key={item.item} item={item} />;
   });
   return (
