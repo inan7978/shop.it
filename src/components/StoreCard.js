@@ -13,7 +13,7 @@ function StoreCard(props) {
       <img alt="testing" src={stock_photo} className="store-card-img" />
       <h1 className="store-card-title">{props.item.title}</h1>
       <h3>${itemPrice}</h3>
-      <button>Remove</button>
+      <button className="add-cart-btn btn-submit">Add to Cart</button>
     </article>
   );
 }

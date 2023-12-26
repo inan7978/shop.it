@@ -20,6 +20,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<StorePage />} />
+            <Route path="/store-page" element={<StorePage />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/my-cart" element={<MyCartPage />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />

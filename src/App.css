@@ -239,3 +239,33 @@ input[type="password"] {
   justify-content: center;
   align-items: center;
 }
+
+.store-card-img {
+  width: 200px;
+  height: 200px;
+}
+
+.storePage-container {
+  overflow-y: scroll;
+  max-width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inventory-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.store-card {
+  background-color: rgb(228, 245, 133);
+  flex-basis: 25%;
+  height: 400px;
+  padding: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

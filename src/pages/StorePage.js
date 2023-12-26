@@ -29,7 +29,7 @@ function StorePage() {
   }, [items.length]);
 
   const storeItems = items.map((item) => {
-    return <StoreCard key={item._id} item={item} />;
+    return <StoreCard className="store-card" key={item._id} item={item} />;
   });
 
   return (

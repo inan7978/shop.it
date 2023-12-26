@@ -17,7 +17,10 @@ function Header() {
 
   return (
     <div className="global-header">
-      <img className="logo" src={shopItlogo} alt="shop.it logo" />
+      <Link to="/store-page">
+        <img className="logo" src={shopItlogo} alt="shop.it logo" />
+      </Link>
+
       {Object.keys(user).length === 0 ? (
         <nav className="nav-bar">
           <Link to="/login">
