@@ -1,21 +1,26 @@
 import { useState, useEffect } from "react";
+import StoreCard from "../components/StoreCard";
 
 function StorePage() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://localhost:3003/get-store-items`);
+      try {
+        const response = await fetch(`http://localhost:3003/get-store-items`);
 
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
+        if (!response.ok) {
+          const message = `An error occurred: ${response.statusText}`;
+          window.alert(message);
+          return;
+        }
+
+        const records = await response.json();
+        setItems(records);
+        console.log(items);
+      } catch (error) {
+        setItems([]);
       }
-
-      const records = await response.json();
-      setItems(records);
-      console.log(items);
     }
 
     getRecords();
@@ -23,13 +28,13 @@ function StorePage() {
     return;
   }, [items.length]);
 
-  const inventory = items.map((item) => {
-    return <h1 key={item._id}>{item.title}</h1>;
+  const storeItems = items.map((item) => {
+    return <StoreCard key={item._id} item={item} />;
   });
 
   return (
     <div className="storePage-container">
-      <div>{inventory}</div>
+      <div className="inventory-container">{storeItems}</div>
     </div>
   );
 }
