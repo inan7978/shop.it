@@ -10,10 +10,17 @@ function StoreCard(props) {
         console.log(`${props.item.title} has been clicked.`);
       }}
     >
-      <img alt="testing" src={stock_photo} className="store-card-img" />
+      <img alt="testing" src={props.item.imgURL} className="store-card-img" />
       <h1 className="store-card-title">{props.item.title}</h1>
       <h3>${itemPrice}</h3>
-      <button className="add-cart-btn btn-submit">Add to Cart</button>
+      <button
+        className="add-cart-btn btn-submit"
+        onClick={() => {
+          console.log(props.item.title + " request to add to cart.");
+        }}
+      >
+        Add to Cart
+      </button>
     </article>
   );
 }

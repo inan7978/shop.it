@@ -17,7 +17,6 @@ function StorePage() {
 
         const records = await response.json();
         setItems(records);
-        console.log(items);
       } catch (error) {
         setItems([]);
       }
@@ -26,7 +25,7 @@ function StorePage() {
     getRecords();
 
     return;
-  }, [items.length]);
+  }, []);
 
   const storeItems = items.map((item) => {
     return <StoreCard className="store-card" key={item._id} item={item} />;
