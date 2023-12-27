@@ -33,7 +33,11 @@ function StorePage() {
 
   return (
     <div className="storePage-container">
-      <div className="inventory-container">{storeItems}</div>
+      {storeItems.length ? (
+        <div className="inventory-container">{storeItems}</div>
+      ) : (
+        <h1>Nothing here</h1>
+      )}
     </div>
   );
 }

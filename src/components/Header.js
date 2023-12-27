@@ -32,8 +32,8 @@ function Header() {
         </nav>
       ) : (
         <nav className="nav-bar">
-          <h2>{`Welcome, ${user.fname}`}</h2>
-          <h1>{`items in cart: ${cart.length}`}</h1>
+          {/* <h2>{`Welcome, ${user.fname}`}</h2>
+          <h1>{`items in cart: ${cart.length}`}</h1> */}
           <button className="logout-btn nav-btns" onClick={logOutUser}>
             Log out!
           </button>

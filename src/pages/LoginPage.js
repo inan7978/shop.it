@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import UserContext from "../context/UserContext";
 
@@ -7,6 +8,7 @@ function LoginPage() {
   const { loginUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const navigate = useNavigate();
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -20,6 +22,7 @@ function LoginPage() {
 
     setEmail("");
     setPass("");
+    navigate("../store-page");
   };
 
   return (

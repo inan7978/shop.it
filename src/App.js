@@ -12,6 +12,8 @@ import MyCartPage from "./pages/MyCartPage";
 import Footer from "./components/Footer";
 import LoginPage from "./pages/LoginPage";
 import Header from "./components/Header";
+import ItemDetailsPage from "./pages/ItemDetailsPage";
+
 function App() {
   return (
     <UserProvider>
@@ -28,6 +30,10 @@ function App() {
             <Route path="/list-item" element={<CreateListingPage />} />
             <Route path="/sign-up" element={<CreateAccountPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/item-details-page/:id"
+              element={<ItemDetailsPage />}
+            />
           </Routes>
           <Footer />
         </div>

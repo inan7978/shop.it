@@ -1,13 +1,25 @@
-import stock_photo from "../images/boxes_stock.png";
+import { useNavigate } from "react-router-dom";
 
 function StoreCard(props) {
   const itemPrice = JSON.parse(props.item.price.$numberDecimal);
+  const navigate = useNavigate();
 
   return (
     <article
       className="store-card"
-      onClick={() => {
+      onClick={(e) => {
+        // e.stopPropagation();
+        e.preventDefault();
         console.log(`${props.item.title} has been clicked.`);
+        navigate(`../item-details-page/${props.item._id}`, {
+          state: {
+            item: props.item.title,
+            description: props.item.description,
+            price: itemPrice,
+            imgURL: props.item.imgURL,
+            id: props.item._id,
+          },
+        });
       }}
     >
       <img alt="testing" src={props.item.imgURL} className="store-card-img" />
@@ -15,7 +27,8 @@ function StoreCard(props) {
       <h3>${itemPrice}</h3>
       <button
         className="add-cart-btn btn-submit"
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation(); // this is used because this onClick is located within a broader on click. Not including this would have both on clicks fire when this is selected.
           console.log(props.item.title + " request to add to cart.");
         }}
       >
