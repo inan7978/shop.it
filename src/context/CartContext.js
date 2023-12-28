@@ -1,67 +1,30 @@
 import { createContext, useState } from "react";
 import UserContext from "../context/UserContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const { user } = useContext(UserContext);
   const [cart, setCart] = useState([
-    {
-      item: 10,
-      itemName: "Toothbrush",
-      Price: 1,
-      description: "Handy for nice teeth.",
-    },
-    {
-      item: 11,
-      itemName: "Shirt",
-      Price: 10,
-      description: "Handy if you want to be served at restaurants.",
-    },
-    {
-      item: 12,
-      itemName: "Socks",
-      Price: 5,
-      description: "Keep your dogs warm.",
-    },
-    {
-      item: 13,
-      itemName: "Apple",
-      Price: 1.5,
-      description: "One of these a day keeps the doctor away.",
-    },
-    {
-      item: 14,
-      itemName: "Onion",
-      Price: 1.5,
-      description: "One of these keeps EVERYONE away.",
-    },
-    {
-      item: 15,
-      itemName: "Chocolate",
-      Price: 1.5,
-      description: "A tasty dessert.",
-    },
-    {
-      item: 16,
-      itemName: "Water",
-      Price: 1.5,
-      description: "You are 60% of it. Make sure you drink enough.",
-    },
-    {
-      item: 17,
-      itemName: "Cigarettes",
-      Price: 1.5,
-      description: "Everyone needs one every now and then.",
-    },
+    { itemID: "6ttryyt", quantity: 2 },
+    { itemID: "6rrryyt", quantity: 5 },
+    { itemID: "6rpryyt", quantity: 5 },
   ]);
 
+  useEffect(() => {
+    setCart(user.cart);
+  });
+
   function loadCart() {
-    if (user.fname === "inan") {
-      return cart;
+    return cart;
+  }
+
+  function isLoggedIn() {
+    if (Object.keys(user).length > 1) {
+      return true;
     } else {
-      return [];
+      return false;
     }
   }
 
@@ -70,7 +33,9 @@ export function CartProvider({ children }) {
   function removeFromCart() {}
 
   return (
-    <CartContext.Provider value={{ cart, loadCart, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{ isLoggedIn, loadCart, addToCart, removeFromCart }}
+    >
       {children}
     </CartContext.Provider>
   );

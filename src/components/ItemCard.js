@@ -10,6 +10,9 @@ function ItemCard(props) {
     >
       <img src={stock_photo} className="item-card-img" />
       <h1 className="card-title">{props.item.itemName}</h1>
+      <h3>
+        item: {props.item.itemID} quantity: {props.item.quantity}
+      </h3>
       <h3>${props.item.Price}</h3>
       <button>Remove</button>
     </article>

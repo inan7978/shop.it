@@ -7,7 +7,7 @@ import { useContext } from "react";
 function Header() {
   const { user } = useContext(UserContext);
   const { logOutUser } = useContext(UserContext);
-  const { cart } = useContext(CartContext);
+  // const { cart } = useContext(CartContext);
 
   if (Object.keys(user).length === 0) {
     console.log(`No logged in user.`);
@@ -39,7 +39,7 @@ function Header() {
           </button>
           <Link to="/my-cart">
             <button className="logout-btn nav-btns">
-              {`Cart: ${cart.length}`}
+              {`Cart: ${user.cart.length}`}
             </button>
           </Link>
         </nav>
