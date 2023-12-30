@@ -1,8 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import CartContext from "../context/CartContext";
+import { useContext } from "react";
 
 function StoreCard(props) {
   const itemPrice = JSON.parse(props.item.price.$numberDecimal);
   const navigate = useNavigate();
+
+  const { addToCart } = useContext(CartContext);
 
   return (
     <article
@@ -29,6 +33,7 @@ function StoreCard(props) {
         className="add-cart-btn btn-submit"
         onClick={(e) => {
           e.stopPropagation(); // this is used because this onClick is located within a broader on click. Not including this would have both on clicks fire when this is selected.
+          addToCart(props.item);
           console.log(props.item.title + " request to add to cart.");
         }}
       >

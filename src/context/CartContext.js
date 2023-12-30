@@ -12,6 +12,8 @@ export function CartProvider({ children }) {
     { itemID: "6rpryyt", quantity: 5 },
   ]);
 
+  let testing = [];
+
   useEffect(() => {
     setCart(user.cart);
   });
@@ -28,7 +30,10 @@ export function CartProvider({ children }) {
     }
   }
 
-  function addToCart() {}
+  function addToCart(item) {
+    testing.push(item);
+    console.log(testing);
+  }
 
   function removeFromCart() {}
 
