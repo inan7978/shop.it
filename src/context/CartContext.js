@@ -12,11 +12,30 @@ export function CartProvider({ children }) {
     { itemID: "6rpryyt", quantity: 5 },
   ]);
 
-  let testing = [];
-
   useEffect(() => {
     setCart(user.cart);
-  });
+  }, [user.cart]);
+
+  function updateCart() {
+    const res = fetch("http://localhost:3003/add-to-cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userID: user._id, newCart: cart }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          throw Error;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+  }
 
   function loadCart() {
     return cart;
@@ -31,8 +50,10 @@ export function CartProvider({ children }) {
   }
 
   function addToCart(item) {
-    testing.push(item);
-    console.log(testing);
+    console.log("Before: " + JSON.stringify(cart));
+    setCart([...cart, { itemID: item._id, quantity: 1 }]);
+    console.log("After: " + JSON.stringify(cart));
+    updateCart();
   }
 
   function removeFromCart() {}
