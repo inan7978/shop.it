@@ -40,13 +40,17 @@ export function UserProvider({ children }) {
       });
   }
 
+  function cartSize() {
+    return user.cart.length; // placeholder
+  }
+
   function logOutUser() {
     navigate("../store-page");
     setUser({});
   }
 
   return (
-    <UserContext.Provider value={{ user, loginUser, logOutUser }}>
+    <UserContext.Provider value={{ user, loginUser, logOutUser, cartSize }}>
       {children}
     </UserContext.Provider>
   );

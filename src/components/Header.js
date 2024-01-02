@@ -3,12 +3,11 @@ import shopItlogo from "../images/shopitLogo.png";
 import MyCartPage from "../pages/MyCartPage";
 import UserContext from "../context/UserContext";
 import CartContext from "../context/CartContext";
+import { useState } from "react";
 import { useContext } from "react";
 function Header() {
   const { user } = useContext(UserContext);
   const { logOutUser } = useContext(UserContext);
-  // const { cart } = useContext(CartContext);
-
   if (Object.keys(user).length === 0) {
     console.log(`No logged in user.`);
   } else {
@@ -32,15 +31,11 @@ function Header() {
         </nav>
       ) : (
         <nav className="nav-bar">
-          {/* <h2>{`Welcome, ${user.fname}`}</h2>
-          <h1>{`items in cart: ${cart.length}`}</h1> */}
           <button className="logout-btn nav-btns" onClick={logOutUser}>
             Log out!
           </button>
           <Link to="/my-cart">
-            <button className="logout-btn nav-btns">
-              {`Cart: ${user.cart.length}`}
-            </button>
+            <button className="logout-btn nav-btns">{`Cart`}</button>
           </Link>
         </nav>
       )}

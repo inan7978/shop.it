@@ -1,46 +1,63 @@
 import UserContext from "../context/UserContext";
 import CartContext from "../context/CartContext";
 import ItemCard from "../components/ItemCard";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 function MyCartPage() {
   const { loadCart } = useContext(CartContext);
-  const { isLoggedIn } = useContext(CartContext);
+  const [items, setItems] = useState([{ testing: "testing" }]);
 
   const cart = loadCart();
+  console.log(cart);
 
-  const cartItems = cart.map((item) => {
+  const justID = cart.map((item) => {
+    return item.itemID;
+  });
+
+  useEffect(() => {
+    console.log("Invoked loadItemDetail useEffect");
+    loadItemDetails();
+  }, []);
+
+  const mappedItems = items.map((item) => {
     return (
-      <h1 key={item.itemID}>
-        {item.itemID} {item.quantity}
-      </h1>
+      <>
+        <h1>{item.title}</h1>
+        <img src={item.imgURL} />
+      </>
     );
   });
 
-  return <>{cartItems}</>;
+  function loadItemDetails() {
+    const findThese = {
+      toFind: justID,
+    };
+    console.log("Fetching info for \n" + justID);
+    const res = fetch("http://localhost:3003/get-cart-items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(findThese),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          throw Error;
+        }
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        const resMod = JSON.parse(JSON.stringify(data));
+        setItems(resMod);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-  // const cartItems = cart.map((item) => {
-  //   return <ItemCard key={item.itemID} item={item} />;
-  // });
-  // return (
-  //   <>
-  //     {cart.length ? (
-  //       <div className="cart-page-container">
-  //         <div className="item-cards-container">{cartItems}</div>
-  //         <div className="total-costs">
-  //           <h3>Sub Total: $45.11</h3>
-  //           <h3>Tax: $1.54</h3>
-  //           <h3>Rewards: $0.00</h3>
-  //           <h3>Fees: $0.00</h3>
-  //           <h3>Shipping: $4.94</h3>
-  //           <h2>Grand Total: $51.59</h2>
-  //           <button className="order-btn btn-submit">Place Order!</button>
-  //         </div>
-  //       </div>
-  //     ) : (
-  //       <div>Your cart is empty</div>
-  //     )}
-  //   </>
-  // );
+  return <div>{mappedItems}</div>;
 }
 
 export default MyCartPage;
