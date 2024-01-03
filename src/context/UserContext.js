@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UserContext = createContext();
@@ -7,6 +7,10 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState({});
   const [userCart, setUserCart] = useState(["Empty"]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setUserCart(user.cart);
+  }, [userCart]);
 
   function loginUser(email, pass) {
     const toFind = {
@@ -32,7 +36,6 @@ export function UserProvider({ children }) {
         // console.log("data: " + resMod._id);
         if (resMod.password === pass) {
           setUser(resMod);
-          setUserCart(resMod.cart);
         } else {
           setUser({});
         }
@@ -46,52 +49,44 @@ export function UserProvider({ children }) {
     return user.cart;
   }
 
-  function addToCart(itemToAdd) {
-    const [exists, position] = inCartAlr(itemToAdd);
-    console.log("Already in cart? " + exists + " | Position: " + position);
-
-    if (exists) {
-      userCart[position] = {
-        itemID: itemToAdd._id,
-        quantity: userCart[position].quantity + 1,
-      };
-      setUserCart([...userCart]);
-      // updateCart();
-    } else {
-      setUserCart([...userCart, { itemID: itemToAdd._id, quantity: 1 }]);
-      // updateCart();
-    }
-  }
-
   // inCartAlr() is a helper function for addToCart()
-  function inCartAlr(item) {
-    for (let i = 0; i < userCart.length; i++) {
-      if (userCart[i].itemID === item._id) {
-        return [true, i];
-      }
-    }
-    return [false, -1];
-  }
 
   function updateCart(newCart) {
-    const res = fetch("http://localhost:3003/add-to-cart", {
+    fetch("http://localhost:3003/update-cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ userID: user._id, newCart: newCart }),
     })
-      .then((response) => {
-        if (response.ok) {
-          return response;
-        } else {
-          throw Error;
-        }
+      .then((res) => {
+        return res.json();
       })
-      .catch((error) => {
-        console.log(error);
-        return error;
+      .then((data) => {
+        const temp = JSON.parse(JSON.stringify(data));
+        setUserCart(temp[0].cart);
       });
+  }
+
+  function addToCart(itemToAdd) {
+    console.log("Adding to cart: " + itemToAdd);
+
+    let exists = false;
+    let location = -1;
+    let quantity = -1;
+
+    for (let i = 0; i < user.cart.length; i++) {
+      if (userCart[i].itemID === itemToAdd) {
+        console.log("Its in here at position: " + i); // add logic to add if it is already in cart
+        exists = true;
+        location = i;
+        quantity = userCart[i].quantity;
+      }
+    }
+    console.log(`exists: ${exists}
+    location: ${location}
+    quantity: ${quantity}
+    `);
   }
 
   function logOutUser() {
@@ -100,9 +95,31 @@ export function UserProvider({ children }) {
     setUserCart(["Empty"]);
   }
 
+  function removeFromCart(toRemove) {
+    console.log("removing :" + toRemove);
+
+    let without = [];
+
+    for (let i = 0; i < user.cart.length; i++) {
+      if (user.cart[i].itemID !== toRemove) {
+        without.push(user.cart[i]);
+      }
+    }
+    updateCart(without);
+    user.cart = without;
+  }
+
   return (
     <UserContext.Provider
-      value={{ loadCart, loginUser, addToCart, logOutUser, userCart, user }}
+      value={{
+        loadCart,
+        loginUser,
+        removeFromCart,
+        addToCart,
+        logOutUser,
+        userCart,
+        user,
+      }}
     >
       {children}
     </UserContext.Provider>

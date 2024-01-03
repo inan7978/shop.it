@@ -9,12 +9,6 @@ function Header() {
   const { user } = useContext(UserContext);
   const { logOutUser } = useContext(UserContext);
 
-  if (Object.keys(user).length === 0) {
-    console.log(`No logged in user.`);
-  } else {
-    console.log(`Logged in user: ${user.fname} ${user.lname}`);
-  }
-
   return (
     <div className="global-header">
       <Link to="/store-page">
