@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import CartContext from "../context/CartContext";
+import UserContext from "../context/UserContext";
 import { useContext } from "react";
 
 function StoreCard(props) {
   const itemPrice = JSON.parse(props.item.price.$numberDecimal);
   const navigate = useNavigate();
 
-  const { addToCart } = useContext(CartContext);
+  const { addToCart } = useContext(UserContext);
 
   return (
     <article

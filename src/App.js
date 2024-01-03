@@ -17,27 +17,24 @@ import ItemDetailsPage from "./pages/ItemDetailsPage";
 function App() {
   return (
     <UserProvider>
-      <CartProvider>
-        <div className="App">
-          <Header />
-          <Routes>
-            <Route path="/" element={<StorePage />} />
-            <Route path="/store-page" element={<StorePage />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/my-cart" element={<MyCartPage />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/collaborations" element={<Collaborations />} />
-            <Route path="/list-item" element={<CreateListingPage />} />
-            <Route path="/sign-up" element={<CreateAccountPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route
-              path="/item-details-page/:id"
-              element={<ItemDetailsPage />}
-            />
-          </Routes>
-          <Footer />
-        </div>
-      </CartProvider>
+      {/* <CartProvider> */}
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<StorePage />} />
+          <Route path="/store-page" element={<StorePage />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/my-cart" element={<MyCartPage />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/collaborations" element={<Collaborations />} />
+          <Route path="/list-item" element={<CreateListingPage />} />
+          <Route path="/sign-up" element={<CreateAccountPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/item-details-page/:id" element={<ItemDetailsPage />} />
+        </Routes>
+        <Footer />
+      </div>
+      {/* </CartProvider> */}
     </UserProvider>
   );
 }

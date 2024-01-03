@@ -8,6 +8,7 @@ import { useContext } from "react";
 function Header() {
   const { user } = useContext(UserContext);
   const { logOutUser } = useContext(UserContext);
+
   if (Object.keys(user).length === 0) {
     console.log(`No logged in user.`);
   } else {

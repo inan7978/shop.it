@@ -1,10 +1,9 @@
 import UserContext from "../context/UserContext";
-import CartContext from "../context/CartContext";
 import ItemCard from "../components/ItemCard";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 function MyCartPage() {
-  const { loadCart } = useContext(CartContext);
+  const { loadCart } = useContext(UserContext);
   const [items, setItems] = useState([{ testing: "testing" }]);
 
   const cart = loadCart();
