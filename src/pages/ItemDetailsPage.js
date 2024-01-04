@@ -1,7 +1,11 @@
 import { useLocation } from "react-router-dom";
+import UserContext from "../context/UserContext";
+import { useContext } from "react";
+
 function ItemDetailPage() {
   const { state } = useLocation();
   const { item, description, price, imgURL, id } = state;
+  const { addToCart } = useContext(UserContext);
 
   return (
     <>
@@ -12,7 +16,14 @@ function ItemDetailPage() {
           <h2>${price}</h2>
           <p>{description}</p>
         </div>
-        <button className="btn-submit">Add to Cart</button>
+        <button
+          className="btn-submit"
+          onClick={() => {
+            addToCart(id);
+          }}
+        >
+          Add to Cart
+        </button>
       </div>
     </>
   );
