@@ -45,11 +45,49 @@ export function UserProvider({ children }) {
       });
   }
 
+  function logOutUser() {
+    navigate("../store-page");
+    setUser({});
+    setUserCart(["Empty"]);
+  }
+
   function loadCart() {
     return user.cart;
   }
 
-  // inCartAlr() is a helper function for addToCart()
+  function addToCart(itemToAdd) {
+    console.log("Adding to cart: " + itemToAdd);
+
+    let withItem = user.cart;
+
+    for (let i = 0; i < user.cart.length; i++) {
+      if (user.cart[i].itemID === itemToAdd) {
+        withItem[i] = {
+          itemID: withItem[i].itemID,
+          quantity: withItem[i].quantity + 1,
+        };
+        updateCart(withItem);
+        return;
+      }
+    }
+    withItem.push({ itemID: itemToAdd, quantity: 1 });
+  }
+
+  function removeFromCart(toRemove) {
+    console.log("removing :" + toRemove);
+
+    let without = [];
+
+    for (let i = 0; i < user.cart.length; i++) {
+      if (user.cart[i].itemID !== toRemove) {
+        without.push(user.cart[i]);
+      }
+    }
+    updateCart(without);
+    user.cart = without;
+  }
+
+  function adjustQuantity(toAdjust, newQuantity) {}
 
   function updateCart(newCart) {
     fetch("http://localhost:3003/update-cart", {
@@ -66,47 +104,6 @@ export function UserProvider({ children }) {
         const temp = JSON.parse(JSON.stringify(data));
         setUserCart(temp[0].cart);
       });
-  }
-
-  function addToCart(itemToAdd) {
-    console.log("Adding to cart: " + itemToAdd);
-
-    let exists = false;
-    let location = -1;
-    let quantity = -1;
-
-    for (let i = 0; i < user.cart.length; i++) {
-      if (userCart[i].itemID === itemToAdd) {
-        console.log("Its in here at position: " + i); // add logic to add if it is already in cart
-        exists = true;
-        location = i;
-        quantity = userCart[i].quantity;
-      }
-    }
-    console.log(`exists: ${exists}
-    location: ${location}
-    quantity: ${quantity}
-    `);
-  }
-
-  function logOutUser() {
-    navigate("../store-page");
-    setUser({});
-    setUserCart(["Empty"]);
-  }
-
-  function removeFromCart(toRemove) {
-    console.log("removing :" + toRemove);
-
-    let without = [];
-
-    for (let i = 0; i < user.cart.length; i++) {
-      if (user.cart[i].itemID !== toRemove) {
-        without.push(user.cart[i]);
-      }
-    }
-    updateCart(without);
-    user.cart = without;
   }
 
   return (
