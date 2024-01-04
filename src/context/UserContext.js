@@ -71,6 +71,7 @@ export function UserProvider({ children }) {
       }
     }
     withItem.push({ itemID: itemToAdd, quantity: 1 });
+    updateCart(withItem);
   }
 
   function removeFromCart(toRemove) {
@@ -87,7 +88,21 @@ export function UserProvider({ children }) {
     user.cart = without;
   }
 
-  function adjustQuantity(toAdjust, newQuantity) {}
+  function setQuantity(toAdjust, newQuantity) {
+    console.log(`Adjusting quantity for ${toAdjust} to ${newQuantity}`);
+
+    let withNewCount = [];
+
+    for (let i = 0; i < user.cart.length; i++) {
+      if (user.cart[i].itemID === toAdjust) {
+        withNewCount.push({ itemID: toAdjust, quantity: newQuantity });
+      } else {
+        withNewCount.push(user.cart[i]);
+      }
+    }
+    updateCart(withNewCount);
+    user.cart = withNewCount;
+  }
 
   function updateCart(newCart) {
     fetch("http://localhost:3003/update-cart", {
@@ -116,6 +131,7 @@ export function UserProvider({ children }) {
         logOutUser,
         userCart,
         user,
+        setQuantity,
       }}
     >
       {children}
