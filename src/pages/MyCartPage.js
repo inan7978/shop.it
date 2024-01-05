@@ -8,6 +8,50 @@ function MyCartPage() {
   const [items, setItems] = useState(loadCart());
   const navigate = useNavigate();
   // testing new branch
+
+  useEffect(() => {
+    loadDetails();
+  });
+
+  async function loadDetails() {
+    console.log("loadDetails has been called");
+    let details = [];
+    let onlyIDs = items.map((item) => {
+      return item.itemID;
+    });
+
+    const toFind = {
+      find: onlyIDs,
+    };
+
+    await fetch("http://localhost:3003/get-cart-items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(toFind),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          throw Error;
+        }
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        details = data;
+      })
+      .catch((error) => {
+        console.log(error);
+        details = ["Nothing arrived"];
+      });
+    return details;
+  }
+
   const listItems = items.map((item) => {
     return (
       <div key={item.itemID}>
