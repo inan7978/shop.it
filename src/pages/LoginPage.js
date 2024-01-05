@@ -10,7 +10,7 @@ function LoginPage() {
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
 
-  const loginHandler = (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
     console.log(`You entered:
     
@@ -18,11 +18,23 @@ function LoginPage() {
     
     Password: ${pass}`);
 
-    loginUser(email, pass);
+    const confirm = await loginUser(email, pass);
 
-    setEmail("");
-    setPass("");
-    navigate("../store-page");
+    if (confirm.status === "Incorrect password.") {
+      alert("Password is incorrect.");
+      setPass("");
+      return 1;
+    } else if (confirm.status === "No such account exists.") {
+      alert("No such account exists.");
+      setEmail("");
+      setPass("");
+      return 2;
+    } else if (confirm.status === "OK") {
+      setEmail("");
+      setPass("");
+      navigate("../store-page");
+      return 0;
+    }
   };
 
   return (

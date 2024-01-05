@@ -1,25 +1,25 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import UserContext from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 function CreateAccountPage() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const { createUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const loginHandler = (e) => {
+  const createHandler = async (e) => {
     e.preventDefault();
 
     if (pass === confirmPass) {
-      console.log(`Submitted!
-      
-      Email: ${email}
-      Password: ${pass}`);
+      console.log("Entered: " + email + " " + pass);
+      const confirm = await createUser(email, pass);
+      console.log(confirm);
 
-      setConfirmPass("");
-      setEmail("");
-      setPass("");
+      // notify user if the account is already in use
+      // also direct them to the login page if an account is successfully creatd
     } else {
-      alert(`Make sure you re-enter the password correctly.`);
-
-      console.log(`"${confirmPass}" !== "${pass}"`);
+      alert(`Passwords don't match!`);
     }
   };
 
@@ -28,7 +28,7 @@ function CreateAccountPage() {
       <div className="create-account-page" style={{ background: "#7eb2dd" }}>
         <div className="form-container">
           <h3 className="heading-bold">Create Account!</h3>
-          <form className="register-form" onSubmit={loginHandler}>
+          <form className="register-form" onSubmit={createHandler}>
             <label className="field-label">
               Email:
               <input

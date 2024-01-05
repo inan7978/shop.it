@@ -12,11 +12,12 @@ export function UserProvider({ children }) {
     setUserCart(user.cart);
   }, [userCart]);
 
-  function loginUser(email, pass) {
+  async function loginUser(email, pass) {
+    let result = { status: "OK" };
     const toFind = {
       emailSearch: email,
     };
-    const res = fetch("http://localhost:3003/authenticate", {
+    const res = await fetch("http://localhost:3003/authenticate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,17 +39,54 @@ export function UserProvider({ children }) {
           setUser(resMod);
         } else {
           setUser({});
+          result = { status: "Incorrect password." };
         }
       })
       .catch((error) => {
         console.log(error);
+        result = { status: "No such account exists." };
       });
+    return result;
   }
 
   function logOutUser() {
     navigate("../store-page");
     setUser({});
     setUserCart(["Empty"]);
+  }
+
+  async function createUser(email, pass) {
+    let result;
+    const userToAdd = {
+      email: email,
+      pass: pass,
+    };
+
+    await fetch("http://localhost:3003/create-user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userToAdd),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          throw Error;
+        }
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.status);
+        result = data.status;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return result;
   }
 
   function loadCart() {
@@ -132,6 +170,7 @@ export function UserProvider({ children }) {
         userCart,
         user,
         setQuantity,
+        createUser,
       }}
     >
       {children}
