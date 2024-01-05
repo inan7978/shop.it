@@ -6,6 +6,7 @@ function MyCartPage() {
   const { loadCart } = useContext(UserContext);
   const { removeFromCart, setQuantity } = useContext(UserContext);
   const [items, setItems] = useState(loadCart());
+  const navigate = useNavigate();
 
   const listItems = items.map((item) => {
     return (
@@ -46,7 +47,20 @@ function MyCartPage() {
     );
   });
 
-  return <div>{listItems}</div>;
+  return listItems.length ? (
+    <div>{listItems}</div>
+  ) : (
+    <div>
+      <h2>Add something!</h2>
+      <button
+        onClick={() => {
+          navigate("../store-page");
+        }}
+      >
+        Go to Store!
+      </button>
+    </div>
+  );
 }
 
 export default MyCartPage;

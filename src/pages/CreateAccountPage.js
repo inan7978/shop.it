@@ -14,10 +14,22 @@ function CreateAccountPage() {
     if (pass === confirmPass) {
       console.log("Entered: " + email + " " + pass);
       const confirm = await createUser(email, pass);
-      console.log(confirm);
+      console.log("Status: " + confirm);
 
-      // notify user if the account is already in use
-      // also direct them to the login page if an account is successfully creatd
+      switch (confirm) {
+        case "Already exists":
+          setPass("");
+          setConfirmPass("");
+          setEmail("");
+          alert("That email is already used!");
+          return;
+
+        case "OK":
+          setPass("");
+          setConfirmPass("");
+          setEmail("");
+          navigate("../login");
+      }
     } else {
       alert(`Passwords don't match!`);
     }
