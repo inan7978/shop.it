@@ -7,7 +7,7 @@ function MyCartPage() {
   const { removeFromCart, setQuantity } = useContext(UserContext);
   const [items, setItems] = useState(loadCart());
   const navigate = useNavigate();
-
+  // testing new branch
   const listItems = items.map((item) => {
     return (
       <div key={item.itemID}>
