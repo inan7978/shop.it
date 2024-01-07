@@ -68,6 +68,7 @@ function MyCartPage() {
       ? details.map((item) => {
           return (
             <div key={item._id}>
+              <img className="img-testing" src={item.imgURL} />
               <h3>
                 {item.title} || {item.quantity}
               </h3>
@@ -121,45 +122,6 @@ function MyCartPage() {
   } else {
     return <div>Loading</div>;
   }
-
-  // const listItems = items.map((item) => {
-  //   return (
-  //     <div key={item.itemID}>
-  //       <h3>
-  //         {item.itemID} || {item.quantity}
-  //       </h3>
-  //       <button
-  //         onClick={() => {
-  //           removeFromCart(item.itemID);
-  //           setItems(loadCart());
-  //         }}
-  //       >
-  //         Remove
-  //       </button>
-  //       <button
-  //         onClick={() => {
-  //           if (item.quantity - 1 === 0) {
-  //             removeFromCart(item.itemID);
-  //             setItems(loadCart());
-  //           } else {
-  //             setQuantity(item.itemID, item.quantity - 1);
-  //             setItems(loadCart());
-  //           }
-  //         }}
-  //       >
-  //         Subtract one
-  //       </button>
-  //       <button
-  //         onClick={() => {
-  //           setQuantity(item.itemID, item.quantity + 1);
-  //           setItems(loadCart());
-  //         }}
-  //       >
-  //         Add one
-  //       </button>
-  //     </div>
-  //   );
-  // });
 }
 
 export default MyCartPage;
