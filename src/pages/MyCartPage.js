@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 function MyCartPage() {
   const { loadCart } = useContext(UserContext);
   const { removeFromCart, setQuantity } = useContext(UserContext);
-  const [items, setItems] = useState(loadCart());
-  const [details, setDetails] = useState();
+  const [items, setItems] = useState([""]); // this is a bit weird
+  const [details, setDetails] = useState(); // need to revist this to potentially refactor
   const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
   // testing new branch
@@ -16,9 +16,10 @@ function MyCartPage() {
   }, [items]);
 
   async function loadDetails() {
+    const items1 = await loadCart();
     console.log("loadDetails has been called");
     let details = [];
-    let onlyIDs = items.map((item) => {
+    let onlyIDs = items1.map((item) => {
       return item.itemID;
     });
 
@@ -46,10 +47,12 @@ function MyCartPage() {
       .then((data) => {
         // console.log(data);
         details = data;
-        for (let i = 0; i < items.length; i++) {
-          for (let j = 0; j < items.length; j++) {
-            if (details[i]._id === items[j].itemID) {
-              details[i].quantity = items[j].quantity;
+
+        // this here adds the quantity key to the details returned from server by comparing to the items array of objects
+        for (let i = 0; i < items1.length; i++) {
+          for (let j = 0; j < items1.length; j++) {
+            if (details[i]._id === items1[j].itemID) {
+              details[i].quantity = items1[j].quantity;
             }
           }
         }
@@ -59,10 +62,13 @@ function MyCartPage() {
         console.log(error);
         details = ["Nothing arrived"];
       });
+
+    // sets the details and load status to state
     setDetails(details);
     setLoaded(true);
   }
 
+  // load status must be true to run this. This keeps it from trying to map before the values from loadDetails, which is async, arrive.
   if (loaded) {
     const listItems = details
       ? details.map((item) => {
