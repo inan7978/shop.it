@@ -6,12 +6,14 @@ function MyCartPage() {
   const { loadCart } = useContext(UserContext);
   const { removeFromCart, setQuantity } = useContext(UserContext);
   const [items, setItems] = useState(loadCart());
+  const [details, setDetails] = useState();
+  const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
   // testing new branch
 
   useEffect(() => {
     loadDetails();
-  });
+  }, [items]);
 
   async function loadDetails() {
     console.log("loadDetails has been called");
@@ -42,69 +44,122 @@ function MyCartPage() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         details = data;
+        for (let i = 0; i < items.length; i++) {
+          for (let j = 0; j < items.length; j++) {
+            if (details[i]._id === items[j].itemID) {
+              details[i].quantity = items[j].quantity;
+            }
+          }
+        }
+        console.log("This is the data to map: ", details);
       })
       .catch((error) => {
         console.log(error);
         details = ["Nothing arrived"];
       });
-    return details;
+    setDetails(details);
+    setLoaded(true);
   }
 
-  const listItems = items.map((item) => {
-    return (
-      <div key={item.itemID}>
-        <h3>
-          {item.itemID} || {item.quantity}
-        </h3>
+  if (loaded) {
+    const listItems = details
+      ? details.map((item) => {
+          return (
+            <div key={item._id}>
+              <h3>
+                {item.title} || {item.quantity}
+              </h3>
+              <button
+                onClick={() => {
+                  removeFromCart(item._id);
+                  setItems(loadCart());
+                }}
+              >
+                Remove
+              </button>
+              <button
+                onClick={() => {
+                  if (item.quantity - 1 === 0) {
+                    removeFromCart(item._id);
+                    setItems(loadCart());
+                  } else {
+                    setQuantity(item._id, item.quantity - 1);
+                    setItems(loadCart());
+                  }
+                }}
+              >
+                Subtract one
+              </button>
+              <button
+                onClick={() => {
+                  setQuantity(item._id, item.quantity + 1);
+                  setItems(loadCart());
+                }}
+              >
+                Add one
+              </button>
+            </div>
+          );
+        })
+      : null;
+    return listItems.length ? (
+      <div>{listItems}</div>
+    ) : (
+      <div>
+        <h2>Add something!</h2>
         <button
           onClick={() => {
-            removeFromCart(item.itemID);
-            setItems(loadCart());
+            navigate("../store-page");
           }}
         >
-          Remove
-        </button>
-        <button
-          onClick={() => {
-            if (item.quantity - 1 === 0) {
-              removeFromCart(item.itemID);
-              setItems(loadCart());
-            } else {
-              setQuantity(item.itemID, item.quantity - 1);
-              setItems(loadCart());
-            }
-          }}
-        >
-          Subtract one
-        </button>
-        <button
-          onClick={() => {
-            setQuantity(item.itemID, item.quantity + 1);
-            setItems(loadCart());
-          }}
-        >
-          Add one
+          Go to Store!
         </button>
       </div>
     );
-  });
+  } else {
+    return <div>Loading</div>;
+  }
 
-  return listItems.length ? (
-    <div>{listItems}</div>
-  ) : (
-    <div>
-      <h2>Add something!</h2>
-      <button
-        onClick={() => {
-          navigate("../store-page");
-        }}
-      >
-        Go to Store!
-      </button>
-    </div>
-  );
+  // const listItems = items.map((item) => {
+  //   return (
+  //     <div key={item.itemID}>
+  //       <h3>
+  //         {item.itemID} || {item.quantity}
+  //       </h3>
+  //       <button
+  //         onClick={() => {
+  //           removeFromCart(item.itemID);
+  //           setItems(loadCart());
+  //         }}
+  //       >
+  //         Remove
+  //       </button>
+  //       <button
+  //         onClick={() => {
+  //           if (item.quantity - 1 === 0) {
+  //             removeFromCart(item.itemID);
+  //             setItems(loadCart());
+  //           } else {
+  //             setQuantity(item.itemID, item.quantity - 1);
+  //             setItems(loadCart());
+  //           }
+  //         }}
+  //       >
+  //         Subtract one
+  //       </button>
+  //       <button
+  //         onClick={() => {
+  //           setQuantity(item.itemID, item.quantity + 1);
+  //           setItems(loadCart());
+  //         }}
+  //       >
+  //         Add one
+  //       </button>
+  //     </div>
+  //   );
+  // });
 }
 
 export default MyCartPage;
