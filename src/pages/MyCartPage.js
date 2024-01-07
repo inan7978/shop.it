@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function MyCartPage() {
   const { loadCart } = useContext(UserContext);
   const { removeFromCart, setQuantity } = useContext(UserContext);
-  const [items, setItems] = useState([""]); // this is a bit weird
+  const [trigger, setTrigger] = useState([""]); // this is a bit weird
   const [details, setDetails] = useState(); // need to revist this to potentially refactor
   const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
@@ -13,13 +13,13 @@ function MyCartPage() {
 
   useEffect(() => {
     loadDetails();
-  }, [items]);
+  }, [trigger]);
 
   async function loadDetails() {
-    const items1 = await loadCart();
+    const items = await loadCart();
     console.log("loadDetails has been called");
     let details = [];
-    let onlyIDs = items1.map((item) => {
+    let onlyIDs = items.map((item) => {
       return item.itemID;
     });
 
@@ -49,10 +49,10 @@ function MyCartPage() {
         details = data;
 
         // this here adds the quantity key to the details returned from server by comparing to the items array of objects
-        for (let i = 0; i < items1.length; i++) {
-          for (let j = 0; j < items1.length; j++) {
-            if (details[i]._id === items1[j].itemID) {
-              details[i].quantity = items1[j].quantity;
+        for (let i = 0; i < items.length; i++) {
+          for (let j = 0; j < items.length; j++) {
+            if (details[i]._id === items[j].itemID) {
+              details[i].quantity = items[j].quantity;
             }
           }
         }
@@ -81,7 +81,7 @@ function MyCartPage() {
               <button
                 onClick={() => {
                   removeFromCart(item._id);
-                  setItems(loadCart());
+                  setTrigger([...trigger]);
                 }}
               >
                 Remove
@@ -90,10 +90,10 @@ function MyCartPage() {
                 onClick={() => {
                   if (item.quantity - 1 === 0) {
                     removeFromCart(item._id);
-                    setItems(loadCart());
+                    setTrigger([...trigger]);
                   } else {
                     setQuantity(item._id, item.quantity - 1);
-                    setItems(loadCart());
+                    setTrigger([...trigger]);
                   }
                 }}
               >
@@ -102,7 +102,7 @@ function MyCartPage() {
               <button
                 onClick={() => {
                   setQuantity(item._id, item.quantity + 1);
-                  setItems(loadCart());
+                  setTrigger([...trigger]);
                 }}
               >
                 Add one
