@@ -156,6 +156,12 @@ input[type="email"] {
   font-size: 16px;
   font-weight: 600;
 }
+input[type="text"] {
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
 
 input[type="password"] {
   padding-left: 15px;
@@ -287,4 +293,16 @@ input[type="password"] {
 .img-testing {
   max-width: 75px;
   max-height: 75px;
+}
+
+.account-details-container {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #7eb2dd;
 }

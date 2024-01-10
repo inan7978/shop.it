@@ -3,10 +3,9 @@ import ItemCard from "../components/ItemCard";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 function MyCartPage() {
-  const { loadCart } = useContext(UserContext);
-  const { removeFromCart, setQuantity } = useContext(UserContext);
+  const { removeFromCart, setQuantity, loadCart } = useContext(UserContext);
   const [trigger, setTrigger] = useState([""]); // this is a bit weird
-  const [details, setDetails] = useState(); // need to revist this to potentially refactor
+  const [details, setDetails] = useState();
   const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
 
