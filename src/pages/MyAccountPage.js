@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function MyAccountPage() {
   const { user } = useContext(UserContext);
+  const { logOutUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -20,10 +21,35 @@ function MyAccountPage() {
     setLname(user.lname);
     setPassword(user.password);
   }, []);
+
   function pushChanges(e) {
     e.preventDefault();
     if (password === conPass) {
-      console.log("Pushing", email, fname, lname, password);
+      const updateUser = {
+        userID: user._id,
+        fname: fname,
+        lname: lname,
+        password: password,
+      };
+
+      fetch("http://localhost:3003/update-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updateUser),
+      }).then((response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          throw Error;
+        }
+      });
+
+      logOutUser();
+      alert("Changes saved. Please log in again.");
+    } else {
+      alert("Passwords don't match!");
     }
   }
 
