@@ -29,8 +29,11 @@ function Header() {
           <button className="logout-btn nav-btns" onClick={logOutUser}>
             Log out!
           </button>
+          <Link to="/my-account">
+            <button className="logout-btn nav-btns">Account</button>
+          </Link>
           <Link to="/my-cart">
-            <button className="logout-btn nav-btns">{`Cart`}</button>
+            <button className="logout-btn nav-btns">{`Cart: ${user.cart.length}`}</button>
           </Link>
         </nav>
       )}
