@@ -9,7 +9,6 @@ function MyCartPage() {
   const [details, setDetails] = useState(); // need to revist this to potentially refactor
   const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
-  // testing new branch
 
   useEffect(() => {
     loadDetails();
