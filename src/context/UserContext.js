@@ -49,10 +49,24 @@ export function UserProvider({ children }) {
     return result;
   }
 
-  function logOutUser() {
-    navigate("../store-page");
-    setUser({});
-    setUserCart(["Empty"]);
+  function logOutUser(whereTo) {
+    // whereto lets you specify where to direct after logout
+    switch (whereTo) {
+      case "toStore":
+        navigate("../store-page");
+        setUser({});
+        setUserCart(["Empty"]);
+        break;
+      case "toLogin":
+        navigate("../login");
+        setUser({});
+        setUserCart(["Empty"]);
+        break;
+      default:
+        navigate("../store-page");
+        setUser({});
+        setUserCart(["Empty"]);
+    }
   }
 
   async function createUser(email, pass) {
