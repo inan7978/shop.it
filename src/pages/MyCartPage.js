@@ -13,6 +13,8 @@ function MyCartPage() {
     loadDetails();
   }, [trigger]);
 
+  let totalCost = 0;
+
   async function loadDetails() {
     const items = await loadCart();
     console.log("loadDetails has been called");
@@ -70,11 +72,14 @@ function MyCartPage() {
   if (loaded) {
     const listItems = details
       ? details.map((item) => {
+          totalCost =
+            totalCost + JSON.parse(item.price.$numberDecimal) * item.quantity;
           return (
             <div key={item._id}>
               <img className="img-testing" src={item.imgURL} />
               <h3>
-                {item.title} || {item.quantity}
+                {item.title} || {item.quantity} ||{" "}
+                {JSON.parse(item.price.$numberDecimal)}
               </h3>
               <button
                 onClick={() => {
@@ -110,7 +115,10 @@ function MyCartPage() {
         })
       : null;
     return listItems.length ? (
-      <div>{listItems}</div>
+      <>
+        <div>{listItems}</div>
+        <h2>Grand Total: ${Math.round(totalCost * 100) / 100}</h2>
+      </>
     ) : (
       <div>
         <h2>Add something!</h2>
@@ -124,7 +132,7 @@ function MyCartPage() {
       </div>
     );
   } else {
-    return <div>Loading</div>;
+    return <div>Loading...</div>;
   }
 }
 
