@@ -4,6 +4,11 @@ import { useContext } from "react";
 
 function StoreCard(props) {
   const itemPrice = JSON.parse(props.item.price.$numberDecimal);
+  const modPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(itemPrice);
+
   const navigate = useNavigate();
 
   const { addToCart } = useContext(UserContext);
@@ -28,7 +33,7 @@ function StoreCard(props) {
     >
       <img alt="testing" src={props.item.imgURL} className="store-card-img" />
       <h1 className="store-card-title">{props.item.title}</h1>
-      <h3>${itemPrice}</h3>
+      <h3>{modPrice}</h3>
       <button
         className="add-cart-btn btn-submit"
         onClick={(e) => {

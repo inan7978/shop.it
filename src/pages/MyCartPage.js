@@ -79,7 +79,10 @@ function MyCartPage() {
               <img className="img-testing" src={item.imgURL} />
               <h3>
                 {item.title} || {item.quantity} ||{" "}
-                {JSON.parse(item.price.$numberDecimal)}
+                {new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(JSON.parse(item.price.$numberDecimal))}
               </h3>
               <button
                 onClick={() => {
@@ -117,7 +120,14 @@ function MyCartPage() {
     return listItems.length ? (
       <>
         <div>{listItems}</div>
-        <h2>Grand Total: ${Math.round(totalCost * 100) / 100}</h2>
+        {/* <h2>Grand Total: ${Math.round(totalCost * 100) / 100}</h2> */}
+        <h2>
+          Grand Total:{" "}
+          {new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+          }).format(totalCost)}
+        </h2>
       </>
     ) : (
       <div>

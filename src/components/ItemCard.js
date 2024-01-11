@@ -5,6 +5,10 @@ function ItemCard(props) {
   } catch {
     itemPrice = "Error";
   }
+  const modPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(itemPrice);
 
   return (
     <article
@@ -16,7 +20,7 @@ function ItemCard(props) {
       <img src={props.item.imgURL} className="item-card-img" />
       <h1 className="card-title">{props.item.title}</h1>
       <h3>quantity: {props.item.quantity}</h3>
-      <h3>${itemPrice}</h3>
+      <h3>{modPrice}</h3>
       <button>Remove</button>
     </article>
   );
