@@ -26,7 +26,10 @@ function Header() {
         </nav>
       ) : (
         <nav className="nav-bar">
-          <button className="logout-btn nav-btns" onClick={logOutUser}>
+          <button
+            className="logout-btn nav-btns"
+            onClick={() => logOutUser("toStore")}
+          >
             Log out!
           </button>
           <Link to="/my-account">
