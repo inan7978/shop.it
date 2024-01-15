@@ -1,25 +1,23 @@
 import { useState } from "react";
 
 function CreateListingPage() {
-  const [file, setFile] = useState();
+  const [myFiles, setMyFiles] = useState();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
 
   async function uploadHandler(e) {
     e.preventDefault();
-    // console.log("Pics: ", pics);
-    // console.log("title: ", title);
-    // console.log("desc: ", desc);
-    // console.log("price: ", price);
-
     const formData = new FormData();
-
     formData.append("title", title);
     formData.append("desc", desc);
     formData.append("price", price);
-    formData.append("pics", file); // has to be file
+    // formData.append("files", myFile); // has to be file
+    // formData.append("fileName", myFile.name);
 
+    Object.keys(myFiles).forEach((key) => {
+      formData.append(myFiles.item(key).name, myFiles.item(key));
+    });
     console.log("formData: ", formData);
 
     const response = await fetch("http://localhost:3003/create-listing", {
@@ -40,7 +38,7 @@ function CreateListingPage() {
           type="file"
           id="myFiles"
           onChange={(e) => {
-            setFile(e.target.files[0]);
+            setMyFiles(e.target.files);
           }}
           accept="image/*"
           multiple
