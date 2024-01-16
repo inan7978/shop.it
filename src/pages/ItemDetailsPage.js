@@ -15,7 +15,8 @@ function ItemDetailPage() {
   return (
     <>
       <div className="item-detail-container">
-        <img className="item-description-img" src={imgURL} alt={`${item}`} />
+        {/* needs to be changed to carousel through all the images */}
+        <img className="item-description-img" src={imgURL[0]} alt={`${item}`} />
         <div className="item-info-container">
           <h1>{item}</h1>
           <h2>{modPrice}</h2>

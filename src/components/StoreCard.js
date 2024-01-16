@@ -31,7 +31,12 @@ function StoreCard(props) {
         });
       }}
     >
-      <img alt="testing" src={props.item.imgURL} className="store-card-img" />
+      {/* needs to be changed to a carousel that slides when mouse is hovered over it */}
+      <img
+        alt="testing"
+        src={props.item.imgURL[0]}
+        className="store-card-img"
+      />
       <h1 className="store-card-title">{props.item.title}</h1>
       <h3>{modPrice}</h3>
       <button
