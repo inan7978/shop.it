@@ -29,6 +29,13 @@ function CreateListingPage() {
     });
 
     console.log(response);
+    if (response.ok) {
+      console.log(title, " has been added.");
+      setMyFiles();
+      setTitle("");
+      setDesc("");
+      setPrice("");
+    }
   }
 
   return (

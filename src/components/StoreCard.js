@@ -19,7 +19,9 @@ function StoreCard(props) {
       onClick={(e) => {
         // e.stopPropagation();
         e.preventDefault();
-        console.log(`${props.item.title} has been clicked.`);
+        console.log(
+          `${props.item.title} with ID ${props.item._id} has been clicked.`
+        );
         navigate(`../item-details-page/${props.item._id}`, {
           state: {
             item: props.item.title,
