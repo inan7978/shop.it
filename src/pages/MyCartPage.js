@@ -68,6 +68,26 @@ function MyCartPage() {
     setLoaded(true);
   }
 
+  function oneLess(item) {
+    if (item.quantity - 1 === 0) {
+      removeFromCart(item._id);
+      setTrigger([...trigger]);
+    } else {
+      setQuantity(item._id, item.quantity - 1);
+      setTrigger([...trigger]);
+    }
+  }
+
+  function oneMore(item) {
+    setQuantity(item._id, item.quantity + 1);
+    setTrigger([...trigger]);
+  }
+
+  function removeOne(item) {
+    removeFromCart(item._id);
+    setTrigger([...trigger]);
+  }
+
   // load status must be true to run this. This keeps it from trying to map before the values from loadDetails, which is async, arrive.
   if (loaded) {
     const listItems = details
@@ -75,52 +95,20 @@ function MyCartPage() {
           totalCost =
             totalCost + JSON.parse(item.price.$numberDecimal) * item.quantity;
           return (
-            <div key={item._id}>
-              <img className="img-testing" src={item.imgURL} />
-              <h3>
-                {item.title} || {item.quantity} ||{" "}
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(JSON.parse(item.price.$numberDecimal))}
-              </h3>
-              <button
-                onClick={() => {
-                  removeFromCart(item._id);
-                  setTrigger([...trigger]);
-                }}
-              >
-                Remove
-              </button>
-              <button
-                onClick={() => {
-                  if (item.quantity - 1 === 0) {
-                    removeFromCart(item._id);
-                    setTrigger([...trigger]);
-                  } else {
-                    setQuantity(item._id, item.quantity - 1);
-                    setTrigger([...trigger]);
-                  }
-                }}
-              >
-                Subtract one
-              </button>
-              <button
-                onClick={() => {
-                  setQuantity(item._id, item.quantity + 1);
-                  setTrigger([...trigger]);
-                }}
-              >
-                Add one
-              </button>
-            </div>
+            <ItemCard
+              key={item._id}
+              item={item}
+              oneLess={oneLess}
+              oneMore={oneMore}
+              removeFromCart={removeFromCart}
+              removeOne={removeOne}
+            />
           );
         })
       : null;
     return listItems.length ? (
       <>
         <div>{listItems}</div>
-        {/* <h2>Grand Total: ${Math.round(totalCost * 100) / 100}</h2> */}
         <h2>
           Grand Total:{" "}
           {new Intl.NumberFormat("en-US", {

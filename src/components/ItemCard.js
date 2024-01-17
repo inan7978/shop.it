@@ -1,7 +1,7 @@
-function ItemCard(props) {
+function ItemCard({ item, oneLess, oneMore, removeOne }) {
   let itemPrice = 0;
   try {
-    itemPrice = props.item.price.$numberDecimal;
+    itemPrice = item.price.$numberDecimal;
   } catch {
     itemPrice = "Error";
   }
@@ -14,14 +14,34 @@ function ItemCard(props) {
     <article
       className="item-card"
       onClick={() => {
-        console.log(`${props.item._id} has been clicked.`);
+        console.log(`${item._id} has been clicked.`);
       }}
     >
-      <img src={props.item.imgURL} className="item-card-img" />
-      <h1 className="card-title">{props.item.title}</h1>
-      <h3>quantity: {props.item.quantity}</h3>
+      <img src={item.imgURL} className="item-card-img" />
+      <h1 className="card-title">{item.title}</h1>
+      <h3>quantity: {item.quantity}</h3>
       <h3>{modPrice}</h3>
-      <button>Remove</button>
+      <button
+        onClick={() => {
+          removeOne(item);
+        }}
+      >
+        Remove
+      </button>
+      <button
+        onClick={() => {
+          oneMore(item);
+        }}
+      >
+        Add one
+      </button>
+      <button
+        onClick={() => {
+          oneLess(item);
+        }}
+      >
+        Subtract one
+      </button>
     </article>
   );
 }

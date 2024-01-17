@@ -6,6 +6,7 @@ const UserContext = createContext();
 export function UserProvider({ children }) {
   const [user, setUser] = useState({});
   const [userCart, setUserCart] = useState(["Empty"]);
+  const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export function UserProvider({ children }) {
         // console.log("data: " + resMod._id);
         if (resMod.password === pass) {
           setUser(resMod);
+          setLoggedIn(true);
         } else {
           setUser({});
           result = { status: "Incorrect password." };
@@ -50,6 +52,7 @@ export function UserProvider({ children }) {
   }
 
   function logOutUser(whereTo) {
+    setLoggedIn(false);
     // whereto lets you specify where to direct after logout
     switch (whereTo) {
       case "toStore":
@@ -185,6 +188,7 @@ export function UserProvider({ children }) {
         user,
         setQuantity,
         createUser,
+        loggedIn,
       }}
     >
       {children}
