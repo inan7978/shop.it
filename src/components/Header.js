@@ -26,15 +26,18 @@ function Header() {
         </nav>
       ) : (
         <nav className="nav-bar">
+          <Link to="/my-listings">
+            <button className="logout-btn nav-btns">My Listings</button>
+          </Link>
+          <Link to="/my-account">
+            <button className="logout-btn nav-btns">Account</button>
+          </Link>
           <button
             className="logout-btn nav-btns"
             onClick={() => logOutUser("toStore")}
           >
             Log out!
           </button>
-          <Link to="/my-account">
-            <button className="logout-btn nav-btns">Account</button>
-          </Link>
           <Link to="/my-cart">
             <button className="logout-btn nav-btns">{`Cart: ${user.cart.length}`}</button>
           </Link>

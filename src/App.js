@@ -9,6 +9,7 @@ import Collaborations from "./pages/Collaborations";
 import CreateListingPage from "./pages/CreateListingPage";
 import CreateAccountPage from "./pages/CreateAccountPage";
 import MyCartPage from "./pages/MyCartPage";
+import MyListings from "./pages/MyListings";
 import MyAccountPage from "./pages/MyAccountPage";
 import Footer from "./components/Footer";
 import LoginPage from "./pages/LoginPage";
@@ -27,6 +28,7 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/my-cart" element={<MyCartPage />} />
           <Route path="/my-account" element={<MyAccountPage />} />
+          <Route path="/my-listings" element={<MyListings />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/collaborations" element={<Collaborations />} />
           <Route path="/list-item" element={<CreateListingPage />} />
