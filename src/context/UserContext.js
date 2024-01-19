@@ -35,7 +35,7 @@ export function UserProvider({ children }) {
       .then((response) => response.json())
       .then((data) => {
         const resMod = JSON.parse(JSON.stringify(data));
-        // console.log("data: " + resMod._id);
+        console.log("data: ", resMod);
         if (resMod.password === pass) {
           setUser(resMod);
           setLoggedIn(true);
@@ -143,6 +143,10 @@ export function UserProvider({ children }) {
     user.cart = without;
   }
 
+  function getUserID() {
+    return user._id;
+  }
+
   function setQuantity(toAdjust, newQuantity) {
     console.log(`Adjusting quantity for ${toAdjust} to ${newQuantity}`);
 
@@ -189,6 +193,7 @@ export function UserProvider({ children }) {
         setQuantity,
         createUser,
         loggedIn,
+        getUserID,
       }}
     >
       {children}
