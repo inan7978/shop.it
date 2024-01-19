@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import UserContext from "../context/UserContext";
+import userEvent from "@testing-library/user-event";
 
 function CreateListingPage() {
   const [myFiles, setMyFiles] = useState();
@@ -8,6 +9,7 @@ function CreateListingPage() {
   const [price, setPrice] = useState("");
   const { getUserID } = useContext(UserContext);
   const { loggedIn } = useContext(UserContext);
+  const { updateListings } = UserContext(UserContext);
 
   async function uploadHandler(e) {
     e.preventDefault();

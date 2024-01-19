@@ -27,7 +27,7 @@ function Header() {
       ) : (
         <nav className="nav-bar">
           <Link to="/my-listings">
-            <button className="logout-btn nav-btns">My Listings</button>
+            <button className="logout-btn nav-btns">Listings</button>
           </Link>
           <Link to="/my-account">
             <button className="logout-btn nav-btns">Account</button>

@@ -2,16 +2,13 @@ import { useContext } from "react";
 import UserContext from "../context/UserContext";
 
 function MyListings() {
-  const { user } = useContext(UserContext);
-  const listings = user.listings;
-  console.log("Listings-user: ", user.listings);
+  const { loadListings } = useContext(UserContext);
+  const listings = loadListings();
 
-  const mapListings = listings
-    ? listings.map((listing) => {
-        return <h1>{listing}</h1>;
-      })
-    : null;
-  return <div>{mapListings}</div>;
+  const mappedListings = listings.map((listing) => {
+    return <h2 key={listing}>{listing}</h2>;
+  });
+  return <div>{mappedListings}</div>;
 }
 
 export default MyListings;

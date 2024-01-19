@@ -6,12 +6,19 @@ const UserContext = createContext();
 export function UserProvider({ children }) {
   const [user, setUser] = useState({});
   const [userCart, setUserCart] = useState(["Empty"]);
+  const [userListings, setUserListings] = useState(["Empty"]);
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    updateBoth();
+  }, [userCart, userListings]);
+
+  function updateBoth() {
+    // helper function for the above useEffect
     setUserCart(user.cart);
-  }, [userCart]);
+    setUserListings(user.listings);
+  }
 
   async function loginUser(email, pass) {
     let result = { status: "OK" };
@@ -35,8 +42,8 @@ export function UserProvider({ children }) {
       .then((response) => response.json())
       .then((data) => {
         const resMod = JSON.parse(JSON.stringify(data));
-        console.log("data: ", resMod);
         if (resMod.password === pass) {
+          console.log("data: ", resMod);
           setUser(resMod);
           setLoggedIn(true);
         } else {
@@ -180,10 +187,32 @@ export function UserProvider({ children }) {
       });
   }
 
+  function updateListings(newListings) {
+    fetch("http://localhost:3003/update-listings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userID: user._id, newCart: newListings }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        const temp = JSON.parse(JSON.stringify(data));
+        setUserListings(temp[0].listings);
+      });
+  }
+
+  function loadListings() {
+    return user.listings;
+  }
+
   return (
     <UserContext.Provider
       value={{
         loadCart,
+        loadListings,
         loginUser,
         removeFromCart,
         addToCart,
@@ -194,6 +223,7 @@ export function UserProvider({ children }) {
         createUser,
         loggedIn,
         getUserID,
+        userListings,
       }}
     >
       {children}
