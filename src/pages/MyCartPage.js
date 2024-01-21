@@ -122,7 +122,7 @@ function MyCartPage() {
         <h2>Add something!</h2>
         <button
           onClick={() => {
-            navigate("../store-page");
+            navigate("../list-item");
           }}
         >
           Go to Store!
