@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../context/UserContext";
-import ItemCard from "../components/ItemCard";
 import { useNavigate, useNavigation } from "react-router-dom";
+import ItemListing from "../components/ItemListing";
 
 function MyListings() {
   const { loadListings } = useContext(UserContext);
@@ -63,9 +63,10 @@ function MyListings() {
     const showListings = details
       ? details.map((listing) => {
           return (
-            <h2 key={listing._id}>
-              {listing.title} {listing.description}
-            </h2>
+            // <h2 key={listing._id}>
+            //   {listing.title} {listing.description}
+            // </h2>
+            <ItemListing key={listing._id} item={listing} />
           );
         })
       : null;

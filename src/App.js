@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import LoginPage from "./pages/LoginPage";
 import Header from "./components/Header";
 import ItemDetailsPage from "./pages/ItemDetailsPage";
+import EditListing from "./pages/EditListing";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/my-cart" element={<MyCartPage />} />
           <Route path="/my-account" element={<MyAccountPage />} />
           <Route path="/my-listings" element={<MyListings />} />
+          <Route path="/edit-listing" element={<EditListing />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/collaborations" element={<Collaborations />} />
           <Route path="/list-item" element={<CreateListingPage />} />
