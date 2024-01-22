@@ -16,7 +16,7 @@ function ItemListing({ item, oneLess, oneMore, removeOne }) {
 
   return (
     <article className="item-card">
-      <img src={item.imgURL} className="item-card-img" />
+      <img src={item.imgURL[0]} className="item-card-img" />
       <h1 className="card-title">{item.title}</h1>
       <h3>{modPrice}</h3>
       <button

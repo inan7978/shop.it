@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function EditListing() {
   const { state } = useLocation();
   const { title, description, price, imgURL, id } = state;
-  const { loggedIn } = useContext(UserContext);
+  const { removeListing } = useContext(UserContext);
   const [img, setImg] = useState(0);
   const [_title, setTitle] = useState("");
   const [_desc, setDesc] = useState("");
@@ -39,6 +39,19 @@ function EditListing() {
     } else {
       setImg(img - 1);
     }
+  }
+  async function deleteListing() {
+    console.log("requested to delete : ", id);
+    removeListing(id);
+    await fetch("http://localhost:3003/delete-listing", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ deleteID: id }),
+    });
+
+    navigate("../my-listings");
   }
 
   function editHandler(e) {
@@ -103,6 +116,7 @@ function EditListing() {
           </label>
           <input className="btn-submit" type="submit" />
         </form>
+        <button onClick={deleteListing}>Delete Listing</button>
         <div className="item-info-container">
           <h1>{title}</h1>
           <h2>{price}</h2>

@@ -92,8 +92,13 @@ function MyCartPage() {
   if (loaded) {
     const listItems = details
       ? details.map((item) => {
-          totalCost =
-            totalCost + JSON.parse(item.price.$numberDecimal) * item.quantity;
+          try {
+            totalCost =
+              totalCost + JSON.parse(item.price.$numberDecimal) * item.quantity;
+          } catch {
+            console.log("Error");
+          }
+
           return (
             <ItemCard
               key={item._id}
@@ -114,7 +119,7 @@ function MyCartPage() {
           {new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
-          }).format(totalCost)}
+          }).format(totalCost || "0.00")}
         </h2>
       </>
     ) : (
@@ -122,7 +127,7 @@ function MyCartPage() {
         <h2>Add something!</h2>
         <button
           onClick={() => {
-            navigate("../list-item");
+            navigate("../store-page");
           }}
         >
           Go to Store!

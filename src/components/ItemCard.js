@@ -17,7 +17,7 @@ function ItemCard({ item, oneLess, oneMore, removeOne }) {
         console.log(`${item._id} has been clicked.`);
       }}
     >
-      <img src={item.imgURL} className="item-card-img" />
+      <img src={item.imgURL[0]} className="item-card-img" />
       <h1 className="card-title">{item.title}</h1>
       <h3>quantity: {item.quantity}</h3>
       <h3>{modPrice}</h3>

@@ -187,22 +187,45 @@ export function UserProvider({ children }) {
       });
   }
 
-  function updateListings(newListings) {
-    fetch("http://localhost:3003/update-listings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userID: user._id, newCart: newListings }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        const temp = JSON.parse(JSON.stringify(data));
-        setUserListings(temp[0].listings);
-      });
+  function removeListing(toRemove) {
+    console.log("removing listing: ", toRemove);
+
+    let without = [];
+    let newCart = [];
+
+    for (let i = 0; i < user.listings.length; i++) {
+      if (user.listings[i] !== toRemove) {
+        without.push(user.listings[i]);
+      }
+    }
+
+    for (let i = 0; i < user.cart.length; i++) {
+      if (user.cart[i].itemID !== toRemove) {
+        newCart.push(user.cart[i]);
+      }
+    }
+    user.listings = without;
+    user.cart = newCart;
+    setUserListings(without);
+    setUserCart(newCart);
   }
+
+  // function updateListings(newListings) {
+  //   fetch("http://localhost:3003/update-listings", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ userID: user._id, newCart: newListings }),
+  //   })
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       const temp = JSON.parse(JSON.stringify(data));
+  //       setUserListings(temp[0].listings);
+  //     });
+  // }
 
   function loadListings() {
     return user.listings;
@@ -224,6 +247,7 @@ export function UserProvider({ children }) {
         loggedIn,
         getUserID,
         userListings,
+        removeListing,
       }}
     >
       {children}

@@ -9,11 +9,10 @@ function CreateListingPage() {
   const [price, setPrice] = useState("");
   const { getUserID } = useContext(UserContext);
   const { loggedIn } = useContext(UserContext);
-  const { updateListings } = UserContext(UserContext);
 
   async function uploadHandler(e) {
     e.preventDefault();
-    const userID = getUserID();
+    const userID = await getUserID();
     const formData = new FormData();
     formData.append("title", title);
     formData.append("desc", desc);
