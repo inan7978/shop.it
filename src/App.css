@@ -306,3 +306,34 @@ input[type="password"] {
   flex-wrap: wrap;
   background-color: #7eb2dd;
 }
+
+/*Contact us page CSS*/
+.contact-us-container {
+}
+
+.contact-us-heading {
+  text-align: center;
+  padding-top: 1.5rem;
+}
+
+.img-desc-container {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 60vw;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.contact-us-img {
+  width: 40vw;
+  border-radius: 5%;
+}
+
+.contact-us-text-container {
+  text-align: center;
+}
+
+.contact-us-text {
+  font-size: 20px;
+}
