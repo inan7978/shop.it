@@ -4,7 +4,6 @@ import { useNavigate, useNavigation } from "react-router-dom";
 import ItemListing from "../components/ItemListing";
 
 function MyListings() {
-  const { loadListings } = useContext(UserContext);
   const { getUserID } = useContext(UserContext);
   const [trigger, setTrigger] = useState([""]);
   const [details, setDetails] = useState();

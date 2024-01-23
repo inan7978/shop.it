@@ -6,18 +6,16 @@ const UserContext = createContext();
 export function UserProvider({ children }) {
   const [user, setUser] = useState({});
   const [userCart, setUserCart] = useState(["Empty"]);
-  const [userListings, setUserListings] = useState(["Empty"]);
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     updateBoth();
-  }, [userCart, userListings]);
+  }, [userCart]);
 
   function updateBoth() {
     // helper function for the above useEffect
     setUserCart(user.cart);
-    setUserListings(user.listings);
   }
 
   async function loginUser(email, pass) {
@@ -190,24 +188,20 @@ export function UserProvider({ children }) {
   function removeListing(toRemove) {
     console.log("removing listing: ", toRemove);
 
-    let without = [];
     let newCart = [];
-
-    for (let i = 0; i < user.listings.length; i++) {
-      if (user.listings[i] !== toRemove) {
-        without.push(user.listings[i]);
-      }
-    }
 
     for (let i = 0; i < user.cart.length; i++) {
       if (user.cart[i].itemID !== toRemove) {
         newCart.push(user.cart[i]);
       }
     }
-    user.listings = without;
-    user.cart = newCart;
-    setUserListings(without);
-    setUserCart(newCart);
+
+    if (newCart.length !== user.cart.length) {
+      user.cart = newCart;
+      setUserCart(newCart);
+    } else {
+      console.log("Was not in users cart");
+    }
   }
 
   // function updateListings(newListings) {
@@ -227,15 +221,10 @@ export function UserProvider({ children }) {
   //     });
   // }
 
-  function loadListings() {
-    return user.listings;
-  }
-
   return (
     <UserContext.Provider
       value={{
         loadCart,
-        loadListings,
         loginUser,
         removeFromCart,
         addToCart,
@@ -246,7 +235,6 @@ export function UserProvider({ children }) {
         createUser,
         loggedIn,
         getUserID,
-        userListings,
         removeListing,
       }}
     >
