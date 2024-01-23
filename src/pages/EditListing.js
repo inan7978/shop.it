@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 function EditListing() {
   const { state } = useLocation();
   const { title, description, price, imgURL, id } = state;
-  const { removeListing } = useContext(UserContext);
+  const { removeListing, getUserID } = useContext(UserContext);
   const [img, setImg] = useState(0);
   const [_title, setTitle] = useState("");
   const [_desc, setDesc] = useState("");
   const [_price, setPrice] = useState("");
-  const [myyFiles, setMyFiles] = useState();
+  const [_myFiles, setMyFiles] = useState();
   const navigate = useNavigate();
   console.log("Showing image: ", img + 1);
 
@@ -20,11 +20,6 @@ function EditListing() {
     setDesc(description);
     setPrice(price);
   }, []);
-
-  // const modPrice = new Intl.NumberFormat("en-US", {
-  //   style: "currency",
-  //   currency: "USD",
-  // }).format(price);
 
   function nextImg() {
     if (img + 1 >= imgURL.length) {
@@ -54,11 +49,46 @@ function EditListing() {
     navigate("../my-listings");
   }
 
-  function editHandler(e) {
+  async function editHandler(e) {
     e.preventDefault();
     console.log(`New Title: ${_title}`);
     console.log(`New description : ${_desc}`);
     console.log(`New Price: ${_price}`);
+    console.log(`New Files: ${JSON.stringify(_myFiles)}`);
+
+    const userID = await getUserID();
+    const formData = new FormData();
+
+    formData.append("title", _title);
+    formData.append("desc", _desc);
+    formData.append("price", _price);
+    formData.append("itemID", id);
+
+    Object.keys(_myFiles).forEach((key) => {
+      formData.append(_myFiles.item(key).name, _myFiles.item(key));
+    });
+
+    console.log("formData: ", formData);
+
+    const response = await fetch("http://localhost:3003/update-listing", {
+      header: {
+        "content-type": "multipart/form-data",
+      },
+
+      method: "POST",
+      body: formData,
+    });
+
+    console.log(response);
+
+    if (response.ok) {
+      console.log(id, " has been updated.");
+      setMyFiles();
+      setTitle("");
+      setDesc("");
+      setPrice("");
+      navigate("../my-listings");
+    }
   }
 
   return (
