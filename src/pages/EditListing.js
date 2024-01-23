@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function EditListing() {
   const { state } = useLocation();
   const { title, description, price, imgURL, id } = state;
-  const { removeListing, getUserID } = useContext(UserContext);
+  const { removeListing } = useContext(UserContext);
   const [img, setImg] = useState(0);
   const [_title, setTitle] = useState("");
   const [_desc, setDesc] = useState("");
@@ -56,7 +56,6 @@ function EditListing() {
     console.log(`New Price: ${_price}`);
     console.log(`New Files: ${JSON.stringify(_myFiles)}`);
 
-    const userID = await getUserID();
     const formData = new FormData();
 
     formData.append("title", _title);

@@ -29,6 +29,13 @@ function CreateAccountPage() {
           setConfirmPass("");
           setEmail("");
           navigate("../login");
+          return;
+
+        default:
+          setPass("");
+          setConfirmPass("");
+          setEmail("");
+          navigate("../login");
       }
     } else {
       alert(`Passwords don't match!`);

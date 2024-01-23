@@ -47,7 +47,7 @@ function MyAccountPage() {
       });
 
       logOutUser("toLogin");
-      alert("Changes saved. Please log in again.");
+      alert(`Changes saved for ${email}. Please log in again.`);
     } else {
       alert("Passwords don't match!");
     }

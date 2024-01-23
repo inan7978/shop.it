@@ -2,8 +2,12 @@ function ContactUs() {
   return (
     <div className="contact-us-container">
       <h2 className="contact-us-heading">Contact Us</h2>
-      <div className="img-desc-container">
-        <img className="contact-us-img" src={"https://picsum.photos/500"} />
+      <div className="contact-us-img-desc-container">
+        <img
+          className="contact-us-img"
+          src={"https://picsum.photos/500"}
+          alt="contact-us-img"
+        />
         <div className="contact-us-text-container">
           <p className="contact-us-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

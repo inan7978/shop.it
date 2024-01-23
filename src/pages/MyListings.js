@@ -1,22 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../context/UserContext";
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ItemListing from "../components/ItemListing";
 
 function MyListings() {
   const { getUserID } = useContext(UserContext);
-  const [trigger, setTrigger] = useState([""]);
   const [details, setDetails] = useState();
   const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
 
-  // const mappedListings = listings.map((listing) => {
-  //   return <h2 key={listing}>{listing}</h2>;
-  // });
-
   useEffect(() => {
     loadDetails();
-  }, [trigger]);
+  }, []);
 
   async function loadDetails() {
     const owner = await getUserID();

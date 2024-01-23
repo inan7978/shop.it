@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import UserContext from "../context/UserContext";
-import userEvent from "@testing-library/user-event";
 
 function CreateListingPage() {
   const [myFiles, setMyFiles] = useState();

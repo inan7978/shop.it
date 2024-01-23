@@ -11,8 +11,8 @@ function Footer() {
       <Link to="/privacy" className="footer-links">
         Privacy Policy
       </Link>
-      <Link to="/collaborations" className="footer-links">
-        Collaborations
+      <Link to="/about" className="footer-links">
+        About
       </Link>
       <Link to="/list-item" className="footer-links">
         List Your Product
