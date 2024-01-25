@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .App {
@@ -138,10 +139,21 @@ input {
   background-color: #d9d9d9;
 }
 
+.input-multi {
+  display: block;
+  resize: none;
+  width: 15vw;
+}
+
 .field-label {
   font-size: 32px;
   font-weight: 600;
   color: #fff;
+}
+.field-label-dark {
+  font-size: 32px;
+  font-weight: 600;
+  color: #050505;
 }
 
 .heading-bold {
@@ -154,13 +166,22 @@ input[type="email"] {
   padding-left: 15px;
   padding-right: 15px;
   font-size: 16px;
+  width: 25rem;
   font-weight: 600;
 }
 input[type="text"] {
   padding-left: 15px;
   padding-right: 15px;
+  width: 25rem;
   font-size: 16px;
   font-weight: 600;
+}
+textarea[type="text"] {
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  height: 15rem;
+  width: 25rem;
 }
 
 input[type="password"] {
@@ -168,6 +189,7 @@ input[type="password"] {
   padding-right: 15px;
   font-size: 16px;
   font-weight: 600;
+  width: 25rem;
 }
 
 .item-cards-container {
@@ -400,4 +422,60 @@ input[type="password"] {
 
 .about-page-text {
   font-size: 20px;
+}
+
+/*Create Listing Page*/
+.create-listing-container {
+  width: 100vw;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.upload-listing {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10vw;
+}
+
+.choose-files {
+  background-color: rgb(209, 231, 209);
+  border-radius: 15px;
+  width: 25vw;
+  height: 25vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-file-btn {
+  display: block;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: rgb(51, 76, 112); */
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.add-file-btn {
+  vertical-align: middle;
+}
+input[type="file"]::file-selector-button {
+}
+
+.info-part-listing {
 }

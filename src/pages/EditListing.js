@@ -122,17 +122,6 @@ function EditListing() {
             />
           </label>
           <label className="field-label">
-            Description:
-            <input
-              className="input-single"
-              type="text"
-              id="description"
-              name="description"
-              value={_desc}
-              onChange={(e) => setDesc(e.target.value)}
-            />
-          </label>
-          <label className="field-label">
             Price:
             <input
               className="input-single"
@@ -143,14 +132,20 @@ function EditListing() {
               onChange={(e) => setPrice(e.target.value)}
             />
           </label>
+          <label className="field-label">
+            Description:
+            <textarea
+              className="input-single input-multi"
+              type="text"
+              id="description"
+              name="description"
+              value={_desc}
+              onChange={(e) => setDesc(e.target.value)}
+            />
+          </label>
           <input className="btn-submit" type="submit" />
         </form>
         <button onClick={deleteListing}>Delete Listing</button>
-        <div className="item-info-container">
-          <h1>{title}</h1>
-          <h2>{price}</h2>
-          <p>{description}</p>
-        </div>
         {imgURL.length > 1 ? (
           <>
             <button onClick={nextImg}>Next image</button>
