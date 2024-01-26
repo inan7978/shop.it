@@ -179,7 +179,7 @@ input[type="text"] {
 textarea[type="text"] {
   padding: 15px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 575;
   height: 15rem;
   width: 25rem;
 }
@@ -427,55 +427,104 @@ input[type="password"] {
 /*Create Listing Page*/
 .create-listing-container {
   width: 100vw;
-  margin-top: 2rem;
   margin-left: auto;
   margin-right: auto;
 }
 
-.upload-listing {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10vw;
+.list-item-heading {
+  text-align: center;
+  font-size: 3rem;
 }
 
-.choose-files {
-  background-color: rgb(209, 231, 209);
-  border-radius: 15px;
-  width: 25vw;
-  height: 25vw;
+input[type="file"] {
+  display: none;
+}
+
+.inputs-container {
+  /* background-color: #17a873; */
+  height: 1000px;
+  width: 1100px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.photo-picker {
+  width: 45%;
+  height: 38rem;
+}
+
+.info-inputs {
+  width: 45%;
+  height: 42rem;
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
 }
 
-.add-file-btn {
-  display: block;
+.file-btn-label {
+  width: 100%;
   height: 100%;
-  width: 100%;
+  display: inline-block;
+  text-transform: uppercase;
   display: flex;
   justify-content: center;
-  align-items: center;
-  /* background-color: rgb(51, 76, 112); */
+  color: #fff;
+  background-color: rgb(218, 218, 218);
+  border-radius: 5px;
+  text-align: center;
 }
 
-.inputfile {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+.file-btn-label:hover {
+  cursor: pointer;
+  background-color: rgb(170, 170, 170);
 }
 
-.add-file-btn {
-  vertical-align: middle;
-}
-input[type="file"]::file-selector-button {
+.add-listing-input {
+  display: block;
+  background-color: rgb(218, 218, 218);
+
+  height: 4rem;
+  border-radius: 5px;
+  border: none;
 }
 
-.info-part-listing {
+.add-listing-input:hover {
+  background-color: rgb(170, 170, 170);
+}
+
+.add-listing-input-desc {
+  display: inline-block;
+  background-color: rgb(218, 218, 218);
+
+  resize: none;
+  border-radius: 5px;
+  border: none;
+  width: 75%;
+}
+
+.add-listing-input-desc:hover {
+  background-color: rgb(170, 170, 170);
+}
+
+.create-listing-btn {
+  display: block;
+  width: 25rem;
+  height: 6rem;
+  background-color: #17a873;
+  border: none;
+  color: white;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 0.2rem;
+  border-radius: 5px;
+}
+.create-listing-btn:hover {
+  background-color: #1fe29b;
+
+  cursor: pointer;
 }

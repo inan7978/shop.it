@@ -41,24 +41,15 @@ function CreateListingPage() {
     if (response.ok) {
       console.log(title, " has been added.");
       navigate("../store-page");
-      // setMyFiles();
-      // setTitle("");
-      // setDesc("");
-      // setPrice("");
     }
   }
 
   return (
-    <div className="create-listing-container">
+    <section className="create-listing-container">
       {loggedIn ? (
-        <form onSubmit={uploadHandler} className="upload-listing">
-          <div className="choose-files">
-            <label className="add-file-btn" htmlFor="myFiles">
-              <img src={addPic} alt="btn-img" width="100" height="100" />
-            </label>
-
+        <>
+          <form onSubmit={uploadHandler}>
             <input
-              className="inputfile"
               type="file"
               id="myFiles"
               onChange={(e) => {
@@ -67,48 +58,53 @@ function CreateListingPage() {
               accept="image/*"
               multiple
             />
-          </div>
-          <div className="info-part-listing">
-            <label className="field-label-dark">
-              Title:
-              <input
-                className="input-single"
-                type="text"
-                id="title"
-                name="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </label>
-            <label className="field-label-dark">
-              Price:
-              <input
-                className="input-single"
-                type="text"
-                id="price"
-                name="price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </label>
-            <label className="field-label-dark">
-              Description:
-              <textarea
-                className="input-single input-multi"
-                type="text"
-                id="description"
-                name="description"
-                value={desc}
-                onChange={(e) => setDesc(e.target.value)}
-              />
-            </label>
-            <input className="btn-submit" type="submit" />
-          </div>
-        </form>
+            <div className="inputs-container">
+              <div className="photo-picker">
+                <label for="myFiles" className="file-btn-label">
+                  <img src={addPic} width="100" />
+                </label>
+              </div>
+              <div className="info-inputs">
+                <input
+                  className="add-listing-input"
+                  type="text"
+                  id="title"
+                  name="title"
+                  placeholder="Title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+                <input
+                  className="add-listing-input"
+                  type="text"
+                  id="price"
+                  name="price"
+                  placeholder="Price"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+                <textarea
+                  className="add-listing-input-desc"
+                  type="text"
+                  id="description"
+                  name="description"
+                  placeholder="Details"
+                  value={desc}
+                  onChange={(e) => setDesc(e.target.value)}
+                />
+                <input
+                  type="submit"
+                  className="create-listing-btn"
+                  value="List It!"
+                />
+              </div>
+            </div>
+          </form>
+        </>
       ) : (
         <h2>Log in</h2>
       )}
-    </div>
+    </section>
   );
 }
 

@@ -15,7 +15,7 @@ function AboutPage() {
             my career. After a long call with a friend of mine, I signed up for
             Coursera and began the Meta Front-End Development Course. About 7
             months later, I received my certificate and began to apply what I
-            have learned. I am truly amazed at how far I have come. I have
+            have learned. I am truly amazed at how far I have come. <br />I have
             created a basic color guessing game, a ToDo app, and my ultimate
             showcase of skill to date is the creation of shop.it, a full stack
             e-commerce site that incorporates React.js for the front end,
