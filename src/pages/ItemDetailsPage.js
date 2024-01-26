@@ -34,33 +34,46 @@ function ItemDetailPage() {
 
   return (
     <>
-      <div className="item-detail-container">
-        <img
-          className="item-description-img"
-          src={imgURL[img]}
-          alt={`${item}`}
-        />
-        <div className="item-info-container">
-          <h1>{item}</h1>
-          <h2>{modPrice}</h2>
-          <p>{description}</p>
+      <div className="item-details-page">
+        <div className="item-description-img-container">
+          {" "}
+          <img
+            className="item-description-img"
+            src={imgURL[img]}
+            alt={`${item}`}
+          />
+          <div className="cycle-img-btns-container">
+            <button className="cycle-img-btn" onClick={prevImg}>
+              {"<"}
+            </button>
+            <button className="cycle-img-btn" onClick={nextImg}>
+              {">"}
+            </button>
+          </div>
         </div>
-        {loggedIn ? (
-          <button
-            className="btn-submit"
-            onClick={() => {
-              addToCart(id);
-            }}
-          >
-            Add to Cart
-          </button>
-        ) : (
-          <button className="btn-submit" onClick={() => navigate("/login")}>
-            Log In!
-          </button>
-        )}
-        <button onClick={nextImg}>Next image</button>
-        <button onClick={prevImg}>Previous image</button>
+
+        <div className="item-info-container">
+          <h1 className="item-details-heading">{item}</h1>
+          <h2 className="item-details-price">{modPrice}</h2>
+          <p className="item-details-description">{description}</p>
+          {loggedIn ? (
+            <button
+              className="add-item-cart-btn"
+              onClick={() => {
+                addToCart(id);
+              }}
+            >
+              Add to Cart
+            </button>
+          ) : (
+            <button
+              className="add-item-cart-btn"
+              onClick={() => navigate("/login")}
+            >
+              Log In!
+            </button>
+          )}
+        </div>
       </div>
     </>
   );

@@ -15,32 +15,37 @@ function CreateListingPage() {
 
   async function uploadHandler(e) {
     e.preventDefault();
-    const userID = await getUserID();
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("desc", desc);
-    formData.append("price", price);
-    formData.append("owner", userID);
-    // formData.append("files", myFile); // has to be file
-    // formData.append("fileName", myFile.name);
 
-    Object.keys(myFiles).forEach((key) => {
-      formData.append(myFiles.item(key).name, myFiles.item(key));
-    });
-    console.log("formData: ", formData);
+    if (title && desc && price && myFiles) {
+      const userID = await getUserID();
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("desc", desc);
+      formData.append("price", price);
+      formData.append("owner", userID);
+      // formData.append("files", myFile); // has to be file
+      // formData.append("fileName", myFile.name);
 
-    const response = await fetch("http://localhost:3003/create-listing", {
-      header: {
-        "content-type": "multipart/form-data",
-      },
-      method: "POST",
-      body: formData,
-    });
+      Object.keys(myFiles).forEach((key) => {
+        formData.append(myFiles.item(key).name, myFiles.item(key));
+      });
+      console.log("formData: ", formData);
 
-    console.log(response);
-    if (response.ok) {
-      console.log(title, " has been added.");
-      navigate("../store-page");
+      const response = await fetch("http://localhost:3003/create-listing", {
+        header: {
+          "content-type": "multipart/form-data",
+        },
+        method: "POST",
+        body: formData,
+      });
+
+      console.log(response);
+      if (response.ok) {
+        console.log(title, " has been added.");
+        navigate("../store-page");
+      }
+    } else {
+      alert("Fill in all fields!");
     }
   }
 
