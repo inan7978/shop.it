@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import addPic from "../images/add-folder-svgrepo-com.svg";
 
 function EditListing() {
   const { state } = useLocation();
@@ -54,7 +55,6 @@ function EditListing() {
     console.log(`New Title: ${_title}`);
     console.log(`New description : ${_desc}`);
     console.log(`New Price: ${_price}`);
-    console.log(`New Files: ${JSON.stringify(_myFiles)}`);
 
     const formData = new FormData();
 
@@ -63,9 +63,11 @@ function EditListing() {
     formData.append("price", _price);
     formData.append("itemID", id);
 
-    Object.keys(_myFiles).forEach((key) => {
-      formData.append(_myFiles.item(key).name, _myFiles.item(key));
-    });
+    if (_myFiles) {
+      Object.keys(_myFiles).forEach((key) => {
+        formData.append(_myFiles.item(key).name, _myFiles.item(key));
+      });
+    }
 
     console.log("formData: ", formData);
 
@@ -92,68 +94,67 @@ function EditListing() {
 
   return (
     <>
-      <div className="item-detail-container">
-        <img
-          className="item-description-img"
-          src={imgURL[img]}
-          alt={`${title}`}
+      <div className="edit-listing-container">
+        <div className="edit-listing-img-container">
+          <img
+            className="edit-listing-img"
+            src={imgURL[img]}
+            alt={`${title}`}
+          />
+          {imgURL.length > 1 ? (
+            <>
+              <button onClick={nextImg}>Next image</button>
+              <button onClick={prevImg}>Previous image</button>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+        <input
+          type="file"
+          id="myFiles"
+          onChange={(e) => {
+            setMyFiles(e.target.files);
+          }}
+          accept="image/*"
+          multiple
         />
-        <form onSubmit={editHandler} className="login-form">
-          <label>
+        <div className="edit-listing-info">
+          <form onSubmit={editHandler}>
+            <label for="myFiles" className="file-btn-label">
+              <img src={addPic} width="100" />
+            </label>
+
             <input
-              type="file"
-              id="myFiles"
-              onChange={(e) => {
-                setMyFiles(e.target.files);
-              }}
-              accept="image/*"
-              multiple
-            />
-          </label>
-          <label className="field-label">
-            Title:
-            <input
-              className="input-single"
+              className="edit-listing-title"
               type="text"
               id="title"
               name="title"
               value={_title}
               onChange={(e) => setTitle(e.target.value)}
             />
-          </label>
-          <label className="field-label">
-            Price:
+
             <input
-              className="input-single"
+              className="edit-listing-price"
               type="text"
               id="price"
               name="price"
               value={_price}
               onChange={(e) => setPrice(e.target.value)}
             />
-          </label>
-          <label className="field-label">
-            Description:
+
             <textarea
-              className="input-single input-multi"
+              className="edit-listing-description"
               type="text"
               id="description"
               name="description"
               value={_desc}
               onChange={(e) => setDesc(e.target.value)}
             />
-          </label>
-          <input className="btn-submit" type="submit" />
-        </form>
-        <button onClick={deleteListing}>Delete Listing</button>
-        {imgURL.length > 1 ? (
-          <>
-            <button onClick={nextImg}>Next image</button>
-            <button onClick={prevImg}>Previous image</button>
-          </>
-        ) : (
-          <></>
-        )}
+
+            <input type="submit" />
+          </form>
+        </div>
       </div>
     </>
   );
