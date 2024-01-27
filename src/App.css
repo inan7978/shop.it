@@ -320,6 +320,7 @@ input[type="password"] {
 
 .item-description-img {
   height: 35rem;
+  border-radius: 5px;
   display: block;
 }
 .item-info-container {
@@ -611,11 +612,14 @@ input[type="file"] {
 /*Edit listing*/
 
 .edit-listing-container {
+  /* background-color: red; */
   margin-left: auto;
   margin-right: auto;
   gap: 3rem;
   width: 1100px;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .edit-listing-img-container {
@@ -624,25 +628,73 @@ input[type="file"] {
 
 .edit-listing-img {
   width: 100%;
+  border-radius: 5px;
 }
 
 .edit-listing-info {
-  width: 45%;
+  /* background-color: blue; */
+  width: 30rem;
+  height: 42rem;
   display: flex;
   flex-direction: column;
-  background-color: red;
-  justify-content: space-evenly;
+  gap: 3rem;
+  align-items: center;
 }
 
-.edit-listing-title {
+.edit-listing-input {
   display: block;
+  background-color: rgb(218, 218, 218);
+  height: 4rem;
+  border-radius: 5px;
+  border: none;
 }
 
-.edit-listing-price {
-  display: block;
+.edit-listing-input:hover {
+  background-color: rgb(170, 170, 170);
 }
 
 .edit-listing-description {
+  display: inline-block;
+  background-color: rgb(218, 218, 218);
+
   resize: none;
-  display: block;
+  border-radius: 5px;
+  border: none;
+  width: 75%;
+}
+
+.edit-listing-description:hover {
+  background-color: rgb(170, 170, 170);
+}
+
+.edit-file-btn {
+  width: 20%;
+  height: 5rem;
+  display: inline-block;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  background-color: rgb(218, 218, 218);
+  border-radius: 5px;
+  text-align: center;
+}
+.edit-file-btn:hover {
+  background-color: rgb(170, 170, 170);
+  cursor: pointer;
+}
+
+.submit-edit-btn {
+  height: 4rem;
+  width: 12rem;
+  background-color: #1fd694;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 2rem;
+}
+
+.submit-edit-btn:hover {
+  background-color: #17a873;
+  cursor: pointer;
 }

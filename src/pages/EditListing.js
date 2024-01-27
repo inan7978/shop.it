@@ -94,6 +94,15 @@ function EditListing() {
 
   return (
     <>
+      <input
+        type="file"
+        id="myFiles"
+        onChange={(e) => {
+          setMyFiles(e.target.files);
+        }}
+        accept="image/*"
+        multiple
+      />
       <div className="edit-listing-container">
         <div className="edit-listing-img-container">
           <img
@@ -103,30 +112,27 @@ function EditListing() {
           />
           {imgURL.length > 1 ? (
             <>
-              <button onClick={nextImg}>Next image</button>
-              <button onClick={prevImg}>Previous image</button>
+              <div className="cycle-img-btns-container">
+                <button className="cycle-img-btn" onClick={prevImg}>
+                  {"<"}
+                </button>
+                <button className="cycle-img-btn" onClick={nextImg}>
+                  {">"}
+                </button>
+              </div>
             </>
           ) : (
             <></>
           )}
         </div>
-        <input
-          type="file"
-          id="myFiles"
-          onChange={(e) => {
-            setMyFiles(e.target.files);
-          }}
-          accept="image/*"
-          multiple
-        />
-        <div className="edit-listing-info">
-          <form onSubmit={editHandler}>
-            <label for="myFiles" className="file-btn-label">
+
+        <form onSubmit={editHandler}>
+          <div className="edit-listing-info">
+            <label for="myFiles" className="edit-file-btn">
               <img src={addPic} width="100" />
             </label>
-
             <input
-              className="edit-listing-title"
+              className="edit-listing-input"
               type="text"
               id="title"
               name="title"
@@ -135,7 +141,7 @@ function EditListing() {
             />
 
             <input
-              className="edit-listing-price"
+              className="edit-listing-input"
               type="text"
               id="price"
               name="price"
@@ -152,9 +158,9 @@ function EditListing() {
               onChange={(e) => setDesc(e.target.value)}
             />
 
-            <input type="submit" />
-          </form>
-        </div>
+            <input className="submit-edit-btn" type="submit" value="Apply" />
+          </div>
+        </form>
       </div>
     </>
   );
