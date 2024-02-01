@@ -22,7 +22,7 @@ function MyListings() {
       owner: owner,
     };
 
-    await fetch("https://144.126.248.93:3003/get-listing-items", {
+    await fetch("http://localhost:3003/get-listing-items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

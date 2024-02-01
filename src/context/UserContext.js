@@ -24,7 +24,7 @@ export function UserProvider({ children }) {
     const toFind = {
       emailSearch: email,
     };
-    const res = await fetch("https://144.126.248.93:3003/authenticate", {
+    const res = await fetch("http://localhost:3003/authenticate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export function UserProvider({ children }) {
       pass: pass,
     };
 
-    await fetch("https://144.126.248.93:3003/create-user", {
+    await fetch("http://localhost:3003/create-user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -170,7 +170,7 @@ export function UserProvider({ children }) {
   }
 
   function updateCart(newCart) {
-    fetch("https://144.126.248.93:3003/update-cart", {
+    fetch("http://localhost:3003/update-cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -204,23 +204,6 @@ export function UserProvider({ children }) {
       console.log("Was not in users cart");
     }
   }
-
-  // function updateListings(newListings) {
-  //   fetch("http://localhost:3003/update-listings", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ userID: user._id, newCart: newListings }),
-  //   })
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       const temp = JSON.parse(JSON.stringify(data));
-  //       setUserListings(temp[0].listings);
-  //     });
-  // }
 
   return (
     <UserContext.Provider
