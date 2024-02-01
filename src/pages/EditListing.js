@@ -39,7 +39,7 @@ function EditListing() {
   async function deleteListing() {
     console.log("requested to delete : ", id);
     removeListing(id);
-    await fetch("http://localhost:3003/delete-listing", {
+    await fetch("http://144.126.248.93:3003/delete-listing", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ function EditListing() {
 
     console.log("formData: ", formData);
 
-    const response = await fetch("http://localhost:3003/update-listing", {
+    const response = await fetch("http://144.126.248.93:3003/update-listing", {
       header: {
         "content-type": "multipart/form-data",
       },

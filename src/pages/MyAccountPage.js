@@ -32,7 +32,7 @@ function MyAccountPage() {
         password: password,
       };
 
-      fetch("http://localhost:3003/update-user", {
+      fetch("http://144.126.248.93:3003/update-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -7,7 +7,9 @@ function StorePage() {
   useEffect(() => {
     async function getRecords() {
       try {
-        const response = await fetch(`http://localhost:3003/get-store-items`);
+        const response = await fetch(
+          `http://144.126.248.93:3003/get-store-items`
+        );
 
         if (!response.ok) {
           const message = `An error occurred: ${response.statusText}`;
