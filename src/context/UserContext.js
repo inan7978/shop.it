@@ -24,7 +24,7 @@ export function UserProvider({ children }) {
     const toFind = {
       emailSearch: email,
     };
-    const res = await fetch("http://144.126.248.93:3003/authenticate", {
+    const res = await fetch("https://144.126.248.93:3003/authenticate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export function UserProvider({ children }) {
       pass: pass,
     };
 
-    await fetch("http://144.126.248.93:3003/create-user", {
+    await fetch("https://144.126.248.93:3003/create-user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -170,7 +170,7 @@ export function UserProvider({ children }) {
   }
 
   function updateCart(newCart) {
-    fetch("http://144.126.248.93:3003/update-cart", {
+    fetch("https://144.126.248.93:3003/update-cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

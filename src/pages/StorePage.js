@@ -8,7 +8,7 @@ function StorePage() {
     async function getRecords() {
       try {
         const response = await fetch(
-          `http://144.126.248.93:3003/get-store-items`
+          `https://144.126.248.93:3003/get-store-items`
         );
 
         if (!response.ok) {

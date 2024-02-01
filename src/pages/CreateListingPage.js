@@ -32,7 +32,7 @@ function CreateListingPage() {
       console.log("formData: ", formData);
 
       const response = await fetch(
-        "http://144.126.248.93:3003/create-listing",
+        "https://144.126.248.93:3003/create-listing",
         {
           header: {
             "content-type": "multipart/form-data",
