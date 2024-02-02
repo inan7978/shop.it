@@ -24,13 +24,16 @@ export function UserProvider({ children }) {
     const toFind = {
       emailSearch: email,
     };
-    const res = await fetch("http://localhost:3003/authenticate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(toFind),
-    })
+    const res = await fetch(
+      "https://shop-it-backend.onrender.com/authenticate",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(toFind),
+      }
+    )
       .then((response) => {
         if (response.ok) {
           return response;
@@ -85,7 +88,7 @@ export function UserProvider({ children }) {
       pass: pass,
     };
 
-    await fetch("http://localhost:3003/create-user", {
+    await fetch("https://shop-it-backend.onrender.com/create-user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -170,7 +173,7 @@ export function UserProvider({ children }) {
   }
 
   function updateCart(newCart) {
-    fetch("http://localhost:3003/update-cart", {
+    fetch("https://shop-it-backend.onrender.com/update-cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

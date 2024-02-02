@@ -31,13 +31,16 @@ function CreateListingPage() {
       });
       console.log("formData: ", formData);
 
-      const response = await fetch("http://localhost:3003/create-listing", {
-        header: {
-          "content-type": "multipart/form-data",
-        },
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://shop-it-backend.onrender.com/create-listing",
+        {
+          header: {
+            "content-type": "multipart/form-data",
+          },
+          method: "POST",
+          body: formData,
+        }
+      );
 
       console.log(response);
       if (response.ok) {

@@ -27,7 +27,7 @@ function MyCartPage() {
       find: onlyIDs,
     };
 
-    await fetch("http://localhost:3003/get-cart-items", {
+    await fetch("https://shop-it-backend.onrender.com/get-cart-items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

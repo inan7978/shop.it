@@ -39,7 +39,7 @@ function EditListing() {
   async function deleteListing() {
     console.log("requested to delete : ", id);
     removeListing(id);
-    await fetch("http://localhost:3003/delete-listing", {
+    await fetch("https://shop-it-backend.onrender.com/delete-listing", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,14 +71,17 @@ function EditListing() {
 
     console.log("formData: ", formData);
 
-    const response = await fetch("http://localhost:3003/update-listing", {
-      header: {
-        "content-type": "multipart/form-data",
-      },
+    const response = await fetch(
+      "https://shop-it-backend.onrender.com/update-listing",
+      {
+        header: {
+          "content-type": "multipart/form-data",
+        },
 
-      method: "POST",
-      body: formData,
-    });
+        method: "POST",
+        body: formData,
+      }
+    );
 
     console.log(response);
 
@@ -157,6 +160,14 @@ function EditListing() {
               value={_desc}
               onChange={(e) => setDesc(e.target.value)}
             />
+
+            <h3
+              onClick={() => {
+                deleteListing();
+              }}
+            >
+              delete
+            </h3>
 
             <input className="submit-edit-btn" type="submit" value="Apply" />
           </div>

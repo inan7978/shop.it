@@ -22,7 +22,7 @@ function MyListings() {
       owner: owner,
     };
 
-    await fetch("http://localhost:3003/get-listing-items", {
+    await fetch("https://shop-it-backend.onrender.com/get-listing-items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

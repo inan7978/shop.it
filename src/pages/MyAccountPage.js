@@ -32,7 +32,7 @@ function MyAccountPage() {
         password: password,
       };
 
-      fetch("http://localhost:3003/update-user", {
+      fetch("https://shop-it-backend.onrender.com/update-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
