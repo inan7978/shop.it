@@ -112,8 +112,8 @@ function MyCartPage() {
         })
       : null;
     return listItems.length ? (
-      <>
-        <div>{listItems}</div>
+      <div className="my-cart-container">
+        <div className="cart-items">{listItems}</div>
         <h2>
           Grand Total:{" "}
           {new Intl.NumberFormat("en-US", {
@@ -121,7 +121,7 @@ function MyCartPage() {
             currency: "USD",
           }).format(totalCost || "0.00")}
         </h2>
-      </>
+      </div>
     ) : (
       <div>
         <h2>Add something!</h2>

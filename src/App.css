@@ -223,7 +223,7 @@ input[type="password"] {
 }
 
 .item-card {
-  width: 80%;
+  width: 100%;
   height: 80px;
   background-color: rgb(233, 252, 152);
   border-radius: 15px;
@@ -246,8 +246,7 @@ input[type="password"] {
 }
 
 .item-card-img {
-  height: 75px;
-  width: 75px;
+  width: 5rem;
   border-radius: 5px;
 }
 
@@ -697,4 +696,25 @@ input[type="file"] {
 .submit-edit-btn:hover {
   background-color: #17a873;
   cursor: pointer;
+}
+
+/*My Cart Container*/
+
+.my-cart-container {
+  width: 100rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.cart-items {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
