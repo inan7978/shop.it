@@ -1,5 +1,6 @@
 import UserContext from "../context/UserContext";
 import ItemCard from "../components/ItemCard";
+import CartCard from "../components/CartCard";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 function MyCartPage() {
@@ -100,7 +101,7 @@ function MyCartPage() {
           }
 
           return (
-            <ItemCard
+            <CartCard
               key={item._id}
               item={item}
               oneLess={oneLess}
