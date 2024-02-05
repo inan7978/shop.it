@@ -1,5 +1,4 @@
 import UserContext from "../context/UserContext";
-import ItemCard from "../components/ItemCard";
 import CartCard from "../components/CartCard";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -115,13 +114,24 @@ function MyCartPage() {
     return listItems.length ? (
       <div className="my-cart-container">
         <div className="cart-items">{listItems}</div>
-        <h2>
-          Grand Total:{" "}
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-          }).format(totalCost || "0.00")}
-        </h2>
+        <div className="cart-price-container">
+          <h2 className="grand-total">
+            Grand Total:{" "}
+            {new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+            }).format(totalCost || "0.00")}
+          </h2>
+          <button
+            onClick={() => {
+              alert("Order has been placed!");
+              navigate("../store-page");
+            }}
+            className="place-order"
+          >
+            Place order!
+          </button>
+        </div>
       </div>
     ) : (
       <div>
