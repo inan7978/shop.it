@@ -753,6 +753,11 @@ input[type="file"] {
   font-size: 2rem;
 }
 
+.cart-item-button:hover{
+  background-color: rgb(166, 125, 87);
+  cursor: pointer;
+}
+
 .cart-item-quantity {
   font-size: 2rem;
   margin-left: 2rem;
@@ -763,12 +768,17 @@ input[type="file"] {
   height: 6rem;
   width: 6rem;
   margin-left: auto;
-  background-color: lightcoral;
+  background-color: #f08080;
   font-size: 3rem;
   margin-top: auto;
   margin-bottom: auto;
   color: white;
   border: none;
+}
+
+.delete-btn-cart:hover{
+  background-color: #ad5b5b;
+  cursor: pointer;
 }
 
 .cart-card-section {
