@@ -58,9 +58,12 @@ function EditListing() {
 
     const formData = new FormData();
 
+    let priceMod = _price.replace(/\$*/g, "");
+    priceMod = priceMod.replace(/\,*/g, "");
+
     formData.append("title", _title);
     formData.append("desc", _desc);
-    formData.append("price", _price);
+    formData.append("price", priceMod);
     formData.append("itemID", id);
 
     if (_myFiles) {
