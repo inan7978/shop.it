@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -101,7 +102,18 @@ function MyAccountPage() {
               onChange={(e) => setConPass(e.target.value)}
             />
           </label>
-
+          <Link to="/my-listings">
+            <button
+              className="btn-submit"
+              style={{
+                display: "block",
+                background: "yellow",
+                color: "black",
+              }}
+            >
+              My Listings
+            </button>
+          </Link>
           <input className="btn-submit" type="submit" value="Save" />
           <button
             className="btn-submit"
