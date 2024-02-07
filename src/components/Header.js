@@ -15,6 +15,10 @@ function Header() {
         <img className="logo" src={shopItlogo} alt="shop.it logo" />
       </Link>
 
+      <h1 className="text-5xl hidden">
+        Tailwind is configed and can start being used
+      </h1>
+
       {Object.keys(user).length === 0 ? (
         <nav className="nav-bar">
           <Link to="/login">
