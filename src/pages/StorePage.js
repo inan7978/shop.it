@@ -30,15 +30,17 @@ function StorePage() {
   }, []);
 
   const storeItems = items.map((item) => {
-    return <StoreCard className="store-card" key={item._id} item={item} />;
+    return <StoreCard key={item._id} item={item} />;
   });
 
   return (
-    <div className="storePage-container">
+    <div>
       {storeItems.length ? (
-        <div className="inventory-container">{storeItems}</div>
+        <div className="flex flex-wrap justify-center gap-5 my-5 basis-1/2">
+          {storeItems}
+        </div>
       ) : (
-        <h1>Nothing here</h1>
+        <h1>Loading...</h1>
       )}
     </div>
   );

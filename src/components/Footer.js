@@ -51,7 +51,7 @@ function Footer() {
           >
             Sell something!
           </button>
-          <p className="text-white">&copy; 2027 TrevIn Labs LLC</p>
+          <p className="text-white pl-5">&copy; 2024 TrevIn Labs LLC</p>
         </div>
       </div>
     </div>
