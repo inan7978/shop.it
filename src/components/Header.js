@@ -12,11 +12,11 @@ function Header() {
   const navigate = useNavigate();
 
   const buttonsStyles =
-    "text-yellow-400 p-2 md:text-3xl text-nowrap hover:text-gray-700";
+    "text-theYellow p-2 md:text-3xl text-nowrap hover:text-yellow-500";
 
   return (
     <div className="flex justify-between w-1/1 bg-theBlue">
-      <div>
+      <div className="flex">
         <img
           className="w-1/4 cursor-pointer"
           onClick={() => navigate("./store-page")}
