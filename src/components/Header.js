@@ -11,10 +11,11 @@ function Header() {
   const { logOutUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const buttonsStyles = "text-yellow-400 p-2 md:text-3xl text-nowrap";
+  const buttonsStyles =
+    "text-yellow-400 p-2 md:text-3xl text-nowrap hover:text-gray-700";
 
   return (
-    <div className="flex justify-between w-1/1 bg bg-sky-400">
+    <div className="flex justify-between w-1/1 bg-theBlue">
       <div>
         <img
           className="w-1/4 cursor-pointer"
