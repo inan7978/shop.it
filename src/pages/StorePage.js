@@ -43,7 +43,7 @@ function StorePage() {
       />
       <div>
         {storeItems.length ? (
-          <div className="container flex flex-wrap justify-center gap-5 my-5 max-w-1920px mx-auto">
+          <div className="container flex flex-wrap justify-center gap-5 mt-5 mb-20 max-w-1920px mx-auto">
             {storeItems}
           </div>
         ) : (

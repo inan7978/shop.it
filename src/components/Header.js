@@ -49,6 +49,10 @@ function Header() {
             >
               Log out!
             </button>
+            <button
+              className={buttonsStyles}
+              onClick={() => navigate("./my-cart")}
+            >{`Cart: ${user.cart.length}`}</button>
           </>
         ) : (
           <>

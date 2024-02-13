@@ -18,7 +18,7 @@ function StoreCard(props) {
 
   return (
     <div
-      className="container flex flex-col w-4/5 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-cardColor rounded py-5 justify-center"
+      className="container flex flex-col w-4/5 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-cardColor rounded p-5 justify-center"
       onClick={(e) => {
         // e.stopPropagation();
         e.preventDefault();
@@ -40,7 +40,7 @@ function StoreCard(props) {
         <img
           alt="testing"
           src={props.item.imgURL[0]}
-          className="aspect-auto h-48 max-h-48"
+          className="aspect-auto h-48 max-h-48 rounded bg-white"
         />
         <h1 className="text-black text-2xl font-bold">{props.item.title}</h1>
       </div>

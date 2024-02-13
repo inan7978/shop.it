@@ -12,6 +12,12 @@ function ItemDetailPage() {
   const navigate = useNavigate();
   console.log("Showing image: ", img + 1);
 
+  const buttonStyles =
+    "rounded p-5 bg-theYellow text-2xl font-bold text-blue-500 m-5";
+
+  const buttonStyles2 =
+    "px-7 py-3 bg-theYellow text-blue-500 font-bold text-2xl";
+
   const modPrice = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -34,7 +40,51 @@ function ItemDetailPage() {
 
   return (
     <>
-      <div className="item-details-page">
+      {/* Page container */}
+      <div className="container flex flex-col md:flex-row w-full justify-center mx-auto md:gap-5 max-w-1920px">
+        {/* image and buttons container */}
+        <div className="flex flex-col justify-center items-center w-4/5 mx-auto md:w-1/2">
+          <div className="w-full">
+            <img max-h-48 src={imgURL[img]} alt={`${item}`} />
+          </div>
+          {imgURL.length > 1 ? (
+            <div>
+              <button className={buttonStyles} onClick={prevImg}>
+                {"<"}
+              </button>
+              <button className={buttonStyles} onClick={nextImg}>
+                {">"}
+              </button>
+            </div>
+          ) : null}
+        </div>
+
+        {/* information container */}
+        <div className="flex flex-col justify-center items-center md:w-1/2">
+          <h1>{item}</h1>
+          <h2>{modPrice}</h2>
+          <p>{description}</p>
+          {loggedIn ? (
+            <button
+              className={buttonStyles2}
+              onClick={() => {
+                addToCart(id);
+              }}
+            >
+              Add to Cart
+            </button>
+          ) : (
+            <button
+              className={buttonStyles2}
+              onClick={() => navigate("/login")}
+            >
+              Log In!
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* <div className="item-details-page">
         <div className="item-description-img-container">
           {" "}
           <img
@@ -74,7 +124,7 @@ function ItemDetailPage() {
             </button>
           )}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
