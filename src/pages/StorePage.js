@@ -35,13 +35,21 @@ function StorePage() {
 
   return (
     <div>
-      {storeItems.length ? (
-        <div className="flex flex-wrap justify-center gap-5 my-5 basis-1/2">
-          {storeItems}
-        </div>
-      ) : (
-        <h1>Loading...</h1>
-      )}
+      <input
+        type="text"
+        id="item-search"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-10 h-12 bg-gray-300"
+        placeholder="Whatchu need?"
+      />
+      <div>
+        {storeItems.length ? (
+          <div className="container flex flex-wrap justify-center gap-5 my-5 max-w-1920px mx-auto">
+            {storeItems}
+          </div>
+        ) : (
+          <h1>Loading...</h1>
+        )}
+      </div>
     </div>
   );
 }

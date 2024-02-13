@@ -14,9 +14,11 @@ function StoreCard(props) {
   const { addToCart } = useContext(UserContext);
   const { loggedIn } = useContext(UserContext);
 
+  const buttonsStyles = "text-xl font-bold bg-blue-400 rounded p-2";
+
   return (
-    <article
-      className="store-card"
+    <div
+      className="container flex flex-col w-4/5 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-cardColor rounded py-5 justify-center"
       onClick={(e) => {
         // e.stopPropagation();
         e.preventDefault();
@@ -34,37 +36,41 @@ function StoreCard(props) {
         });
       }}
     >
-      {/* needs to be changed to a carousel that slides when mouse is hovered over it */}
-      <img
-        alt="testing"
-        src={props.item.imgURL[0]}
-        className="store-card-img"
-      />
-      <h1 className="store-card-title">{props.item.title}</h1>
-      <h3>{modPrice}</h3>
-      {loggedIn ? (
-        <button
-          className="add-cart-btn btn-submit"
-          onClick={(e) => {
-            e.stopPropagation(); // this is used because this onClick is located within a broader on click. Not including this would have both on clicks fire when this is selected.
-            addToCart(props.item._id);
-            console.log(props.item.title + " request to add to cart.");
-          }}
-        >
-          Add to Cart
-        </button>
-      ) : (
-        <button
-          className="btn-submit"
-          onClick={(e) => {
-            e.stopPropagation();
-            navigate("/login");
-          }}
-        >
-          Add to Cart
-        </button>
-      )}
-    </article>
+      <div className="container flex flex-col items-center p-2 gap-3">
+        <img
+          alt="testing"
+          src={props.item.imgURL[0]}
+          className="aspect-auto h-48 max-h-48"
+        />
+        <h1 className="text-black text-2xl font-bold">{props.item.title}</h1>
+      </div>
+
+      <div className="container flex flex-col xl:flex-row gap-5 justify-center items-center my-10">
+        <h3 className="text-xl font-bold">{modPrice}</h3>
+        {loggedIn ? (
+          <button
+            className={buttonsStyles}
+            onClick={(e) => {
+              e.stopPropagation(); // this is used because this onClick is located within a broader on click. Not including this would have both on clicks fire when this is selected.
+              addToCart(props.item._id);
+              console.log(props.item.title + " request to add to cart.");
+            }}
+          >
+            Add to Cart
+          </button>
+        ) : (
+          <button
+            className={buttonsStyles}
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate("/login");
+            }}
+          >
+            Add to Cart
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
 

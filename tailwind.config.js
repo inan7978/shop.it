@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         theBlue: "#7eb2dd",
         theYellow: "#FF0",
+        cardColor: "#FFDC83",
       },
     },
   },
