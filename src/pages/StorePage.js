@@ -30,16 +30,26 @@ function StorePage() {
   }, []);
 
   const storeItems = items.map((item) => {
-    return <StoreCard className="store-card" key={item._id} item={item} />;
+    return <StoreCard key={item._id} item={item} />;
   });
 
   return (
-    <div className="storePage-container">
-      {storeItems.length ? (
-        <div className="inventory-container">{storeItems}</div>
-      ) : (
-        <h1>Nothing here</h1>
-      )}
+    <div>
+      <input
+        type="text"
+        id="item-search"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-10 h-12 bg-gray-300"
+        placeholder="Whatchu need? (coming soon)"
+      />
+      <div>
+        {storeItems.length ? (
+          <div className="container flex flex-wrap justify-center gap-5 mt-5 mb-20 max-w-1920px mx-auto">
+            {storeItems}
+          </div>
+        ) : (
+          <h1>Loading...</h1>
+        )}
+      </div>
     </div>
   );
 }
