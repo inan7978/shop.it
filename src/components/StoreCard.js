@@ -18,7 +18,7 @@ function StoreCard(props) {
 
   return (
     <div
-      className="container flex flex-col w-4/5 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-cardColor rounded p-5 justify-center"
+      className="container flex flex-col w-4/5 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-cardColor hover:cursor-pointer rounded p-5 justify-center"
       onClick={(e) => {
         // e.stopPropagation();
         e.preventDefault();
