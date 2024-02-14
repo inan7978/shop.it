@@ -111,28 +111,31 @@ function MyCartPage() {
           );
         })
       : null;
+
     return listItems.length ? (
-      <div className="my-cart-container">
-        <div className="cart-items">{listItems}</div>
-        <div className="cart-price-container">
-          <h2 className="grand-total">
-            Grand Total:{" "}
-            {new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-            }).format(totalCost || "0.00")}
-          </h2>
-          <button
-            onClick={() => {
-              alert("Order has been placed!");
-              navigate("../store-page");
-            }}
-            className="place-order"
-          >
-            Place order!
-          </button>
-        </div>
-      </div>
+      // <div className="my-cart-container">
+      //   <div className="cart-items">{listItems}</div>
+      //   <div className="cart-price-container">
+      //     <h2 className="grand-total">
+      //       Grand Total:{" "}
+      //       {new Intl.NumberFormat("en-US", {
+      //         style: "currency",
+      //         currency: "USD",
+      //       }).format(totalCost || "0.00")}
+      //     </h2>
+      //     <button
+      //       onClick={() => {
+      //         alert("Order has been placed!");
+      //         navigate("../store-page");
+      //       }}
+      //       className="place-order"
+      //     >
+      //       Place order!
+      //     </button>
+      //   </div>
+      // </div>
+
+      <div className="container flex-col items-center mx-auto">{listItems}</div>
     ) : (
       <div>
         <h2>Add something!</h2>

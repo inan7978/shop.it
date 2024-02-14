@@ -73,7 +73,7 @@ function ItemDetailPage() {
 
           {loggedIn ? (
             <button
-              className={{ ...buttonStyles2 } + " mt-10"}
+              className={buttonStyles2}
               onClick={() => {
                 addToCart(id);
               }}
