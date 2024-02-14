@@ -17,7 +17,22 @@ function ItemListing({ item, oneLess, oneMore, removeOne }) {
   }).format(itemPrice);
 
   return (
-    <div className="flex justify-around bg-someGreen my-5 w-4/5 lg:w-7/10 xl:w-3/5 mx-auto rounded">
+    <div
+      className="flex justify-around bg-someGreen my-5 w-4/5 lg:w-7/10 xl:w-3/5 mx-auto rounded"
+      onClick={(e) => {
+        e.preventDefault();
+        console.log(`${item.title} with ID ${item._id} has been clicked.`);
+        navigate(`../item-details-page/${item._id}`, {
+          state: {
+            item: item.title,
+            description: item.description,
+            price: itemPrice,
+            imgURL: item.imgURL,
+            id: item._id,
+          },
+        });
+      }}
+    >
       <div className={sectionStyle}>
         <img
           src={item.imgURL[0]}
@@ -34,8 +49,7 @@ function ItemListing({ item, oneLess, oneMore, removeOne }) {
         <button
           className="p-3 bg-blue-500 rounded text-white font-bold"
           onClick={(e) => {
-            // e.stopPropagation();
-            e.preventDefault();
+            e.stopPropagation();
             console.log(`${item.title} with ID ${item._id} has been clicked.`);
             navigate(`../edit-listing`, {
               state: {

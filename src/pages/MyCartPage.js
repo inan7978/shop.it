@@ -118,28 +118,6 @@ function MyCartPage() {
       : null;
 
     return listItems.length ? (
-      // <div className="my-cart-container">
-      //   <div className="cart-items">{listItems}</div>
-      //   <div className="cart-price-container">
-      //     <h2 className="grand-total">
-      //       Grand Total:{" "}
-      //       {new Intl.NumberFormat("en-US", {
-      //         style: "currency",
-      //         currency: "USD",
-      //       }).format(totalCost || "0.00")}
-      //     </h2>
-      //     <button
-      //       onClick={() => {
-      //         alert("Order has been placed!");
-      //         navigate("../store-page");
-      //       }}
-      //       className="place-order"
-      //     >
-      //       Place order!
-      //     </button>
-      //   </div>
-      // </div>
-
       <div>
         <div className="flex justify-center gap-3 items-center mt-5 w-4/5 mx-auto">
           <h1 className="text-3xl">
@@ -179,7 +157,11 @@ function MyCartPage() {
       </div>
     );
   } else {
-    return <div>Loading...</div>;
+    return (
+      <div className="container flex flex-wrap justify-center gap-5 mt-5 mb-20 max-w-1920px mx-auto">
+        <h1 className="mx-auto text-2xl font-bold">Loading...</h1>
+      </div>
+    );
   }
 }
 

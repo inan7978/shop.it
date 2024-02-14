@@ -56,7 +56,9 @@ function MyAccountPage() {
 
   return (
     <div className="flex flex-col items-center justify-start">
-      <h1 className="text-2xl font-bold mt-10 underline">{`${user.fname}'s account`}</h1>
+      <h1 className="text-2xl font-bold mt-10 underline">
+        {user.fname !== "" ? `${user.fname}'s account` : "Account Info"}
+      </h1>
       <form onSubmit={pushChanges}>
         <div className="flex flex-col items-center justify-start">
           <input
