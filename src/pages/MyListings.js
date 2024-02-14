@@ -56,27 +56,29 @@ function MyListings() {
   if (loaded) {
     const showListings = details
       ? details.map((listing) => {
-          return (
-            // <h2 key={listing._id}>
-            //   {listing.title} {listing.description}
-            // </h2>
-            <ItemListing key={listing._id} item={listing} />
-          );
+          return <ItemListing key={listing._id} item={listing} />;
         })
       : null;
 
-    return showListings.length ? (
-      <div>{showListings}</div>
-    ) : (
+    return (
       <div>
-        <h2>Add something!</h2>
-        <button
-          onClick={() => {
-            navigate("../store-page");
-          }}
-        >
-          List something!
-        </button>
+        <h1 className="text-center my-12 text-3xl font-bold">
+          Your Listings 👇
+        </h1>
+        {showListings.length ? (
+          <div>{showListings}</div>
+        ) : (
+          <div>
+            <h2>Add something!</h2>
+            <button
+              onClick={() => {
+                navigate("../store-page");
+              }}
+            >
+              List something!
+            </button>
+          </div>
+        )}
       </div>
     );
   } else {
