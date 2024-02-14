@@ -3,7 +3,8 @@ import CartCard from "../components/CartCard";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 function MyCartPage() {
-  const { removeFromCart, setQuantity, loadCart } = useContext(UserContext);
+  const { removeFromCart, setQuantity, loadCart, loggedIn } =
+    useContext(UserContext);
   const [trigger, setTrigger] = useState([""]); // this is a bit weird
   const [details, setDetails] = useState();
   const [loaded, setLoaded] = useState(false);
@@ -16,6 +17,10 @@ function MyCartPage() {
   let totalCost = 0;
 
   async function loadDetails() {
+    if (!loggedIn) {
+      navigate("../login");
+      return 0;
+    }
     const items = await loadCart();
     console.log("loadDetails has been called");
     let details = [];
