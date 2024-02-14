@@ -135,7 +135,26 @@ function MyCartPage() {
       //   </div>
       // </div>
 
-      <div className="container flex-col items-center mx-auto">{listItems}</div>
+      <div>
+        <div className="flex justify-center gap-3 items-center mt-5 w-4/5 mx-auto">
+          <h1 className="text-3xl">
+            Grand Total:{" "}
+            <strong>
+              {" "}
+              {new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(totalCost || "0.00")}
+            </strong>
+          </h1>
+          <button className="p-2 bg-green-400 text-white text-2xl rounded">
+            Place Order!
+          </button>
+        </div>
+        <div className="container flex-col items-center mx-auto">
+          {listItems}
+        </div>
+      </div>
     ) : (
       <div>
         <h2>Add something!</h2>
