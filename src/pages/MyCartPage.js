@@ -147,7 +147,13 @@ function MyCartPage() {
               }).format(totalCost || "0.00")}
             </strong>
           </h1>
-          <button className="p-2 bg-green-400 text-white text-2xl rounded">
+          <button
+            className="p-2 bg-green-400 text-white text-2xl rounded"
+            onClick={() => {
+              alert("Order has been placed!");
+              navigate("../store-page");
+            }}
+          >
             Place Order!
           </button>
         </div>
