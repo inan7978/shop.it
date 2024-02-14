@@ -117,8 +117,8 @@ function CreateAccountPage() {
           />
           <input
             type="password"
-            id="password"
-            name="password"
+            id="confirm-password"
+            name="confirm-password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-4 h-12 bg-gray-300"
             placeholder="Re-Enter Password"
             value={confirmPass}
