@@ -1,4 +1,7 @@
 function CartCard({ item, oneLess, oneMore, removeOne }) {
+  const sectionStyle = "w-1/4 items-center flex justify-start p-2";
+  const btnStyles =
+    "text-white text-xl md:text-3xl rounded p-2 bg-theBlue m-1 w-full";
   let itemPrice = 0;
   try {
     itemPrice = item.price.$numberDecimal;
@@ -8,34 +11,40 @@ function CartCard({ item, oneLess, oneMore, removeOne }) {
   const modPrice = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-  }).format(itemPrice);
+  }).format(itemPrice * item.quantity);
 
   return (
-    <article
-      className="cart-card"
+    <div
       onClick={() => {
         console.log(`${item._id} has been clicked.`);
       }}
+      className="flex justify-around bg-cardColor my-5 w-11/12 max-w-1440px md:w-4/5 lg:w-1440px mx-auto rounded p-2"
     >
-      <div className="cart-card-section-img">
-        <img src={item.imgURL[0]} className="cart-card-img" />
+      <div className="flex items-center justify-center w-1/4">
+        <img
+          className="aspect-auto h-24 max-h-24 rounded bg-white mx-auto"
+          src={item.imgURL[0]}
+        ></img>
       </div>
-      <div className="cart-card-section-title-price">
-        <h1 className="cart-card-title">{item.title}</h1>
-        <h3>{modPrice}</h3>
+      <div className="flex-col flex justify-center items-center mx-auto gap-3 w-1/4">
+        <h1 className="font-bold text-1xl md:text-2xl self-start">
+          {item.title}
+        </h1>
+        <h2 className="font-bold self-start">
+          {modPrice} x {item.quantity}
+        </h2>
       </div>
-      <div className="cart-card-section">
+      <div className="flex flex-col md:flex-row justify-center w-1/4">
         <button
-          className="cart-item-button"
+          className={btnStyles}
           onClick={() => {
             oneMore(item);
           }}
         >
           +
         </button>
-        <h3 className="cart-item-quantity">{item.quantity}</h3>
         <button
-          className="cart-item-button"
+          className={btnStyles}
           onClick={() => {
             oneLess(item);
           }}
@@ -43,16 +52,17 @@ function CartCard({ item, oneLess, oneMore, removeOne }) {
           -
         </button>
       </div>
-
-      <button
-        className="delete-btn-cart"
-        onClick={() => {
-          removeOne(item);
-        }}
-      >
-        X
-      </button>
-    </article>
+      <div className="ml-auto flex items-center justify-center w-1/6">
+        <button
+          onClick={() => {
+            removeOne(item);
+          }}
+          className="bg-red-500 p-3 text-white rounded"
+        >
+          X
+        </button>
+      </div>
+    </div>
   );
 }
 

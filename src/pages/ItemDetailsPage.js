@@ -16,7 +16,7 @@ function ItemDetailPage() {
     "rounded p-5 bg-theYellow text-2xl font-bold text-blue-500 m-5 hover:bg-cardColor";
 
   const buttonStyles2 =
-    "rounded px-7 py-3 bg-theYellow text-blue-500 font-bold text-2xl hover:bg-cardColor";
+    "rounded px-7 py-3 bg-theYellow text-blue-500 font-bold text-2xl hover:bg-cardColor mt-10";
 
   const modPrice = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -46,7 +46,7 @@ function ItemDetailPage() {
         <div className="flex flex-col justify-center items-center w-4/5 mx-auto md:w-1/2">
           <div className="flex justify-center">
             <img
-              className="aspect-auto h-48 md:h-64 lg:h-96 max-h-96"
+              className="aspect-auto h-48 md:h-64 lg:h-96 max-h-96 rounded"
               src={imgURL[img]}
               alt={`${item}`}
             />
@@ -68,9 +68,9 @@ function ItemDetailPage() {
           <div className="flex flex-col justify-center items-center gap-5">
             <h1 className="text-black font-bold md:text-4xl">{item}</h1>
             <h2 className="text-green-400 font-bold md:text-2xl">{modPrice}</h2>
+            <p className="font-medium">{description}</p>
           </div>
 
-          <p>{description}</p>
           {loggedIn ? (
             <button
               className={buttonStyles2}

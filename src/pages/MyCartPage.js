@@ -111,26 +111,48 @@ function MyCartPage() {
           );
         })
       : null;
+
     return listItems.length ? (
-      <div className="my-cart-container">
-        <div className="cart-items">{listItems}</div>
-        <div className="cart-price-container">
-          <h2 className="grand-total">
+      // <div className="my-cart-container">
+      //   <div className="cart-items">{listItems}</div>
+      //   <div className="cart-price-container">
+      //     <h2 className="grand-total">
+      //       Grand Total:{" "}
+      //       {new Intl.NumberFormat("en-US", {
+      //         style: "currency",
+      //         currency: "USD",
+      //       }).format(totalCost || "0.00")}
+      //     </h2>
+      //     <button
+      //       onClick={() => {
+      //         alert("Order has been placed!");
+      //         navigate("../store-page");
+      //       }}
+      //       className="place-order"
+      //     >
+      //       Place order!
+      //     </button>
+      //   </div>
+      // </div>
+
+      <div>
+        <div className="flex justify-center gap-3 items-center mt-5 w-4/5 mx-auto">
+          <h1 className="text-3xl">
             Grand Total:{" "}
-            {new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-            }).format(totalCost || "0.00")}
-          </h2>
-          <button
-            onClick={() => {
-              alert("Order has been placed!");
-              navigate("../store-page");
-            }}
-            className="place-order"
-          >
-            Place order!
+            <strong>
+              {" "}
+              {new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(totalCost || "0.00")}
+            </strong>
+          </h1>
+          <button className="p-2 bg-green-400 text-white text-2xl rounded">
+            Place Order!
           </button>
+        </div>
+        <div className="container flex-col items-center mx-auto">
+          {listItems}
         </div>
       </div>
     ) : (
