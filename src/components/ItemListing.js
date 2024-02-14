@@ -39,10 +39,8 @@ function ItemListing({ item, oneLess, oneMore, removeOne }) {
           className="aspect-auto h-24 max-h-24 rounded bg-white mx-auto"
         />
       </div>
-      <div className={sectionStyle}>
+      <div className="w-1/4 items-left flex flex-col justify-center p-2">
         <h1 className="text-2xl font-bold">{item.title}</h1>
-      </div>
-      <div className={sectionStyle}>
         <h3 className="text-1xl font-bold">{modPrice}</h3>
       </div>
       <div className={sectionStyle}>
