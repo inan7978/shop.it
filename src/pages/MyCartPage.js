@@ -3,7 +3,8 @@ import CartCard from "../components/CartCard";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 function MyCartPage() {
-  const { removeFromCart, setQuantity, loadCart } = useContext(UserContext);
+  const { removeFromCart, setQuantity, loadCart, loggedIn } =
+    useContext(UserContext);
   const [trigger, setTrigger] = useState([""]); // this is a bit weird
   const [details, setDetails] = useState();
   const [loaded, setLoaded] = useState(false);
@@ -16,6 +17,10 @@ function MyCartPage() {
   let totalCost = 0;
 
   async function loadDetails() {
+    if (!loggedIn) {
+      navigate("../login");
+      return 0;
+    }
     const items = await loadCart();
     console.log("loadDetails has been called");
     let details = [];
@@ -113,28 +118,6 @@ function MyCartPage() {
       : null;
 
     return listItems.length ? (
-      // <div className="my-cart-container">
-      //   <div className="cart-items">{listItems}</div>
-      //   <div className="cart-price-container">
-      //     <h2 className="grand-total">
-      //       Grand Total:{" "}
-      //       {new Intl.NumberFormat("en-US", {
-      //         style: "currency",
-      //         currency: "USD",
-      //       }).format(totalCost || "0.00")}
-      //     </h2>
-      //     <button
-      //       onClick={() => {
-      //         alert("Order has been placed!");
-      //         navigate("../store-page");
-      //       }}
-      //       className="place-order"
-      //     >
-      //       Place order!
-      //     </button>
-      //   </div>
-      // </div>
-
       <div>
         <div className="flex justify-center gap-3 items-center mt-5 w-4/5 mx-auto">
           <h1 className="text-3xl">
@@ -147,7 +130,13 @@ function MyCartPage() {
               }).format(totalCost || "0.00")}
             </strong>
           </h1>
-          <button className="p-2 bg-green-400 text-white text-2xl rounded">
+          <button
+            className="p-2 bg-green-400 text-white text-2xl rounded"
+            onClick={() => {
+              alert("Order has been placed!");
+              navigate("../store-page");
+            }}
+          >
             Place Order!
           </button>
         </div>
@@ -168,7 +157,11 @@ function MyCartPage() {
       </div>
     );
   } else {
-    return <div>Loading...</div>;
+    return (
+      <div className="container flex flex-wrap justify-center gap-5 mt-5 mb-20 max-w-1920px mx-auto">
+        <h1 className="mx-auto text-2xl font-bold">Loading...</h1>
+      </div>
+    );
   }
 }
 

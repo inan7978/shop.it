@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 function CartCard({ item, oneLess, oneMore, removeOne }) {
+  const navigate = useNavigate();
   const sectionStyle = "w-1/4 items-center flex justify-start p-2";
   const btnStyles =
     "text-white text-xl md:text-3xl rounded p-2 bg-theBlue m-1 w-full";
@@ -15,8 +18,18 @@ function CartCard({ item, oneLess, oneMore, removeOne }) {
 
   return (
     <div
-      onClick={() => {
-        console.log(`${item._id} has been clicked.`);
+      onClick={(e) => {
+        e.preventDefault();
+        console.log(`${item.title} with ID ${item._id} has been clicked.`);
+        navigate(`../item-details-page/${item._id}`, {
+          state: {
+            item: item.title,
+            description: item.description,
+            price: itemPrice,
+            imgURL: item.imgURL,
+            id: item._id,
+          },
+        });
       }}
       className="flex justify-around bg-cardColor my-5 w-11/12 max-w-1440px md:w-4/5 lg:w-1440px mx-auto rounded p-2"
     >
@@ -37,7 +50,8 @@ function CartCard({ item, oneLess, oneMore, removeOne }) {
       <div className="flex flex-col md:flex-row justify-center w-1/4">
         <button
           className={btnStyles}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             oneMore(item);
           }}
         >
@@ -45,7 +59,8 @@ function CartCard({ item, oneLess, oneMore, removeOne }) {
         </button>
         <button
           className={btnStyles}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             oneLess(item);
           }}
         >
@@ -54,7 +69,8 @@ function CartCard({ item, oneLess, oneMore, removeOne }) {
       </div>
       <div className="ml-auto flex items-center justify-center w-1/6">
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             removeOne(item);
           }}
           className="bg-red-500 p-3 text-white rounded"

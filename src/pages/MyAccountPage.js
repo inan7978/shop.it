@@ -55,81 +55,69 @@ function MyAccountPage() {
   }
 
   return (
-    <div className="edit-user-page" style={{ background: "#7eb2dd" }}>
-      <div className="account-details-container">
-        <h1 style={{ color: "white" }}>{user.fname}'s Account</h1>
-        <form onSubmit={pushChanges} className="login-form">
-          <label className="field-label">
-            First Name:
-            <input
-              className="input-single"
-              type="text"
-              id="fname"
-              name="fname"
-              value={fname}
-              onChange={(e) => setFname(e.target.value)}
-            />
-          </label>
-          <label className="field-label">
-            Last Name:
-            <input
-              className="input-single"
-              type="text"
-              id="lname"
-              name="lname"
-              value={lname}
-              onChange={(e) => setLname(e.target.value)}
-            />
-          </label>
-          <label className="field-label">
-            Password:
-            <input
-              className="input-single"
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          <label className="field-label">
-            Confirm Password:
-            <input
-              className="input-single"
-              type="password"
-              id="con-password"
-              name="con-password"
-              onChange={(e) => setConPass(e.target.value)}
-            />
-          </label>
-          <Link to="/my-listings">
-            <button
-              className="btn-submit"
-              style={{
-                display: "block",
-                background: "yellow",
-                color: "black",
-              }}
-            >
-              My Listings
-            </button>
-          </Link>
-          <input className="btn-submit" type="submit" value="Save" />
-          <button
-            className="btn-submit"
-            style={{
-              display: "block",
-              background: "grey",
-            }}
-            onClick={(e) => {
-              e.preventDefault();
-              navigate("../store-page");
-            }}
-          >
-            Discard
-          </button>
-        </form>
-      </div>
+    <div className="flex flex-col items-center justify-start">
+      <h1 className="text-2xl font-bold mt-10 underline">
+        {user.fname !== "" ? `${user.fname}'s account` : "Account Info"}
+      </h1>
+      <form onSubmit={pushChanges}>
+        <div className="flex flex-col items-center justify-start">
+          <input
+            type="text"
+            id="fname"
+            name="fname"
+            value={fname}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-5 h-12 bg-gray-300"
+            placeholder="first name"
+            onChange={(e) => setFname(e.target.value)}
+          />
+          <input
+            type="text"
+            id="lname"
+            name="lname"
+            value={lname}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-5 h-12 bg-gray-300"
+            placeholder="last name"
+            onChange={(e) => setLname(e.target.value)}
+          />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-5 h-12 bg-gray-300"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            id="con-password"
+            name="con-password"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-5 h-12 bg-gray-300"
+            placeholder="re-enter password"
+            onChange={(e) => setConPass(e.target.value)}
+          />
+          <input
+            className="p-2 bg-green-500 text-white my-2 hover:cursor-pointer rounded"
+            type="submit"
+            value="Save changes"
+          />
+        </div>
+      </form>
+      <button
+        className="p-2 bg-gray-500 text-white my-2 rounded"
+        onClick={() => {
+          navigate("../");
+        }}
+      >
+        discard
+      </button>
+      <button
+        className="p-2 bg-yellow-500 text-white my-2 rounded"
+        onClick={() => {
+          navigate("../my-listings");
+        }}
+      >
+        My listings
+      </button>
     </div>
   );
 }

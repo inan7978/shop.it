@@ -68,11 +68,14 @@ function MyListings() {
         {showListings.length ? (
           <div>{showListings}</div>
         ) : (
-          <div>
-            <h2>Add something!</h2>
+          <div className="container flex flex-col items-center mx-auto">
+            <h2 className="text-3xl font-medium my-10">
+              You have no listings! Oh no!
+            </h2>
             <button
+              className="p-3 bg-green-500 text-white rounded text-2xl"
               onClick={() => {
-                navigate("../store-page");
+                navigate("../list-item");
               }}
             >
               List something!
