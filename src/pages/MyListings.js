@@ -85,7 +85,11 @@ function MyListings() {
       </div>
     );
   } else {
-    return <div>Loading...</div>;
+    return (
+      <div className="container flex flex-wrap justify-center gap-5 mt-5 mb-20 max-w-1920px mx-auto">
+        <h1 className="mx-auto text-2xl font-bold">Loading...</h1>
+      </div>
+    );
   }
 }
 

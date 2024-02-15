@@ -516,10 +516,6 @@ input[type="password"] {
   font-size: 3rem;
 }
 
-input[type="file"] {
-  display: none;
-}
-
 .inputs-container {
   /* background-color: #17a873; */
   /* height: 1000px; */
@@ -753,7 +749,7 @@ input[type="file"] {
   font-size: 2rem;
 }
 
-.cart-item-button:hover{
+.cart-item-button:hover {
   background-color: rgb(166, 125, 87);
   cursor: pointer;
 }
@@ -776,7 +772,7 @@ input[type="file"] {
   border: none;
 }
 
-.delete-btn-cart:hover{
+.delete-btn-cart:hover {
   background-color: #ad5b5b;
   cursor: pointer;
 }

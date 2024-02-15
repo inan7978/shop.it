@@ -53,9 +53,9 @@ function CreateListingPage() {
   }
 
   return (
-    <section className="create-listing-container">
+    <div className="bg-theBlue">
       {loggedIn ? (
-        <>
+        <div className="container flex flex-col items-center mx-auto pt-24">
           <form onSubmit={uploadHandler}>
             <input
               type="file"
@@ -66,53 +66,42 @@ function CreateListingPage() {
               accept="image/*"
               multiple
             />
-            <div className="inputs-container">
-              <div className="photo-picker">
-                <label for="myFiles" className="file-btn-label">
-                  <img src={addPic} width="100" />
-                </label>
-              </div>
-              <div className="info-inputs">
-                <input
-                  className="add-listing-input"
-                  type="text"
-                  id="title"
-                  name="title"
-                  placeholder="Title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-                <input
-                  className="add-listing-input"
-                  type="text"
-                  id="price"
-                  name="price"
-                  placeholder="Price"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-                <textarea
-                  className="add-listing-input-desc"
-                  type="text"
-                  id="description"
-                  name="description"
-                  placeholder="Details"
-                  value={desc}
-                  onChange={(e) => setDesc(e.target.value)}
-                />
-                <input
-                  type="submit"
-                  className="create-listing-btn"
-                  value="List It!"
-                />
-              </div>
-            </div>
+            <input
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-4 h-12 bg-gray-300"
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <input
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-4 h-12 bg-gray-300"
+              type="text"
+              id="price"
+              name="price"
+              placeholder="Price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <textarea
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-4 h-12 bg-gray-300"
+              type="text"
+              id="description"
+              name="description"
+              placeholder="Details"
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+            />
+            <input type="submit" className="btn-submit" value="List It!" />
           </form>
-        </>
+        </div>
       ) : (
-        <h2>Log in</h2>
+        <div className="container flex flex-wrap justify-center gap-5 mt-5 mb-20 max-w-1920px mx-auto">
+          <h1 className="mx-auto text-2xl text-white font-bold">Log In!</h1>
+        </div>
       )}
-    </section>
+    </div>
   );
 }
 
