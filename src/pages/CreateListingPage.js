@@ -54,11 +54,11 @@ function CreateListingPage() {
 
   return (
     <div className="bg-theBlue">
-      <h1 className="text-center text-theYellow font-bold text-3xl mt-5">
-        New Listing
-      </h1>
       {loggedIn ? (
-        <div className="container flex flex-col items-center mx-auto pt-24 pb-12">
+        <div className="container flex flex-col items-center mx-auto pt-12 pb-12">
+          <h1 className="text-theYellow font-bold text-3xl pb-20">
+            New Listing
+          </h1>
           <form onSubmit={uploadHandler}>
             <input
               type="file"
@@ -100,8 +100,18 @@ function CreateListingPage() {
           </form>
         </div>
       ) : (
-        <div className="container flex flex-wrap justify-center gap-5 mt-5 mb-20 max-w-1920px mx-auto">
-          <h1 className="mx-auto text-2xl text-white font-bold">Log In!</h1>
+        <div className="container flex flex-col items-center mx-auto">
+          <h2 className="text-3xl text-white font-medium my-10">
+            Log in to do that!
+          </h2>
+          <button
+            className="p-3 bg-green-500 text-white rounded text-2xl"
+            onClick={() => {
+              navigate("../login");
+            }}
+          >
+            Log in
+          </button>
         </div>
       )}
     </div>
