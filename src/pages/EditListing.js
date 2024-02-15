@@ -2,7 +2,6 @@ import { useLocation } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import addPic from "../images/add-folder-svgrepo-com.svg";
 
 function EditListing() {
   const { state } = useLocation();
@@ -99,46 +98,27 @@ function EditListing() {
   }
 
   return (
-    <>
-      <input
-        type="file"
-        id="myFiles"
-        onChange={(e) => {
-          setMyFiles(e.target.files);
-        }}
-        accept="image/*"
-        multiple
-      />
-      <div className="edit-listing-container">
-        <div className="edit-listing-img-container">
-          <img
-            className="edit-listing-img"
-            src={imgURL[img]}
-            alt={`${title}`}
-          />
-          {imgURL.length > 1 ? (
-            <>
-              <div className="cycle-img-btns-container">
-                <button className="cycle-img-btn" onClick={prevImg}>
-                  {"<"}
-                </button>
-                <button className="cycle-img-btn" onClick={nextImg}>
-                  {">"}
-                </button>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
+    <div className="max-w-screen-xl mx-auto pt-12">
+      <h1 className="text-center text-blue-500 text-3xl font-bold pb-10">
+        Edit Listing
+      </h1>
+      <div className="flex flex-col items-center justify-between gap-5 md:flex-row">
+        <div className="flex justify-center md:w-1/2">
+          <img className="h-96" src={imgURL[img]} alt={`${title}`} />
         </div>
-
-        <form onSubmit={editHandler}>
-          <div className="edit-listing-info">
-            <label for="myFiles" className="edit-file-btn">
-              <img src={addPic} width="100" />
-            </label>
+        <div className="flex flex-col items-center justify-center mx-auto w-1/2 py-10">
+          <form onSubmit={editHandler}>
             <input
-              className="edit-listing-input"
+              type="file"
+              id="myFiles"
+              onChange={(e) => {
+                setMyFiles(e.target.files);
+              }}
+              accept="image/*"
+              multiple
+            />
+            <input
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-4 h-12 bg-gray-300"
               type="text"
               id="title"
               name="title"
@@ -147,7 +127,7 @@ function EditListing() {
             />
 
             <input
-              className="edit-listing-input"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-4 h-12 bg-gray-300"
               type="text"
               id="price"
               name="price"
@@ -156,27 +136,122 @@ function EditListing() {
             />
 
             <textarea
-              className="edit-listing-description"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-4 h-12 bg-gray-300"
               type="text"
               id="description"
               name="description"
               value={_desc}
               onChange={(e) => setDesc(e.target.value)}
             />
-
-            <h3
-              onClick={() => {
-                deleteListing();
-              }}
-            >
-              delete
-            </h3>
-
-            <input className="submit-edit-btn" type="submit" value="Apply" />
-          </div>
-        </form>
+            <div className="flex justify-center gap-5">
+              <input
+                className="py-3 px-10 bg-green-500 text-white font-bold rounded"
+                type="submit"
+                value="Apply"
+              />
+              <button
+                className="py-3 px-10 bg-gray-500 text-white font-bold rounded"
+                onClick={() => {
+                  navigate("../my-listings");
+                }}
+              >
+                Discard
+              </button>
+            </div>
+            <div className="flex justify-center gap-5 p-5">
+              <button
+                onClick={() => {
+                  deleteListing();
+                }}
+                className="py-3 px-10 bg-red-500 text-white font-bold rounded"
+              >
+                Delete Listing
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </>
+    </div>
+
+    //   <div>
+
+    //     <input
+    //       type="file"
+    //       id="myFiles"
+    //       onChange={(e) => {
+    //         setMyFiles(e.target.files);
+    //       }}
+    //       accept="image/*"
+    //       multiple
+    //     />
+    //     <div className="edit-listing-container">
+    //       <div className="edit-listing-img-container">
+    //         <img
+    //           className="edit-listing-img"
+    //           src={imgURL[img]}
+    //           alt={`${title}`}
+    //         />
+    //         {imgURL.length > 1 ? (
+    //           <>
+    //             <div className="cycle-img-btns-container">
+    //               <button className="cycle-img-btn" onClick={prevImg}>
+    //                 {"<"}
+    //               </button>
+    //               <button className="cycle-img-btn" onClick={nextImg}>
+    //                 {">"}
+    //               </button>
+    //             </div>
+    //           </>
+    //         ) : (
+    //           <></>
+    //         )}
+    //       </div>
+
+    //       <form onSubmit={editHandler}>
+    //         <div className="edit-listing-info">
+    //           <label for="myFiles" className="edit-file-btn">
+    //             <img src={addPic} width="100" />
+    //           </label>
+    //           <input
+    //             className="edit-listing-input"
+    //             type="text"
+    //             id="title"
+    //             name="title"
+    //             value={_title}
+    //             onChange={(e) => setTitle(e.target.value)}
+    //           />
+
+    //           <input
+    //             className="edit-listing-input"
+    //             type="text"
+    //             id="price"
+    //             name="price"
+    //             value={_price}
+    //             onChange={(e) => setPrice(e.target.value)}
+    //           />
+
+    //           <textarea
+    //             className="edit-listing-description"
+    //             type="text"
+    //             id="description"
+    //             name="description"
+    //             value={_desc}
+    //             onChange={(e) => setDesc(e.target.value)}
+    //           />
+
+    //           <h3
+    //             onClick={() => {
+    //               deleteListing();
+    //             }}
+    //           >
+    //             delete
+    //           </h3>
+
+    //           <input className="submit-edit-btn" type="submit" value="Apply" />
+    //         </div>
+    //       </form>
+    //     </div>
+    //   </div>
   );
 }
 
