@@ -54,8 +54,11 @@ function CreateListingPage() {
 
   return (
     <div className="bg-theBlue">
+      <h1 className="text-center text-theYellow font-bold text-3xl mt-5">
+        New Listing
+      </h1>
       {loggedIn ? (
-        <div className="container flex flex-col items-center mx-auto pt-24">
+        <div className="container flex flex-col items-center mx-auto pt-24 pb-12">
           <form onSubmit={uploadHandler}>
             <input
               type="file"
