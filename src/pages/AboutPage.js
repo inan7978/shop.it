@@ -39,7 +39,7 @@ function AboutPage() {
           an excellent UI design software, and a free logo maker for the logo to
           give this shop.it idea an actual look. After all, you can’t start
           making something if you haven’t made a prototype or sketch of it to
-          follow along to.{" "}
+          follow.
         </p>
         <p className={pStyles}>
           &nbsp; &nbsp; &nbsp; I used REACT for the front end and mainly used
