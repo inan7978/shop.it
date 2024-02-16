@@ -1,9 +1,0 @@
-When listing is deleted:
-
-1. Remove it from MongoDB x
-2. Remove it from S3 x
-3. Go in each users cart and remove it from there x
-4. Remove it from the current logged in users cart X
-
-testing new yoga
-
