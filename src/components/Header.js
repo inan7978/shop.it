@@ -32,7 +32,10 @@ function Header() {
               <div className="bg-theBlue w-full h-screen mx-auto flex flex-col py-24">
                 <button
                   className={menuButtons}
-                  onClick={() => navigate("./my-cart")}
+                  onClick={() => {
+                    navigate("./my-cart");
+                    setMenuOpen(false);
+                  }}
                 >{`Cart: ${user.cart.length}`}</button>
                 <button
                   onClick={() => {
