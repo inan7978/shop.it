@@ -8,7 +8,7 @@ function Footer() {
     "text-theYellow p-2 md:text-1xl text-nowrap hover:text-yellow-500 block";
 
   return (
-    <div className="w-1/1 h-24 bg-theBlue flex hidden sm:block justify-center">
+    <div className="w-1/1 h-24 bg-theBlue flex hidden md:block justify-center">
       <div className="flex w-4/5 mx-auto">
         <div className="hidden w-0 md:w-1/5 md:block">
           <img
