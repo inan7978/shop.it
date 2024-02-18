@@ -82,6 +82,15 @@ function Header() {
                 >
                   About
                 </button>
+                <button
+                  className={menuButtons}
+                  onClick={() => {
+                    logOutUser("toStore");
+                    setMenuOpen(false);
+                  }}
+                >
+                  Log out!
+                </button>
               </div>
             </>
           </div>
