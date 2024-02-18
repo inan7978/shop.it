@@ -66,7 +66,17 @@ function MyListings() {
           Your Listings 👇
         </h1>
         {showListings.length ? (
-          <div>{showListings}</div>
+          <div className="flex flex-col">
+            <div>{showListings}</div>
+            <button
+              className="p-3 bg-green-500 text-white rounded text-2xl mx-auto"
+              onClick={() => {
+                navigate("../list-item");
+              }}
+            >
+              + Add Listing
+            </button>
+          </div>
         ) : (
           <div className="container flex flex-col items-center mx-auto">
             <h2 className="text-3xl font-medium my-10">
