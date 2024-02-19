@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import StoreCard from "../components/StoreCard";
+import useFetch from "../components/useFetch";
 
 function StorePage() {
   const [items, setItems] = useState([]);
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     async function getRecords() {
@@ -29,6 +32,29 @@ function StorePage() {
     return;
   }, []);
 
+  useEffect(() => {
+    const toFind = { search: search };
+    async function searchItem() {
+      const response = await fetch(
+        "https://shop-it-backend.onrender.com/search-results",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(toFind),
+        }
+      );
+
+      const data = await response.json();
+      const dataMod = JSON.parse(JSON.stringify(data));
+
+      console.log("Search Results: ", dataMod);
+    }
+
+    searchItem();
+  }, [search]);
+
   const storeItems = items.map((item) => {
     return <StoreCard key={item._id} item={item} />;
   });
@@ -38,6 +64,10 @@ function StorePage() {
       <h1 className="mx-auto block text-4xl mt-16 font-bold">Whatchu need?</h1>
       <input
         type="text"
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
         id="item-search"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-10 h-12 bg-gray-300"
         placeholder="(coming soon)"
