@@ -50,6 +50,7 @@ function StorePage() {
       const dataMod = JSON.parse(JSON.stringify(data));
 
       console.log("Search Results: ", dataMod);
+      setSearchResults(dataMod);
     }
 
     searchItem();
@@ -59,9 +60,16 @@ function StorePage() {
     return <StoreCard key={item._id} item={item} />;
   });
 
+  const temp = search
+    ? searchResults.map((result) => {
+        return <p key={result.title}>{result.title}</p>;
+      })
+    : null;
+
   return (
     <div className="flex flex-col">
       <h1 className="mx-auto block text-4xl mt-16 font-bold">Whatchu need?</h1>
+      <div className="flex gap-5">{temp}</div>
       <input
         type="text"
         value={search}
