@@ -66,7 +66,7 @@ function SearchBox() {
                     });
                   }}
                 >
-                  <div className="p-4 mb-5 last:mb-0 flex gap-3 items-center hover:bg-red-500 rounded">
+                  <div className="p-4 mb-5 last:mb-0 flex gap-3 items-center hover:bg-red-500 rounded hover:cursor-pointer">
                     <img className="w-10 h-10" src={result.imgURL[0]} />
                     <h1 className="text-white font-bold">{result.title}</h1>
                   </div>
