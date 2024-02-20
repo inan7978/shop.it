@@ -62,14 +62,22 @@ function StorePage() {
 
   const temp = search
     ? searchResults.map((result) => {
-        return <p key={result.title}>{result.title}</p>;
+        return (
+          <div
+            className="flex gap-3 items-center bg-theBlue
+            p-2 rounded w-64 absolute"
+            key={result.title}
+          >
+            <img className="h-10 w-10 rounded" src={result.imgURL[0]} />
+            <h2 className="text-white font-bold">{result.title}</h2>
+          </div>
+        );
       })
     : null;
 
   return (
     <div className="flex flex-col">
       <h1 className="mx-auto block text-4xl mt-16 font-bold">Whatchu need?</h1>
-      <div className="flex gap-5">{temp}</div>
       <input
         type="text"
         value={search}
@@ -80,6 +88,9 @@ function StorePage() {
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-10 h-12 bg-gray-300"
         placeholder="(coming soon)"
       />
+      <div className="container flex flex-col gap-5 justify-center items-center mx-auto">
+        {temp}
+      </div>
       <div>
         {storeItems.length ? (
           <div className="container flex flex-wrap justify-center gap-5 mt-5 mb-20 max-w-1920px mx-auto">
