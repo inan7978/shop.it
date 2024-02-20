@@ -25,7 +25,9 @@ function Header() {
 
   return (
     <div className="flex justify-between w-1/1 bg-theBlue">
+      {/* This is the hamburger menu */}
       {menuOpen &&
+        // hamburger menu when someone is logged in
         (Object.keys(user).length ? (
           <div className="container absolute w-screen">
             <>
@@ -95,6 +97,7 @@ function Header() {
             </>
           </div>
         ) : (
+          // hamburger menu when no one is logged in
           <div className="container absolute w-screen">
             <>
               <div className="bg-theBlue w-full h-screen mx-auto flex flex-col py-24">
