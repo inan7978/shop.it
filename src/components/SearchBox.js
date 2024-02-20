@@ -28,10 +28,10 @@ function SearchBox() {
       setSearchResults(dataMod);
     }
 
-    if (searchTerm === "") {
-      setSearchResults([]);
-    } else {
+    if (searchTerm !== "") {
       searchItem();
+    } else {
+      setSearchResults([]);
     }
   }, [searchTerm]);
 
