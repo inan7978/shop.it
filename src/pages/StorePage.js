@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import StoreCard from "../components/StoreCard";
 import useFetch from "../components/useFetch";
+import SearchBox from "../components/SearchBox";
 
 function StorePage() {
   const [items, setItems] = useState([]);
@@ -65,7 +66,7 @@ function StorePage() {
         return (
           <div
             className="flex gap-3 items-center bg-theBlue
-            p-2 rounded w-64 absolute"
+            p-2 rounded w-64 mt-3"
             key={result.title}
           >
             <img className="h-10 w-10 rounded" src={result.imgURL[0]} />
@@ -78,19 +79,7 @@ function StorePage() {
   return (
     <div className="flex flex-col">
       <h1 className="mx-auto block text-4xl mt-16 font-bold">Whatchu need?</h1>
-      <input
-        type="text"
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-        id="item-search"
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-10 h-12 bg-gray-300"
-        placeholder="(coming soon)"
-      />
-      <div className="container flex flex-col gap-5 justify-center items-center mx-auto">
-        {temp}
-      </div>
+      <SearchBox />
       <div>
         {storeItems.length ? (
           <div className="container flex flex-wrap justify-center gap-5 mt-5 mb-20 max-w-1920px mx-auto">
