@@ -108,6 +108,15 @@ function Header() {
                   Log In
                 </button>
                 <button
+                  onClick={() => {
+                    navigate("./sign-up");
+                    setMenuOpen(false);
+                  }}
+                  className={menuButtons}
+                >
+                  Sign up!
+                </button>
+                <button
                   className={menuButtons}
                   onClick={() => {
                     navigate("./contact-us");
