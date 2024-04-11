@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { _searchItem } from "../api/searchBoxAPI";
 
 function SearchBox() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -7,27 +8,12 @@ function SearchBox() {
 
   const navigate = useNavigate();
 
+  async function searchItem() {
+    const result = await _searchItem(searchTerm);
+    setSearchResults(result);
+  }
+
   useEffect(() => {
-    const toFind = { search: searchTerm };
-    async function searchItem() {
-      const response = await fetch(
-        "https://shop-it-backend.onrender.com/search-results",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(toFind),
-        }
-      );
-
-      const data = await response.json();
-      const dataMod = JSON.parse(JSON.stringify(data));
-
-      console.log("Search Results: ", dataMod);
-      setSearchResults(dataMod);
-    }
-
     if (searchTerm !== "") {
       searchItem();
     } else {

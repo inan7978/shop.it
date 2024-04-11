@@ -3,7 +3,6 @@ import shopItlogo from "../images/shopitLogo.png";
 import MyCartPage from "../pages/MyCartPage";
 import UserContext from "../context/UserContext";
 import Hamburger from "./Hamburger";
-import CartContext from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useContext } from "react";
