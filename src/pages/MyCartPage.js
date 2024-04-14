@@ -2,6 +2,7 @@ import UserContext from "../context/UserContext";
 import CartCard from "../components/CartCard";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { _loadDetails } from "../api/myCartPageAPI";
 function MyCartPage() {
   const { removeFromCart, setQuantity, loadCart, loggedIn } =
     useContext(UserContext);
@@ -15,63 +16,6 @@ function MyCartPage() {
   }, [trigger]);
 
   let totalCost = 0;
-
-  async function loadDetails() {
-    if (!loggedIn) {
-      navigate("../login");
-      return 0;
-    }
-    const items = await loadCart();
-    console.log("loadDetails has been called");
-    let details = [];
-    let onlyIDs = items.map((item) => {
-      return item.itemID;
-    });
-
-    const toFind = {
-      find: onlyIDs,
-    };
-
-    await fetch("https://shop-it-backend.onrender.com/get-cart-items", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(toFind),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response;
-        } else {
-          throw Error;
-        }
-      })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        details = data;
-
-        // this here adds the quantity key to the details returned from server by comparing to the items array of objects
-        for (let i = 0; i < items.length; i++) {
-          for (let j = 0; j < items.length; j++) {
-            if (details[i]._id === items[j].itemID) {
-              details[i].quantity = items[j].quantity;
-            }
-          }
-        }
-        console.log("This is the data to map: ", details);
-      })
-      .catch((error) => {
-        console.log(error);
-        details = ["Nothing arrived"];
-      });
-
-    // sets the details and load status to state
-    setDetails(details);
-    setLoaded(true);
-  }
 
   function oneLess(item) {
     if (item.quantity - 1 === 0) {
@@ -91,6 +35,39 @@ function MyCartPage() {
   function removeOne(item) {
     removeFromCart(item._id);
     setTrigger([...trigger]);
+  }
+
+  async function loadDetails() {
+    if (!loggedIn) {
+      navigate("../login");
+      return 0;
+    }
+    const items = loadCart();
+    console.log("loadDetails has been called");
+    let details = [];
+    let onlyIDs = items.map((item) => {
+      return item.itemID;
+    });
+
+    const toFind = {
+      find: onlyIDs,
+    };
+
+    const data = await _loadDetails(toFind);
+
+    details = data;
+
+    for (let i = 0; i < items.length; i++) {
+      for (let j = 0; j < items.length; j++) {
+        if (details[i]._id === items[j].itemID) {
+          details[i].quantity = items[j].quantity;
+        }
+      }
+    }
+
+    // sets the details and load status to state
+    setDetails(details);
+    setLoaded(true);
   }
 
   // load status must be true to run this. This keeps it from trying to map before the values from loadDetails, which is async, arrive.
