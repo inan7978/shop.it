@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { _deleteListing, _editHandler } from "../api/editListingAPI";
 
 function EditListing() {
   const { state } = useLocation();
@@ -37,15 +38,9 @@ function EditListing() {
   }
   async function deleteListing() {
     console.log("requested to delete : ", id);
+    const data = await _deleteListing(id);
+    console.log(data);
     removeListing(id);
-    await fetch("https://shop-it-backend.onrender.com/delete-listing", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ deleteID: id }),
-    });
-
     navigate("../my-listings");
   }
 
@@ -73,28 +68,15 @@ function EditListing() {
 
     console.log("formData: ", formData);
 
-    const response = await fetch(
-      "https://shop-it-backend.onrender.com/update-listing",
-      {
-        header: {
-          "content-type": "multipart/form-data",
-        },
-
-        method: "POST",
-        body: formData,
-      }
-    );
+    const response = await _editHandler(formData);
 
     console.log(response);
 
-    if (response.ok) {
-      console.log(id, " has been updated.");
-      setMyFiles();
-      setTitle("");
-      setDesc("");
-      setPrice("");
-      navigate("../my-listings");
-    }
+    setMyFiles();
+    setTitle("");
+    setDesc("");
+    setPrice("");
+    navigate("../my-listings");
   }
 
   return (
@@ -172,86 +154,6 @@ function EditListing() {
         </div>
       </div>
     </div>
-
-    //   <div>
-
-    //     <input
-    //       type="file"
-    //       id="myFiles"
-    //       onChange={(e) => {
-    //         setMyFiles(e.target.files);
-    //       }}
-    //       accept="image/*"
-    //       multiple
-    //     />
-    //     <div className="edit-listing-container">
-    //       <div className="edit-listing-img-container">
-    //         <img
-    //           className="edit-listing-img"
-    //           src={imgURL[img]}
-    //           alt={`${title}`}
-    //         />
-    //         {imgURL.length > 1 ? (
-    //           <>
-    //             <div className="cycle-img-btns-container">
-    //               <button className="cycle-img-btn" onClick={prevImg}>
-    //                 {"<"}
-    //               </button>
-    //               <button className="cycle-img-btn" onClick={nextImg}>
-    //                 {">"}
-    //               </button>
-    //             </div>
-    //           </>
-    //         ) : (
-    //           <></>
-    //         )}
-    //       </div>
-
-    //       <form onSubmit={editHandler}>
-    //         <div className="edit-listing-info">
-    //           <label for="myFiles" className="edit-file-btn">
-    //             <img src={addPic} width="100" />
-    //           </label>
-    //           <input
-    //             className="edit-listing-input"
-    //             type="text"
-    //             id="title"
-    //             name="title"
-    //             value={_title}
-    //             onChange={(e) => setTitle(e.target.value)}
-    //           />
-
-    //           <input
-    //             className="edit-listing-input"
-    //             type="text"
-    //             id="price"
-    //             name="price"
-    //             value={_price}
-    //             onChange={(e) => setPrice(e.target.value)}
-    //           />
-
-    //           <textarea
-    //             className="edit-listing-description"
-    //             type="text"
-    //             id="description"
-    //             name="description"
-    //             value={_desc}
-    //             onChange={(e) => setDesc(e.target.value)}
-    //           />
-
-    //           <h3
-    //             onClick={() => {
-    //               deleteListing();
-    //             }}
-    //           >
-    //             delete
-    //           </h3>
-
-    //           <input className="submit-edit-btn" type="submit" value="Apply" />
-    //         </div>
-    //       </form>
-    //     </div>
-    //   </div>
   );
 }
 

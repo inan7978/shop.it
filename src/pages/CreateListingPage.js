@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { _createListing } from "../api/createListingAPI";
 import addPic from "../images/add-folder-svgrepo-com.svg";
 
 function CreateListingPage() {
@@ -31,19 +32,10 @@ function CreateListingPage() {
       });
       console.log("formData: ", formData);
 
-      const response = await fetch(
-        "https://shop-it-backend.onrender.com/create-listing",
-        {
-          header: {
-            "content-type": "multipart/form-data",
-          },
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await _createListing(formData);
 
       console.log(response);
-      if (response.ok) {
+      if (response.statu === 200) {
         console.log(title, " has been added.");
         navigate("../store-page");
       }

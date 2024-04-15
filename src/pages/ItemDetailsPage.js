@@ -90,48 +90,6 @@ function ItemDetailPage() {
           )}
         </div>
       </div>
-
-      {/* <div className="item-details-page">
-        <div className="item-description-img-container">
-          {" "}
-          <img
-            className="item-description-img"
-            src={imgURL[img]}
-            alt={`${item}`}
-          />
-          <div className="cycle-img-btns-container">
-            <button className="cycle-img-btn" onClick={prevImg}>
-              {"<"}
-            </button>
-            <button className="cycle-img-btn" onClick={nextImg}>
-              {">"}
-            </button>
-          </div>
-        </div>
-
-        <div className="item-info-container">
-          <h1 className="item-details-heading">{item}</h1>
-          <h2 className="item-details-price">{modPrice}</h2>
-          <p className="item-details-description">{description}</p>
-          {loggedIn ? (
-            <button
-              className="add-item-cart-btn"
-              onClick={() => {
-                addToCart(id);
-              }}
-            >
-              Add to Cart
-            </button>
-          ) : (
-            <button
-              className="add-item-cart-btn"
-              onClick={() => navigate("/login")}
-            >
-              Log In!
-            </button>
-          )}
-        </div>
-      </div> */}
     </>
   );
 }

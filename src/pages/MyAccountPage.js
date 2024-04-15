@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { _pushChanges } from "../api/myAccountPageAPI";
 
 function MyAccountPage() {
   const { user } = useContext(UserContext);
@@ -23,7 +23,7 @@ function MyAccountPage() {
     setPassword(user.password);
   }, []);
 
-  function pushChanges(e) {
+  async function pushChanges(e) {
     e.preventDefault();
     if (password === conPass) {
       const updateUser = {
@@ -33,20 +33,8 @@ function MyAccountPage() {
         password: password,
       };
 
-      fetch("https://shop-it-backend.onrender.com/update-user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updateUser),
-      }).then((response) => {
-        if (response.ok) {
-          return response;
-        } else {
-          throw Error;
-        }
-      });
-
+      const response = await _pushChanges(updateUser);
+      console.log("Response: ", response);
       logOutUser("toLogin");
       alert(`Changes saved for ${email}. Please log in again.`);
     } else {

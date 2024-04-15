@@ -48,49 +48,6 @@ function CreateAccountPage() {
   };
 
   return (
-    // <>
-    //   <div className="create-account-page" style={{ background: "#7eb2dd" }}>
-    //     <div className="form-container">
-    //       <h3 className="heading-bold">Create Account!</h3>
-    //       <form className="register-form" onSubmit={createHandler}>
-    //         <label className="field-label">
-    //           Email:
-    //           <input
-    //             className="input-single"
-    //             type="email"
-    //             id="email"
-    //             name="email"
-    //             value={email}
-    //             onChange={(e) => setEmail(e.target.value)}
-    //           />
-    //         </label>
-    //         <label className="field-label">
-    //           Password:
-    //           <input
-    //             className="input-single"
-    //             type="password"
-    //             id="password"
-    //             name="password"
-    //             value={pass}
-    //             onChange={(e) => setPass(e.target.value)}
-    //           />
-    //         </label>
-    //         <label className="field-label">
-    //           Re-Enter Password:
-    //           <input
-    //             className="input-single"
-    //             type="password"
-    //             id="confirm-password"
-    //             name="confirm-password"
-    //             value={confirmPass}
-    //             onChange={(e) => setConfirmPass(e.target.value)}
-    //           />
-    //         </label>
-    //         <input className="btn-submit" type="submit" />
-    //       </form>
-    //     </div>
-    //   </div>
-    // </>
     <div className="bg-theBlue">
       <div className="container flex flex-col items-center mx-auto pt-24">
         <h1 className="text-theYellow font-extrabold text-5xl mb-10">
