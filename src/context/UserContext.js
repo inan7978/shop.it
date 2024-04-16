@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { _updateCart, _loginUser, _createUser } from "../api/userContextAPI";
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
@@ -24,6 +25,11 @@ export function UserProvider({ children }) {
     const toFind = {
       emailSearch: email,
     };
+
+    const data = await _loginUser(email, pass);
+
+    // need to finish this transtion...
+
     const res = await fetch(
       "https://shop-it-backend.onrender.com/authenticate",
       {
@@ -82,37 +88,9 @@ export function UserProvider({ children }) {
   }
 
   async function createUser(email, pass) {
-    let result;
-    const userToAdd = {
-      email: email,
-      pass: pass,
-    };
-
-    await fetch("https://shop-it-backend.onrender.com/create-user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userToAdd),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response;
-        } else {
-          throw Error;
-        }
-      })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data.status);
-        result = data.status;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    return result;
+    const data = await _createUser(email, pass);
+    console.log("User create triggered.");
+    return data.status;
   }
 
   function loadCart() {
@@ -172,21 +150,9 @@ export function UserProvider({ children }) {
     user.cart = withNewCount;
   }
 
-  function updateCart(newCart) {
-    fetch("https://shop-it-backend.onrender.com/update-cart", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userID: user._id, newCart: newCart }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        const temp = JSON.parse(JSON.stringify(data));
-        setUserCart(temp[0].cart);
-      });
+  async function updateCart(newCart) {
+    const data = await _updateCart(newCart, user);
+    setUserCart(data);
   }
 
   function removeListing(toRemove) {
