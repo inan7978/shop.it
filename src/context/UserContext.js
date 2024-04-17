@@ -21,49 +21,20 @@ export function UserProvider({ children }) {
   }
 
   async function loginUser(email, pass) {
-    let result = { status: "OK" };
-    const toFind = {
-      emailSearch: email,
-    };
-
     const data = await _loginUser(email, pass);
 
+    if (data.password === pass) {
+      console.log("data: ", data);
+      setUser(data);
+      setLoggedIn(true);
+    } else if (data.password !== pass) {
+      setUser({});
+      return { status: "Incorrect password." };
+    } else {
+      return { status: "That account does not exist." };
+    }
     // need to finish this transtion...
-
-    const res = await fetch(
-      "https://shop-it-backend.onrender.com/authenticate",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(toFind),
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response;
-        } else {
-          throw Error;
-        }
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        const resMod = JSON.parse(JSON.stringify(data));
-        if (resMod.password === pass) {
-          console.log("data: ", resMod);
-          setUser(resMod);
-          setLoggedIn(true);
-        } else {
-          setUser({});
-          result = { status: "Incorrect password." };
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        result = { status: "No such account exists." };
-      });
-    return result;
+    // needs to have proper response handling
   }
 
   function logOutUser(whereTo) {
