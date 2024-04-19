@@ -37,7 +37,7 @@ export async function _updateCart(newCart, user) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ userID: user, newCart: newCart }),
+    body: JSON.stringify({ userID: user._id, newCart: newCart }),
   });
 
   const data = await result.json();
