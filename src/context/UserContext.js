@@ -9,8 +9,6 @@ export function UserProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  console.log("Enviro", process.env.REACT_APP_FETCH_IP);
-
   useEffect(() => {
     updateBoth();
   }, [userCart]);
@@ -23,16 +21,25 @@ export function UserProvider({ children }) {
   async function loginUser(email, pass) {
     const data = await _loginUser(email, pass);
 
-    if (data.password === pass) {
-      console.log("data: ", data);
-      setUser(data);
+    if (data.status === "OK") {
+      console.log("data: ", data.data);
+      setUser(data.data);
       setLoggedIn(true);
-    } else if (data.password !== pass) {
-      setUser({});
-      return { status: "Incorrect password." };
+      return data.status;
     } else {
-      return { status: "That account does not exist." };
+      return data.status;
     }
+
+    // if (data.password === pass) {
+    //   console.log("data: ", data);
+    //   setUser(data);
+    //   setLoggedIn(true);
+    // } else if (data.password !== pass) {
+    //   setUser({});
+    //   return { status: "Incorrect password." };
+    // } else {
+    //   return { status: "That account does not exist." };
+    // }
     // need to finish this transtion...
     // needs to have proper response handling
   }

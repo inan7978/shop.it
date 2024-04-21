@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
 import shopItlogo from "../images/shopitLogo.png";
-import MyCartPage from "../pages/MyCartPage";
 import UserContext from "../context/UserContext";
 import Hamburger from "./Hamburger";
 import { useNavigate } from "react-router-dom";

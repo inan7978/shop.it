@@ -6,34 +6,19 @@ import UserContext from "../context/UserContext";
 
 function LoginPage() {
   const { loginUser } = useContext(UserContext);
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
   const navigate = useNavigate();
+  const [message, setMessage] = useState();
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    console.log(`You entered:
-    
-    Email: ${email}
-    
-    Password: ${pass}`);
-
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
     const confirm = await loginUser(email, pass);
 
-    if (confirm.status === "Incorrect password.") {
-      alert("Password is incorrect.");
-      setPass("");
-      return 1;
-    } else if (confirm.status === "No such account exists.") {
-      alert("No such account exists.");
-      setEmail("");
-      setPass("");
-      return 2;
-    } else if (confirm.status === "OK") {
-      setEmail("");
-      setPass("");
+    if (confirm === "OK") {
       navigate("../store-page");
-      return 0;
+    } else {
+      setMessage(confirm);
     }
   };
 
@@ -47,17 +32,14 @@ function LoginPage() {
             id="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-4 h-12 bg-gray-300"
             placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             id="password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-4 h-12 bg-gray-300"
             placeholder="Password"
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
           />
+          <h1 className="font-medium text-red-500 text-center">{message}</h1>
           <input className="btn-submit" type="submit" />
         </form>
       </div>

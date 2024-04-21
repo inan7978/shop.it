@@ -8,6 +8,7 @@ export async function _loginUser(email, pass) {
     },
     body: JSON.stringify({
       emailSearch: email,
+      password: pass,
     }),
   });
 
