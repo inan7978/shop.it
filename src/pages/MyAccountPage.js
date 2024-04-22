@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { _pushChanges } from "../api/myAccountPageAPI";
@@ -6,39 +6,35 @@ import { _pushChanges } from "../api/myAccountPageAPI";
 function MyAccountPage() {
   const { user } = useContext(UserContext);
   const { logOutUser } = useContext(UserContext);
-  const [email, setEmail] = useState("");
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [password, setPassword] = useState("");
-  const [conPass, setConPass] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (Object.keys(user).length === 0) {
       navigate("../login");
     }
-    setEmail(user.email);
-    setFname(user.fname);
-    setLname(user.lname);
-    setPassword(user.password);
   }, []);
 
   async function pushChanges(e) {
     e.preventDefault();
-    if (password === conPass) {
-      const updateUser = {
-        userID: user._id,
-        fname: fname,
-        lname: lname,
-        password: password,
-      };
 
-      const response = await _pushChanges(updateUser);
-      console.log("Response: ", response);
+    if (e.target.password.value !== e.target.conPassword.value) {
+      alert("The passwords entered do not match.");
+      return 0;
+    }
+
+    const updateUser = {
+      userID: user._id,
+      fname: e.target.fname.value,
+      lname: e.target.lname.value,
+      password: e.target.password.value,
+    };
+
+    const response = await _pushChanges(updateUser);
+    if (response.status === "OK") {
+      alert("Changes saved. Please log in again.");
       logOutUser("toLogin");
-      alert(`Changes saved for ${email}. Please log in again.`);
     } else {
-      alert("Passwords don't match!");
+      alert("Changes not saved. An error has occured.");
     }
   }
 
@@ -53,35 +49,31 @@ function MyAccountPage() {
             type="text"
             id="fname"
             name="fname"
-            value={fname}
+            defaultValue={user.fname}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-5 h-12 bg-gray-300"
             placeholder="first name"
-            onChange={(e) => setFname(e.target.value)}
           />
           <input
             type="text"
             id="lname"
             name="lname"
-            value={lname}
+            defaultValue={user.lname}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-5 h-12 bg-gray-300"
             placeholder="last name"
-            onChange={(e) => setLname(e.target.value)}
           />
           <input
             type="password"
             id="password"
             name="password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-5 h-12 bg-gray-300"
-            placeholder="password"
-            onChange={(e) => setPassword(e.target.value)}
+            placeholder="new password (leave blank to keep current)"
           />
           <input
             type="password"
-            id="con-password"
-            name="con-password"
+            id="conPassword"
+            name="conPassword"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-5 h-12 bg-gray-300"
-            placeholder="re-enter password"
-            onChange={(e) => setConPass(e.target.value)}
+            placeholder="re-enter new password"
           />
           <input
             className="p-2 bg-green-500 text-white my-2 hover:cursor-pointer rounded"
