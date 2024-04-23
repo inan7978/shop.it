@@ -55,19 +55,25 @@ function MyCartPage() {
 
     const data = await _loadDetails(toFind);
 
-    details = data;
+    console.log("cart response: ", data);
 
-    for (let i = 0; i < items.length; i++) {
-      for (let j = 0; j < items.length; j++) {
-        if (details[i]._id === items[j].itemID) {
-          details[i].quantity = items[j].quantity;
+    if (data.status === "OK") {
+      details = data.data;
+
+      for (let i = 0; i < items.length; i++) {
+        for (let j = 0; j < items.length; j++) {
+          if (details[i]._id === items[j].itemID) {
+            details[i].quantity = items[j].quantity;
+          }
         }
       }
-    }
 
-    // sets the details and load status to state
-    setDetails(details);
-    setLoaded(true);
+      // sets the details and load status to state
+      setDetails(details);
+      setLoaded(true);
+    } else {
+      console.log("An error has occured. No changes where made to the cart.");
+    }
   }
 
   // load status must be true to run this. This keeps it from trying to map before the values from loadDetails, which is async, arrive.
