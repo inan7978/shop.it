@@ -68,7 +68,7 @@ export function UserProvider({ children }) {
   async function createUser(email, pass) {
     const data = await _createUser(email, pass);
     console.log("User create triggered.");
-    return data.status;
+    return data;
   }
 
   function loadCart() {

@@ -17,7 +17,7 @@ function MyListings() {
     const owner = getUserID(); // used to have await here...
     console.log("loadDetails has been called");
     const data = await _loadDetails(owner);
-    setDetails(data);
+    setDetails(data.data);
   }
 
   const showListings = details ? (

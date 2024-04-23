@@ -2,13 +2,9 @@ import { useState, useContext } from "react";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { _createListing } from "../api/createListingAPI";
-import addPic from "../images/add-folder-svgrepo-com.svg";
 
 function CreateListingPage() {
   const [myFiles, setMyFiles] = useState();
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [price, setPrice] = useState("");
   const { getUserID } = useContext(UserContext);
   const { loggedIn } = useContext(UserContext);
 
@@ -17,6 +13,10 @@ function CreateListingPage() {
   async function uploadHandler(e) {
     e.preventDefault();
 
+    const title = e.target.title.value;
+    const desc = e.target.desc.value;
+    const price = e.target.price.value;
+
     if (title && desc && price && myFiles) {
       const userID = await getUserID();
       const formData = new FormData();
@@ -24,8 +24,6 @@ function CreateListingPage() {
       formData.append("desc", desc);
       formData.append("price", price);
       formData.append("owner", userID);
-      // formData.append("files", myFile); // has to be file
-      // formData.append("fileName", myFile.name);
 
       Object.keys(myFiles).forEach((key) => {
         formData.append(myFiles.item(key).name, myFiles.item(key));
@@ -67,8 +65,6 @@ function CreateListingPage() {
               id="title"
               name="title"
               placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
             />
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-4 h-12 bg-gray-300"
@@ -76,17 +72,13 @@ function CreateListingPage() {
               id="price"
               name="price"
               placeholder="Price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
             />
             <textarea
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-4 h-12 bg-gray-300"
               type="text"
-              id="description"
-              name="description"
+              id="desc"
+              name="desc"
               placeholder="Details"
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
             />
             <input type="submit" className="btn-submit" value="List It!" />
           </form>
