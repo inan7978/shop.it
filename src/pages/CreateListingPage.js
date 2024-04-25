@@ -33,9 +33,10 @@ function CreateListingPage() {
       const response = await _createListing(formData);
 
       console.log(response);
-      if (response.statu === 200) {
-        console.log(title, " has been added.");
+      if (response.status === "OK") {
         navigate("../store-page");
+      } else {
+        alert(`${response.status}. ${response.data}`);
       }
     } else {
       alert("Fill in all fields!");

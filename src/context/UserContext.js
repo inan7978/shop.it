@@ -29,19 +29,6 @@ export function UserProvider({ children }) {
     } else {
       return data.status;
     }
-
-    // if (data.password === pass) {
-    //   console.log("data: ", data);
-    //   setUser(data);
-    //   setLoggedIn(true);
-    // } else if (data.password !== pass) {
-    //   setUser({});
-    //   return { status: "Incorrect password." };
-    // } else {
-    //   return { status: "That account does not exist." };
-    // }
-    // need to finish this transtion...
-    // needs to have proper response handling
   }
 
   function logOutUser(whereTo) {

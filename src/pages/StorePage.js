@@ -8,6 +8,8 @@ function StorePage() {
 
   async function getRecords() {
     const result = await _getRecords();
+    console.table(result);
+    console.trace(result);
     setItems(result);
   }
 
