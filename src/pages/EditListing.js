@@ -4,23 +4,16 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { _deleteListing, _editHandler } from "../api/editListingAPI";
 
+// get rid of all of those states. Use defaultValue and e.target.<field>.value to grab values
+
 function EditListing() {
   const { state } = useLocation();
   const { title, description, price, imgURL, id } = state;
   const { removeListing } = useContext(UserContext);
   const [img, setImg] = useState(0);
-  const [_title, setTitle] = useState("");
-  const [_desc, setDesc] = useState("");
-  const [_price, setPrice] = useState("");
-  const [_myFiles, setMyFiles] = useState();
+  const [myFiles, setMyFiles] = useState();
   const navigate = useNavigate();
   console.log("Showing image: ", img + 1);
-
-  useEffect(() => {
-    setTitle(title);
-    setDesc(description);
-    setPrice(price);
-  }, []);
 
   function nextImg() {
     if (img + 1 >= imgURL.length) {
@@ -46,23 +39,23 @@ function EditListing() {
 
   async function editHandler(e) {
     e.preventDefault();
-    console.log(`New Title: ${_title}`);
-    console.log(`New description : ${_desc}`);
-    console.log(`New Price: ${_price}`);
+    const newTitle = e.target.title.value;
+    const newDesc = e.target.description.value;
+    const newPrice = e.target.price.value;
 
     const formData = new FormData();
 
-    let priceMod = _price.replace(/\$*/g, "");
+    let priceMod = newPrice.replace(/\$*/g, "");
     priceMod = priceMod.replace(/\,*/g, "");
 
-    formData.append("title", _title);
-    formData.append("desc", _desc);
+    formData.append("title", newTitle);
+    formData.append("desc", newDesc);
     formData.append("price", priceMod);
     formData.append("itemID", id);
 
-    if (_myFiles) {
-      Object.keys(_myFiles).forEach((key) => {
-        formData.append(_myFiles.item(key).name, _myFiles.item(key));
+    if (myFiles) {
+      Object.keys(myFiles).forEach((key) => {
+        formData.append(myFiles.item(key).name, myFiles.item(key));
       });
     }
 
@@ -72,10 +65,6 @@ function EditListing() {
 
     console.log(response);
 
-    setMyFiles();
-    setTitle("");
-    setDesc("");
-    setPrice("");
     navigate("../my-listings");
   }
 
@@ -104,8 +93,7 @@ function EditListing() {
               type="text"
               id="title"
               name="title"
-              value={_title}
-              onChange={(e) => setTitle(e.target.value)}
+              defaultValue={title}
             />
 
             <input
@@ -113,8 +101,7 @@ function EditListing() {
               type="text"
               id="price"
               name="price"
-              value={_price}
-              onChange={(e) => setPrice(e.target.value)}
+              defaultValue={price}
             />
 
             <textarea
@@ -122,8 +109,7 @@ function EditListing() {
               type="text"
               id="description"
               name="description"
-              value={_desc}
-              onChange={(e) => setDesc(e.target.value)}
+              defaultValue={description}
             />
             <div className="flex justify-center gap-5">
               <input
@@ -140,17 +126,16 @@ function EditListing() {
                 Discard
               </button>
             </div>
-            <div className="flex justify-center gap-5 p-5">
-              <button
-                onClick={() => {
-                  deleteListing();
-                }}
-                className="py-3 px-10 bg-red-500 text-white font-bold rounded"
-              >
-                Delete Listing
-              </button>
-            </div>
+            <div className="flex justify-center gap-5 p-5"></div>
           </form>
+          <button
+            onClick={() => {
+              deleteListing();
+            }}
+            className="py-3 px-10 bg-red-500 text-white font-bold rounded"
+          >
+            Delete Listing
+          </button>
         </div>
       </div>
     </div>
