@@ -3,6 +3,8 @@ import UserContext from "../context/UserContext";
 import { useContext } from "react";
 
 function StoreCard(props) {
+  const item = props.item;
+  console.log("item info: ", item);
   const itemPrice = JSON.parse(props.item.price.$numberDecimal);
   const modPrice = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -17,58 +19,27 @@ function StoreCard(props) {
   const buttonsStyles = "text-xl font-bold bg-blue-400 rounded p-2";
 
   return (
-    <div
-      className="container flex flex-col w-4/5 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-cardColor hover:cursor-pointer rounded p-5 justify-center"
-      onClick={(e) => {
-        // e.stopPropagation();
-        e.preventDefault();
-        console.log(
-          `${props.item.title} with ID ${props.item._id} has been clicked.`
-        );
-        navigate(`../item-details-page/${props.item._id}`, {
-          state: {
-            item: props.item.title,
-            description: props.item.description,
-            price: itemPrice,
-            imgURL: props.item.imgURL,
-            id: props.item._id,
-          },
-        });
-      }}
-    >
-      <div className="container flex flex-col items-center p-2 gap-3">
-        <img
-          alt="testing"
-          src={props.item.imgURL[0]}
-          className="aspect-auto h-48 max-h-48 rounded bg-white"
-        />
-        <h1 className="text-black text-2xl font-bold">{props.item.title}</h1>
-      </div>
+    <div className="bg-white">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div className="sm:flex sm:items-baseline sm:justify-between"></div>
 
-      <div className="container flex flex-col xl:flex-row gap-5 justify-center items-center my-10">
-        <h3 className="text-xl font-bold">{modPrice}</h3>
-        {loggedIn ? (
-          <button
-            className={buttonsStyles}
-            onClick={(e) => {
-              e.stopPropagation(); // this is used because this onClick is located within a broader on click. Not including this would have both on clicks fire when this is selected.
-              addToCart(props.item._id);
-              console.log(props.item.title + " request to add to cart.");
-            }}
-          >
-            Add to Cart
-          </button>
-        ) : (
-          <button
-            className={buttonsStyles}
-            onClick={(e) => {
-              e.stopPropagation();
-              navigate("/login");
-            }}
-          >
-            Add to Cart
-          </button>
-        )}
+        <div className="mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 lg:gap-x-8">
+          <div key={item._id} className="group relative">
+            <div className="h-96 w-full overflow-hidden rounded-lg sm:aspect-h-3 sm:aspect-w-2 group-hover:opacity-75 sm:h-auto">
+              <img
+                src={item.imgURL[0]}
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
+            <h3 className="mt-4 text-base font-semibold text-gray-900">
+              <a href={item.href}>
+                <span className="absolute inset-0" />
+                {item.title}
+              </a>
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">{modPrice}</p>
+          </div>
+        </div>
       </div>
     </div>
   );
