@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { _getItemDetails } from "../api/itemAPI";
+import { _getItemDetails, _addToCart } from "../api/itemAPI";
 import { useLocation } from "react-router-dom";
+import UserContext from "../context/UserContext";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function ItemDetailsPage() {
+  const { user } = useContext(UserContext);
   const [item, setItem] = useState();
 
   async function getItemDetails() {
@@ -21,7 +23,10 @@ export default function ItemDetailsPage() {
   }
 
   async function addToCart(id) {
+    console.log(id, user._id);
     console.log("Adding to cart: ", id);
+    const data = await _addToCart(user._id, id);
+    console.log(data);
   }
 
   useEffect(() => {
@@ -36,7 +41,7 @@ export default function ItemDetailsPage() {
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
             {/* Image selector */}
-            <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
+            <div className="mx-auto mt-6 w-full max-w-2xl sm:block lg:max-w-none">
               <Tab.List className="grid grid-cols-4 gap-6">
                 {item.imgURL.map((image) => (
                   <Tab
