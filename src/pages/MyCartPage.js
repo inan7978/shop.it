@@ -1,7 +1,7 @@
 import UserContext from "../context/UserContext";
 import { useContext, useEffect, useState, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-import { _loadDetails, _setQuantity } from "../api/myCartPageAPI";
+import { _loadDetails, _setQuantity, _deleteItem } from "../api/myCartPageAPI";
 import {
   CheckIcon,
   ClockIcon,
@@ -36,6 +36,13 @@ function MyCartPage() {
 
   function grandTotal() {
     return subTotal() + shipping() + taxEstimate();
+  }
+
+  async function deleteItem(user, item) {
+    console.log(user, item);
+    const deleteItem = await _deleteItem(user, item);
+    console.log(deleteItem);
+    loadDetails();
   }
 
   async function setQuantity(user, item, newQuantity) {
@@ -80,7 +87,7 @@ function MyCartPage() {
             className="divide-y divide-gray-200 border-b border-t border-gray-200"
           >
             {products.map((product, productIdx) => (
-              <li key={product.id} className="flex py-6 sm:py-10">
+              <li key={product._id} className="flex py-6 sm:py-10">
                 <div className="flex-shrink-0">
                   <img
                     src={product.imgURL[0]}
@@ -111,7 +118,7 @@ function MyCartPage() {
                         ) : null}
                       </div>
                       <p className="mt-1 text-sm font-medium text-gray-900">
-                        {product.price.$numberDecimal}
+                        ${product.price.$numberDecimal}
                       </p>
                     </div>
 
@@ -141,6 +148,9 @@ function MyCartPage() {
                         <button
                           type="button"
                           className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
+                          onClick={() => {
+                            deleteItem(user._id, product._id);
+                          }}
                         >
                           <span className="sr-only">Remove</span>
                           <XMarkIconMini
