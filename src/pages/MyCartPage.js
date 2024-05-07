@@ -1,7 +1,7 @@
 import UserContext from "../context/UserContext";
 import { useContext, useEffect, useState, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-import { _loadDetails } from "../api/myCartPageAPI";
+import { _loadDetails, _setQuantity } from "../api/myCartPageAPI";
 import {
   CheckIcon,
   ClockIcon,
@@ -36,6 +36,17 @@ function MyCartPage() {
 
   function grandTotal() {
     return subTotal() + shipping() + taxEstimate();
+  }
+
+  async function setQuantity(user, item, newQuantity) {
+    let checkNum = newQuantity;
+    console.log(user, item, newQuantity);
+    if (newQuantity < 1) {
+      checkNum = 1;
+    }
+    const update = await _setQuantity(user, item, checkNum);
+    console.log(update);
+    loadDetails();
   }
 
   async function loadDetails() {
@@ -114,7 +125,16 @@ function MyCartPage() {
                       <input
                         className="max-w-12 rounded-md border border-gray-300 p-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                         type="number"
+                        min="1"
+                        max="99"
                         defaultValue={product.quantity}
+                        onChange={(e) => {
+                          setQuantity(
+                            user._id,
+                            product._id.toString(),
+                            e.target.value
+                          );
+                        }}
                       ></input>
 
                       <div className="absolute right-0 top-0">
