@@ -16,7 +16,7 @@ function MyCartPage() {
 
   useEffect(() => {
     loadDetails();
-  }, []);
+  }, [products]);
 
   function subTotal() {
     let subTotal = 0;
@@ -42,7 +42,7 @@ function MyCartPage() {
     console.log(user, item);
     const deleteItem = await _deleteItem(user, item);
     console.log(deleteItem);
-    loadDetails();
+    setProducts([""]);
   }
 
   async function setQuantity(user, item, newQuantity) {
@@ -53,7 +53,6 @@ function MyCartPage() {
     }
     const update = await _setQuantity(user, item, checkNum);
     console.log(update);
-    loadDetails();
   }
 
   async function loadDetails() {
@@ -269,6 +268,10 @@ function MyCartPage() {
           <div className="mt-6">
             <button
               type="submit"
+              onClick={() => {
+                alert("Order has been placed!");
+                navigate("../store-page");
+              }}
               className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
             >
               Checkout

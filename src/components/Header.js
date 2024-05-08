@@ -175,7 +175,7 @@ function Header() {
             <button
               className={buttonsStyles}
               onClick={() => navigate("./my-cart")}
-            >{`Cart: ${user.cart.length}`}</button>
+            >{`Cart`}</button>
           </>
         ) : (
           <>
