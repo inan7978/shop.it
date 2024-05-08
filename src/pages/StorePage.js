@@ -30,36 +30,40 @@ function StorePage() {
         <h2 className="text-3xl text-center pb-16">New Items!</h2>
 
         <div className="grid grid-cols-item-6 gap-y-10 gap-x-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {items.map((item) => (
-            <div
-              key={item._id}
-              className="group"
-              onClick={(e) => {
-                // e.stopPropagation();
-                e.preventDefault();
-                console.log(
-                  `${item.title} with ID ${item._id} has been clicked.`
-                );
-                navigate(`../item-details-page/${item._id}`, {
-                  state: {
-                    id: item._id,
-                  },
-                });
-              }}
-            >
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                <img
-                  src={item.imgURL[0]}
-                  alt={item.imageAlt}
-                  className="h-full w-full object-cover object-center group-hover:opacity-75"
-                />
+          {items ? (
+            items.map((item) => (
+              <div
+                key={item._id}
+                className="group"
+                onClick={(e) => {
+                  // e.stopPropagation();
+                  e.preventDefault();
+                  console.log(
+                    `${item.title} with ID ${item._id} has been clicked.`
+                  );
+                  navigate(`../item-details-page/${item._id}`, {
+                    state: {
+                      id: item._id,
+                    },
+                  });
+                }}
+              >
+                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                  <img
+                    src={item.imgURL[0]}
+                    alt={item.imageAlt}
+                    className="h-full w-full object-cover object-center group-hover:opacity-75"
+                  />
+                </div>
+                <h3 className="mt-4 text-sm text-gray-700">{item.title}</h3>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  ${item.price.$numberDecimal}
+                </p>
               </div>
-              <h3 className="mt-4 text-sm text-gray-700">{item.title}</h3>
-              <p className="mt-1 text-lg font-medium text-gray-900">
-                ${item.price.$numberDecimal}
-              </p>
-            </div>
-          ))}
+            ))
+          ) : (
+            <>An error has occured.</>
+          )}
         </div>
       </div>
     </div>

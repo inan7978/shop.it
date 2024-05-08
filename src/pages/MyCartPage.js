@@ -10,13 +10,12 @@ import {
 } from "@heroicons/react/20/solid";
 function MyCartPage() {
   const { loggedIn, user } = useContext(UserContext);
-  const [products, setProducts] = useState([]);
-  const [loaded, setLoaded] = useState(false);
+  const [products, setProducts] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
     loadDetails();
-  }, [products]);
+  }, []);
 
   function subTotal() {
     let subTotal = 0;
@@ -42,7 +41,7 @@ function MyCartPage() {
     console.log(user, item);
     const deleteItem = await _deleteItem(user, item);
     console.log(deleteItem);
-    setProducts([""]);
+    return deleteItem;
   }
 
   async function setQuantity(user, item, newQuantity) {
@@ -55,6 +54,16 @@ function MyCartPage() {
     console.log(update);
   }
 
+  async function deleteHandler(user, item) {
+    const result = await deleteItem(user, item);
+    console.log("result of delete: ", result);
+    if (result.status === "OK") {
+      loadDetails();
+    } else {
+      console.log(result.data);
+    }
+  }
+
   async function loadDetails() {
     if (!loggedIn) {
       navigate("../login");
@@ -64,12 +73,11 @@ function MyCartPage() {
     const items = await _loadDetails(user._id);
 
     console.log(items.data);
-    setLoaded(true);
     setProducts(items.data);
   }
 
   // load status must be true to run this. This keeps it from trying to map before the values from loadDetails, which is async, arrive.
-  return loaded ? (
+  return products ? (
     <main className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
       <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
         Shopping Cart
@@ -145,10 +153,9 @@ function MyCartPage() {
 
                       <div className="absolute right-0 top-0">
                         <button
-                          type="button"
                           className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
                           onClick={() => {
-                            deleteItem(user._id, product._id);
+                            deleteHandler(user._id, product._id);
                           }}
                         >
                           <span className="sr-only">Remove</span>
