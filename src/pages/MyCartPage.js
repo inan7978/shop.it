@@ -52,16 +52,14 @@ function MyCartPage() {
     }
     const update = await _setQuantity(user, item, checkNum);
     console.log(update);
+    loadDetails();
   }
 
   async function deleteHandler(user, item) {
     const result = await deleteItem(user, item);
     console.log("result of delete: ", result);
-    if (result.status === "OK") {
-      loadDetails();
-    } else {
-      console.log(result.data);
-    }
+    console.log(result.data);
+    loadDetails();
   }
 
   async function loadDetails() {
