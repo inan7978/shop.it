@@ -40,6 +40,14 @@ function LoginPage() {
             placeholder="Password"
           />
           <h1 className="font-medium text-red-500 text-center">{message}</h1>
+          <h2
+            className="font-medium text-theYellow text-center"
+            onClick={() => {
+              navigate("../sign-up");
+            }}
+          >
+            No account? Sign up!
+          </h2>
           <input className="btn-submit" type="submit" />
         </form>
       </div>
