@@ -106,12 +106,14 @@ function MyCartPage() {
                     <div>
                       <div className="flex justify-between">
                         <h3 className="text-sm">
-                          <a
-                            href={product.href}
-                            className="font-medium text-gray-700 hover:text-gray-800"
+                          <div
+                            onClick={() => {
+                              navigate(`../item-details-page/${product._id}`);
+                            }}
+                            className="font-medium text-gray-700 hover:text-gray-800 hover:cursor-pointer"
                           >
                             {product.title}
-                          </a>
+                          </div>
                         </h3>
                       </div>
                       <div className="mt-1 flex text-sm">
