@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import UserContext from "../context/UserContext";
 
@@ -8,6 +9,8 @@ function LoginPage() {
   const { loginUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [message, setMessage] = useState();
+  const token = Cookies.get("token");
+  console.log("Saved: ", token);
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -17,6 +20,8 @@ function LoginPage() {
 
     if (confirm === "OK") {
       navigate("../store-page");
+      const token = "You got a token!";
+      Cookies.set("token", token, { expires: 7, secure: true });
     } else {
       setMessage(confirm);
     }
