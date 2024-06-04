@@ -9,7 +9,7 @@ function LoginPage() {
   const { loginUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [message, setMessage] = useState();
-  const token = Cookies.get("token");
+  const token = Cookies.get("user-token-shopit");
   console.log("Saved: ", token);
 
   const loginHandler = async (e) => {
@@ -21,7 +21,7 @@ function LoginPage() {
     if (confirm === "OK") {
       navigate("../store-page");
       const token = "You got a token!";
-      Cookies.set("token", token, { expires: 7, secure: true });
+      Cookies.set("user-token-shopit", token, { expires: 7, secure: true });
     } else {
       setMessage(confirm);
     }
