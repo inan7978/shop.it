@@ -2,10 +2,11 @@ import { useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { _pushChanges } from "../api/myAccountPageAPI";
+import Cookies from "js-cookie";
+import { _logOutUser } from "../api/authAPI";
 
 function MyAccountPage() {
   const { user } = useContext(UserContext);
-  const { logOutUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +33,8 @@ function MyAccountPage() {
     const response = await _pushChanges(updateUser);
     if (response.status === "OK") {
       alert("Changes saved. Please log in again.");
-      logOutUser("toLogin");
+      _logOutUser();
+      navigate("../login");
     } else {
       alert("Changes not saved. An error has occured.");
     }

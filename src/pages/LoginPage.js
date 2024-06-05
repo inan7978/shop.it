@@ -2,28 +2,24 @@ import { useState } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-
-import UserContext from "../context/UserContext";
+import { _logInUser } from "../api/authAPI";
 
 function LoginPage() {
-  const { loginUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [message, setMessage] = useState();
-  const token = Cookies.get("user-token-shopit");
-  console.log("Saved: ", token);
 
   const loginHandler = async (e) => {
     e.preventDefault();
     const email = document.getElementById("email").value;
     const pass = document.getElementById("password").value;
-    const confirm = await loginUser(email, pass);
+    const confirm = await _logInUser(email, pass);
 
-    if (confirm === "OK") {
+    if (confirm.status === "OK") {
+      Cookies.set("user-token-shopit", confirm.data, { secure: true });
       navigate("../store-page");
-      const token = "You got a token!";
-      Cookies.set("user-token-shopit", token, { expires: 7, secure: true });
+      window.location.reload(); // hacky way to refresh the page and have the header change to the logged in header
     } else {
-      setMessage(confirm);
+      setMessage(confirm.data);
     }
   };
 

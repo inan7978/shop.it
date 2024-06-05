@@ -3,6 +3,7 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../images/shopitLogo.png";
 import { useNavigate } from "react-router-dom";
+import { _logOutUser } from "../api/authAPI";
 
 const navigation = [
   { name: "Account", href: "./my-account" },
@@ -11,7 +12,7 @@ const navigation = [
   { name: "Add Listing", href: "./list-item" },
 ];
 
-function LoggedInHeader({ logOutUser }) {
+function LoggedInHeader({ refresh }) {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -59,7 +60,8 @@ function LoggedInHeader({ logOutUser }) {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <button
             onClick={() => {
-              logOutUser("toStore");
+              _logOutUser();
+              refresh();
               setMobileMenuOpen(false);
             }}
             className="text-sm font-semibold leading-6 text-white"
@@ -110,7 +112,8 @@ function LoggedInHeader({ logOutUser }) {
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => {
-                    logOutUser("toStore");
+                    _logOutUser();
+                    refresh();
                     setMobileMenuOpen(false);
                   }}
                 >

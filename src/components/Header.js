@@ -1,14 +1,23 @@
-import UserContext from "../context/UserContext";
 import LoggedInHeader from "./LoggedInHeader";
 import LoggedOutHeader from "./LoggedOutHeader";
+import { _logOutUser } from "../api/authAPI";
+import { useEffect, useState } from "react";
 
-import { useContext } from "react";
+import Cookies from "js-cookie";
+
 function Header() {
-  const { user } = useContext(UserContext);
-  const { logOutUser } = useContext(UserContext);
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    setToken(Cookies.get("user-token-shopit"));
+  }, []);
 
-  return user._id ? (
-    <LoggedInHeader logOutUser={logOutUser} />
+  function refresh() {
+    console.log("Refresh the header has been called");
+    setToken(Cookies.get("user-token-shopit"));
+  }
+
+  return token !== undefined ? (
+    <LoggedInHeader refresh={refresh} />
   ) : (
     <LoggedOutHeader />
   );
