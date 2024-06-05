@@ -13,3 +13,17 @@ export async function _pushChanges(newVals) {
 
   return data;
 }
+
+export async function _getUserDetails(token) {
+  const result = await fetch(`${BASE_URL}/GET-USER-DETAILS`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await result.json();
+
+  return data;
+}

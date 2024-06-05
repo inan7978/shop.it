@@ -1,19 +1,30 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { _pushChanges } from "../api/myAccountPageAPI";
 import Cookies from "js-cookie";
 import { _logOutUser } from "../api/authAPI";
+import { _getUserDetails } from "../api/myAccountPageAPI";
 
 function MyAccountPage() {
-  const { user } = useContext(UserContext);
+  const token = Cookies.get("user-token-shopit");
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
+  const [id, setId] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (Object.keys(user).length === 0) {
-      navigate("../login");
-    }
-  }, []);
+    getUserDetails();
+  });
+
+  async function getUserDetails() {
+    const result = await _getUserDetails(token);
+    console.log("Get user details: ", result);
+    setFirst(result.data[0].fname);
+    setLast(result.data[0].lname);
+    setId(result.data[0]._id);
+    return result;
+  }
 
   async function pushChanges(e) {
     e.preventDefault();
@@ -24,7 +35,7 @@ function MyAccountPage() {
     }
 
     const updateUser = {
-      userID: user._id,
+      userID: id,
       fname: e.target.fname.value,
       lname: e.target.lname.value,
       password: e.target.password.value,
@@ -43,7 +54,7 @@ function MyAccountPage() {
   return (
     <div className="flex flex-col items-center justify-start">
       <h1 className="text-2xl font-bold mt-10 underline">
-        {user.fname !== "" ? `${user.fname}'s account` : "Account Info"}
+        {first !== "" ? `${first}'s account` : "Account Info"}
       </h1>
       <form onSubmit={pushChanges}>
         <div className="flex flex-col items-center justify-start">
@@ -51,7 +62,7 @@ function MyAccountPage() {
             type="text"
             id="fname"
             name="fname"
-            defaultValue={user.fname}
+            defaultValue={first}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-5 h-12 bg-gray-300"
             placeholder="first name"
           />
@@ -59,7 +70,7 @@ function MyAccountPage() {
             type="text"
             id="lname"
             name="lname"
-            defaultValue={user.lname}
+            defaultValue={last}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mx-auto my-5 h-12 bg-gray-300"
             placeholder="last name"
           />
