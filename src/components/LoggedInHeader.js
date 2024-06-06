@@ -62,6 +62,7 @@ function LoggedInHeader({ refresh }) {
             onClick={() => {
               _logOutUser();
               refresh();
+              navigate("../store-page");
               setMobileMenuOpen(false);
             }}
             className="text-sm font-semibold leading-6 text-white"
@@ -114,6 +115,7 @@ function LoggedInHeader({ refresh }) {
                   onClick={() => {
                     _logOutUser();
                     refresh();
+                    navigate("../store-page");
                     setMobileMenuOpen(false);
                   }}
                 >

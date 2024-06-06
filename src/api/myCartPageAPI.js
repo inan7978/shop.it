@@ -1,12 +1,12 @@
 import { BASE_URL } from "./baseURL";
 
-export async function _loadDetails(user) {
-  const result = await fetch(`${BASE_URL}/get-cart-items`, {
-    method: "POST",
+export async function _loadDetails(token) {
+  const result = await fetch(`${BASE_URL}/GET-CART-ITEMS`, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ user: user }),
   });
 
   const data = await result.json();

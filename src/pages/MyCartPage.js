@@ -2,6 +2,7 @@ import UserContext from "../context/UserContext";
 import { useContext, useEffect, useState, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { _loadDetails, _setQuantity, _deleteItem } from "../api/myCartPageAPI";
+import Cookies from "js-cookie";
 import {
   CheckIcon,
   ClockIcon,
@@ -12,6 +13,7 @@ function MyCartPage() {
   const { loggedIn, user } = useContext(UserContext);
   const [products, setProducts] = useState();
   const navigate = useNavigate();
+  const token = Cookies.get("user-token-shopit");
 
   useEffect(() => {
     loadDetails();
@@ -63,14 +65,14 @@ function MyCartPage() {
   }
 
   async function loadDetails() {
-    if (!loggedIn) {
+    if (!token) {
       navigate("../login");
       return 0;
     }
 
-    const items = await _loadDetails(user._id);
+    const items = await _loadDetails(token);
 
-    console.log(items.data);
+    console.log("Get cart items: ", items.data);
     setProducts(items.data);
   }
 
