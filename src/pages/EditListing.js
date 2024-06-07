@@ -3,37 +3,23 @@ import UserContext from "../context/UserContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { _deleteListing, _editHandler } from "../api/editListingAPI";
+import Cookies from "js-cookie";
 
 // get rid of all of those states. Use defaultValue and e.target.<field>.value to grab values
 
 function EditListing() {
   const { state } = useLocation();
   const { title, description, price, imgURL, id } = state;
-  const { removeListing } = useContext(UserContext);
   const [img, setImg] = useState(0);
   const [myFiles, setMyFiles] = useState();
   const navigate = useNavigate();
+  const token = Cookies.get("user-token-shopit");
   console.log("Showing image: ", img + 1);
 
-  function nextImg() {
-    if (img + 1 >= imgURL.length) {
-      setImg(0);
-    } else {
-      setImg(img + 1);
-    }
-  }
-  function prevImg() {
-    if (img === 0) {
-      setImg(imgURL.length - 1);
-    } else {
-      setImg(img - 1);
-    }
-  }
   async function deleteListing() {
     console.log("requested to delete : ", id);
-    const data = await _deleteListing(id);
+    const data = await _deleteListing(id, token);
     console.log(data);
-    removeListing(id);
     navigate("../my-listings");
   }
 
@@ -61,7 +47,7 @@ function EditListing() {
 
     console.log("formData: ", formData);
 
-    const response = await _editHandler(formData);
+    const response = await _editHandler(formData, token);
 
     console.log(response);
 

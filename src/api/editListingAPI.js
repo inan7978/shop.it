@@ -1,10 +1,11 @@
 import { BASE_URL } from "./baseURL";
 
-export async function _deleteListing(id) {
-  const result = await fetch(`${BASE_URL}/delete-listing`, {
+export async function _deleteListing(id, token) {
+  const result = await fetch(`${BASE_URL}/DELETE-LISTING`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ deleteID: id }),
   });
@@ -13,10 +14,11 @@ export async function _deleteListing(id) {
   return data;
 }
 
-export async function _editHandler(formData) {
-  const response = await fetch(`${BASE_URL}/update-listing`, {
-    header: {
-      "content-type": "multipart/form-data",
+export async function _editHandler(formData, token) {
+  const response = await fetch(`${BASE_URL}/PUT-LISTING`, {
+    headers: {
+      // content type form data addition would make this not work... still not sure why
+      Authorization: `Bearer ${token}`,
     },
 
     method: "POST",

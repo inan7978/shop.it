@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { _updateCart, _loginUser, _createUser } from "../api/userContextAPI";
+import { _updateCart, _loginUser } from "../api/userContextAPI";
+import { _createUser } from "../api/createAccountPageAPI";
 const UserContext = createContext();
 
 export function UserProvider({ children }) {

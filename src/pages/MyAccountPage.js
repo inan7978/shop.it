@@ -41,7 +41,7 @@ function MyAccountPage() {
       password: e.target.password.value,
     };
 
-    const response = await _pushChanges(updateUser);
+    const response = await _pushChanges(updateUser, token);
     if (response.status === "OK") {
       alert("Changes saved. Please log in again.");
       _logOutUser();

@@ -1,8 +1,7 @@
 import { useState, useContext } from "react";
-import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { _createUser } from "../api/createAccountPageAPI.js";
 function CreateAccountPage() {
-  const { createUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
 
@@ -23,7 +22,7 @@ function CreateAccountPage() {
       return;
     }
 
-    const confirm = await createUser(email, pass);
+    const confirm = await _createUser(email, pass);
 
     if (confirm.status === "OK") {
       navigate("../login");

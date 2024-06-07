@@ -16,21 +16,21 @@ export async function _loginUser(email, pass) {
   return data;
 }
 
-export async function _createUser(email, pass) {
-  const result = await fetch(`${BASE_URL}/create-user`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      pass: pass,
-    }),
-  });
+// export async function _createUser(email, pass) {
+//   const result = await fetch(`${BASE_URL}/create-user`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       email: email,
+//       pass: pass,
+//     }),
+//   });
 
-  const data = await result.json();
-  return data;
-}
+//   const data = await result.json();
+//   return data;
+// }
 
 export async function _updateCart(newCart, user) {
   const result = await fetch(`${BASE_URL}/update-cart`, {

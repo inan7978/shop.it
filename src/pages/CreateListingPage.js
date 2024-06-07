@@ -1,12 +1,11 @@
 import { useState, useContext } from "react";
-import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { _createListing } from "../api/createListingAPI";
+import Cookies from "js-cookie";
 
 function CreateListingPage() {
   const [myFiles, setMyFiles] = useState();
-  const { getUserID } = useContext(UserContext);
-  const { loggedIn } = useContext(UserContext);
+  const token = Cookies.get("user-token-shopit");
 
   const navigate = useNavigate();
 
@@ -18,19 +17,18 @@ function CreateListingPage() {
     const price = e.target.price.value;
 
     if (title && desc && price && myFiles) {
-      const userID = await getUserID();
       const formData = new FormData();
       formData.append("title", title);
       formData.append("desc", desc);
       formData.append("price", price);
-      formData.append("owner", userID);
+      // formData.append("owner", userID);
 
       Object.keys(myFiles).forEach((key) => {
         formData.append(myFiles.item(key).name, myFiles.item(key));
       });
       console.log("formData: ", formData);
 
-      const response = await _createListing(formData);
+      const response = await _createListing(formData, token);
 
       console.log(response);
       if (response.status === "OK") {
@@ -45,7 +43,7 @@ function CreateListingPage() {
 
   return (
     <div className="bg-theBlue">
-      {loggedIn ? (
+      {token !== "" ? (
         <div className="container flex flex-col items-center mx-auto pt-12 pb-12">
           <h1 className="text-theYellow font-bold text-3xl pb-20">
             New Listing

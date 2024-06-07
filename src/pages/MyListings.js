@@ -3,10 +3,11 @@ import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import ItemListing from "../components/ItemListing";
 import { _loadDetails } from "../api/myListingsAPI";
+import Cookies from "js-cookie";
 
 function MyListings() {
-  const { getUserID } = useContext(UserContext);
   const [details, setDetails] = useState();
+  const token = Cookies.get("user-token-shopit");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,9 +15,8 @@ function MyListings() {
   }, []);
 
   async function loadDetails() {
-    const owner = getUserID(); // used to have await here...
     console.log("loadDetails has been called");
-    const data = await _loadDetails(owner);
+    const data = await _loadDetails(token);
     setDetails(data.data);
   }
 
