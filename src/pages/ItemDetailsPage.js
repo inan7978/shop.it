@@ -5,13 +5,14 @@ import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { _getItemDetails, _addToCart } from "../api/itemAPI";
 import { useLocation } from "react-router-dom";
 import UserContext from "../context/UserContext";
+import Cookies from "js-cookie";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function ItemDetailsPage() {
-  const { user } = useContext(UserContext);
+  const token = Cookies.get("user-token-shopit");
   const [item, setItem] = useState();
 
   async function getItemDetails() {
@@ -23,10 +24,10 @@ export default function ItemDetailsPage() {
   }
 
   async function addToCart(id) {
-    console.log(id, user._id);
+    console.log(id);
     console.log("Adding to cart: ", id);
-    const data = await _addToCart(user._id, id);
-    console.log(data);
+    const data = await _addToCart(token, id);
+    console.log(data.data);
   }
 
   useEffect(() => {

@@ -10,7 +10,6 @@ import {
   XMarkIcon as XMarkIconMini,
 } from "@heroicons/react/20/solid";
 function MyCartPage() {
-  const { loggedIn, user } = useContext(UserContext);
   const [products, setProducts] = useState();
   const navigate = useNavigate();
   const token = Cookies.get("user-token-shopit");
@@ -46,14 +45,14 @@ function MyCartPage() {
     return deleteItem;
   }
 
-  async function setQuantity(user, item, newQuantity) {
+  async function setQuantity(token, item, newQuantity) {
     let checkNum = newQuantity;
-    console.log(user, item, newQuantity);
+    console.log(item, newQuantity);
     if (newQuantity < 1) {
       checkNum = 1;
     }
-    const update = await _setQuantity(user, item, checkNum);
-    console.log(update);
+    const update = await _setQuantity(token, item, checkNum);
+    console.log(update.data);
     loadDetails();
   }
 
@@ -146,7 +145,7 @@ function MyCartPage() {
                         defaultValue={product.quantity}
                         onChange={(e) => {
                           setQuantity(
-                            user._id,
+                            token,
                             product._id.toString(),
                             e.target.value
                           );
@@ -157,7 +156,7 @@ function MyCartPage() {
                         <button
                           className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
                           onClick={() => {
-                            deleteHandler(user._id, product._id);
+                            deleteHandler(token, product._id);
                           }}
                         >
                           <span className="sr-only">Remove</span>
