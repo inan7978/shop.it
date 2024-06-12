@@ -18,9 +18,9 @@ export default function ItemDetailsPage() {
   async function getItemDetails() {
     const id = window.location.href.split("/");
     const temp = id[id.length - 1];
-    const details = await _getItemDetails(temp);
+    const result = await _getItemDetails(temp);
     console.log("Item id: ", temp);
-    setItem(details[0]);
+    setItem(result.data[0]);
   }
 
   async function addToCart(id) {

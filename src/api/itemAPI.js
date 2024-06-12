@@ -1,7 +1,7 @@
 import { BASE_URL } from "./baseURL";
 
 export async function _getItemDetails(itemId) {
-  const response = await fetch(`${BASE_URL}/item-details-page/${itemId}`, {
+  const response = await fetch(`${BASE_URL}/GET-ITEM-DETAILS/${itemId}`, {
     header: {
       "Content-Type": "application/json",
     },
