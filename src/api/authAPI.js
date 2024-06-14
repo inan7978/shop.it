@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export async function _logInUser(email, pass) {
   console.log("log in requested");
 
-  const result = await fetch(`${BASE_URL}/authenticate`, {
+  const result = await fetch(`${BASE_URL}/GET-TOKEN`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

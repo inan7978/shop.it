@@ -27,13 +27,14 @@ export async function _setQuantity(token, item, newQuantity) {
   return data;
 }
 
-export async function _deleteItem(user, item) {
-  const result = await fetch(`${BASE_URL}/remove-from-cart`, {
+export async function _deleteItem(token, item) {
+  const result = await fetch(`${BASE_URL}/DELETE-CART-ITEM`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ user: user, item: item }),
+    body: JSON.stringify({ item: item }),
   });
 
   const data = await result.json();

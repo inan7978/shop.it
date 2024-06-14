@@ -21,7 +21,6 @@ function CreateListingPage() {
       formData.append("title", title);
       formData.append("desc", desc);
       formData.append("price", price);
-      // formData.append("owner", userID);
 
       Object.keys(myFiles).forEach((key) => {
         formData.append(myFiles.item(key).name, myFiles.item(key));
