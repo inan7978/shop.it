@@ -1,12 +1,11 @@
 import { BASE_URL } from "./baseURL";
 
-export async function _loadDetails(owner) {
-  const result = await fetch(`${BASE_URL}/get-listing-items`, {
-    method: "POST",
+export async function _loadDetails(token) {
+  const result = await fetch(`${BASE_URL}/GET-LISTING-ITEMS`, {
+    method: "GET",
     headers: {
-      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ owner: owner }),
   });
 
   const data = await result.json();

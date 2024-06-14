@@ -1,38 +1,40 @@
 import { BASE_URL } from "./baseURL";
 
-export async function _loadDetails(user) {
-  const result = await fetch(`${BASE_URL}/get-cart-items`, {
-    method: "POST",
+export async function _loadDetails(token) {
+  const result = await fetch(`${BASE_URL}/GET-CART-ITEMS`, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ user: user }),
   });
 
   const data = await result.json();
   return data;
 }
 
-export async function _setQuantity(user, item, newQuantity) {
-  const result = await fetch(`${BASE_URL}/update-quantity`, {
+export async function _setQuantity(token, item, newQuantity) {
+  const result = await fetch(`${BASE_URL}/PUT-ITEM-QUANTITY`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ user: user, item: item, newQuantity: newQuantity }),
+    body: JSON.stringify({ item: item, newQuantity: newQuantity }),
   });
 
   const data = await result.json();
   return data;
 }
 
-export async function _deleteItem(user, item) {
-  const result = await fetch(`${BASE_URL}/remove-from-cart`, {
+export async function _deleteItem(token, item) {
+  const result = await fetch(`${BASE_URL}/DELETE-CART-ITEM`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ user: user, item: item }),
+    body: JSON.stringify({ item: item }),
   });
 
   const data = await result.json();

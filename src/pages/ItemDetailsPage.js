@@ -1,32 +1,38 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
-import { StarIcon } from "@heroicons/react/20/solid";
-import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { _getItemDetails, _addToCart } from "../api/itemAPI";
-import { useLocation } from "react-router-dom";
-import UserContext from "../context/UserContext";
+
+import Cookies from "js-cookie";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function ItemDetailsPage() {
-  const { user } = useContext(UserContext);
+  const token = Cookies.get("user-token-shopit");
   const [item, setItem] = useState();
+  const [message, setMessage] = useState();
 
   async function getItemDetails() {
     const id = window.location.href.split("/");
     const temp = id[id.length - 1];
-    const details = await _getItemDetails(temp);
+    const result = await _getItemDetails(temp);
     console.log("Item id: ", temp);
-    setItem(details[0]);
+    setItem(result.data[0]);
+  }
+
+  function clearMessage() {
+    setMessage(false);
   }
 
   async function addToCart(id) {
-    console.log(id, user._id);
+    console.log(id);
     console.log("Adding to cart: ", id);
-    const data = await _addToCart(user._id, id);
-    console.log(data);
+    const data = await _addToCart(token, id);
+    console.log(data.data);
+    setMessage(data.data);
+    setTimeout(clearMessage, 3000);
   }
 
   useEffect(() => {
@@ -141,15 +147,18 @@ export default function ItemDetailsPage() {
                   )}
                 </Disclosure>
               </div>
-              <div className="mt-10 flex justify-center">
-                <button
-                  onClick={() => {
-                    addToCart(item._id);
-                  }}
-                  className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
-                >
-                  Add to bag
-                </button>
+              <div className="mt-10 flex flex-col justify-center">
+                <h1 className="font-medium text-green-500 pb-2">
+                  <button
+                    onClick={() => {
+                      addToCart(item._id);
+                    }}
+                    className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                  >
+                    Add to bag
+                  </button>
+                  {message ? message : null}
+                </h1>
               </div>
             </section>
           </div>

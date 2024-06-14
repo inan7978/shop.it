@@ -10,9 +10,12 @@ function StorePage() {
 
   async function getRecords() {
     const result = await _getRecords();
-    console.table(result);
-    console.trace(result);
-    setItems(result);
+    if (result.status === "OK") {
+      console.table(result.data);
+      setItems(result.data);
+    } else {
+      console.log(result.data);
+    }
   }
 
   useEffect(() => {

@@ -1,7 +1,8 @@
 import UserContext from "../context/UserContext";
-import { useContext, useEffect, useState, Fragment } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { _loadDetails, _setQuantity, _deleteItem } from "../api/myCartPageAPI";
+import Cookies from "js-cookie";
 import {
   CheckIcon,
   ClockIcon,
@@ -9,9 +10,10 @@ import {
   XMarkIcon as XMarkIconMini,
 } from "@heroicons/react/20/solid";
 function MyCartPage() {
-  const { loggedIn, user } = useContext(UserContext);
   const [products, setProducts] = useState();
+  const [message, setMessage] = useState();
   const navigate = useNavigate();
+  const token = Cookies.get("user-token-shopit");
 
   useEffect(() => {
     loadDetails();
@@ -37,40 +39,39 @@ function MyCartPage() {
     return subTotal() + shipping() + taxEstimate();
   }
 
-  async function deleteItem(user, item) {
-    console.log(user, item);
-    const deleteItem = await _deleteItem(user, item);
-    console.log(deleteItem);
-    return deleteItem;
+  function clearMessage() {
+    setMessage(false);
   }
 
-  async function setQuantity(user, item, newQuantity) {
+  async function deleteItem(token, item) {
+    const deleteItem = await _deleteItem(token, item);
+    console.log(deleteItem.data);
+    setMessage(deleteItem.data);
+    setTimeout(clearMessage, 3000);
+    loadDetails();
+    return;
+  }
+
+  async function setQuantity(token, item, newQuantity) {
     let checkNum = newQuantity;
-    console.log(user, item, newQuantity);
+    console.log(item, newQuantity);
     if (newQuantity < 1) {
       checkNum = 1;
     }
-    const update = await _setQuantity(user, item, checkNum);
-    console.log(update);
-    loadDetails();
-  }
-
-  async function deleteHandler(user, item) {
-    const result = await deleteItem(user, item);
-    console.log("result of delete: ", result);
-    console.log(result.data);
+    const update = await _setQuantity(token, item, checkNum);
+    console.log(update.data);
     loadDetails();
   }
 
   async function loadDetails() {
-    if (!loggedIn) {
+    if (!token) {
       navigate("../login");
       return 0;
     }
 
-    const items = await _loadDetails(user._id);
+    const items = await _loadDetails(token);
 
-    console.log(items.data);
+    console.log("Get cart items: ", items.data);
     setProducts(items.data);
   }
 
@@ -144,7 +145,7 @@ function MyCartPage() {
                         defaultValue={product.quantity}
                         onChange={(e) => {
                           setQuantity(
-                            user._id,
+                            token,
                             product._id.toString(),
                             e.target.value
                           );
@@ -155,7 +156,7 @@ function MyCartPage() {
                         <button
                           className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
                           onClick={() => {
-                            deleteHandler(user._id, product._id);
+                            deleteItem(token, product._id);
                           }}
                         >
                           <span className="sr-only">Remove</span>
@@ -284,6 +285,7 @@ function MyCartPage() {
               Checkout
             </button>
           </div>
+          <h1>{message ? message : null}</h1>
         </section>
       </div>
     </main>
