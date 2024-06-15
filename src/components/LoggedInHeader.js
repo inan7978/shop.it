@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../images/shopitLogo.png";
 import { useNavigate } from "react-router-dom";
 import { _logOutUser } from "../api/authAPI";
+import Cookies from "js-cookie";
 
 const navigation = [
   { name: "Account", href: "./my-account" },
@@ -15,6 +16,7 @@ const navigation = [
 function LoggedInHeader({ refresh }) {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const token = Cookies.get("user-token-shopit");
 
   return (
     <header className="bg-theBlue">
@@ -60,7 +62,7 @@ function LoggedInHeader({ refresh }) {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <button
             onClick={() => {
-              _logOutUser();
+              _logOutUser(token);
               refresh();
               navigate("../store-page");
               setMobileMenuOpen(false);
@@ -113,7 +115,7 @@ function LoggedInHeader({ refresh }) {
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => {
-                    _logOutUser();
+                    _logOutUser(token);
                     refresh();
                     navigate("../store-page");
                     setMobileMenuOpen(false);

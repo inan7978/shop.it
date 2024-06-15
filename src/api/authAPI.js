@@ -19,8 +19,15 @@ export async function _logInUser(email, pass) {
   return data;
 }
 
-export async function _logOutUser() {
+export async function _logOutUser(token) {
   // need to tell the server to discard the token as well not just delete from the browser
   console.log("log out requested.");
   Cookies.remove("user-token-shopit");
+
+  const result = await fetch(`${BASE_URL}/DELETE-TOKEN/${token}`, {
+    method: "DELETE",
+  });
+
+  const data = await result.json();
+  return data;
 }
