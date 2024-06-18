@@ -44,14 +44,13 @@ function AboutPage() {
         <p className={pStyles}>
           &nbsp; &nbsp; &nbsp; I used REACT for the front end and mainly used
           the useState and useEffect hooks. There was plenty of JSX but that
-          should go without saying. I used context API to store the logged in
-          users and the respective user’s cart contents. I created basic
-          components and a basic website layout along with various “pages”. The
-          navigation was handled by react router and I used a bit of state
-          passing when navigating to other pages. I originally did not use a CSS
-          framework. My idea was to practice my CSS skills a bit. I later
-          incorporated the Tailwind CSS framework and I’m happy I did so. The
-          vanilla CSS I wrote is still in the source code.
+          should go without saying. I used JWT and cookies to store the logged
+          in user. I created basic components and a basic website layout along
+          with various “pages”. The navigation was handled by react router and I
+          used a bit of state passing when navigating to other pages. I
+          originally did not use a CSS framework. My idea was to practice my CSS
+          skills a bit. I later incorporated the Tailwind CSS framework and I’m
+          happy I did so. The vanilla CSS I wrote is still in the source code.
         </p>
         <p className={pStyles}>
           &nbsp; &nbsp; &nbsp; The backend was done with Express and it
@@ -67,23 +66,15 @@ function AboutPage() {
         <p className={pStyles}>
           &nbsp; &nbsp; &nbsp; I used the AWS-SDK package from NPM to allow
           uploading images directly from the app, allowing users to add items to
-          the store intuitively, like they would on… well… craigslist. The users
-          collection is where the information about registered users is held.
-          Each user has their own record that contains information about them
-          and an array of objects that contain the itemIDs to the items in their
-          cart and the quantity of said item. When a user logs in, the client
-          sends the inputted email and password to the server (in the body of a
-          POST request) which then does a query to MongoDB to find a record that
-          has that matching email address. If it finds it, it returns the user’s
-          info and then compares the inputted password to the password for that
-          user in the record grabbed from MongoDB. If the password is correct,
-          the user info is set as the state of the UserContext, which contains
-          the contents of the user’s cart. While this isn’t the most secure
-          method of authenticating, it is a method I developed and managed to
-          figure out by myself. After all, I wanted to challenge myself and
-          showcase what I can do without following YouTube tutorials or guides.
-          In all honesty, the majority of stack overflow surfing I did was for
-          CSS rules (before I used Tailwind) and sending images to the server.
+          the store intuitively. The users collection is where the information
+          about registered users is held. Each user has their own record that
+          contains information about them and an array of objects that contain
+          the itemIDs to the items in their cart and the quantity of said item.
+          When a user logs in, the client sends the inputted email and password
+          to the server (in the body of a POST request) which then does a query
+          to MongoDB to find a record that has that matching email address. If
+          it finds it, and the password is correct, the server sends back a JWT
+          that the client then stores in a cookie on the browser.
         </p>
         <h2 className="font-bold underline">Final Words</h2>
         <p className={pStyles}>
@@ -108,7 +99,6 @@ function AboutPage() {
           knowing nothing, to being able to comfortably interact with these
           technologies. 1% a day truly does add up.
         </p>
-        <p className="font-bold mb-10">Thank you for reading.</p>
       </div>
     </div>
   );
