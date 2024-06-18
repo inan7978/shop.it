@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import StoreCard from "../components/StoreCard";
 import SearchBox from "../components/SearchBox";
 import { _getRecords } from "../api/storePageAPI";
 import { useNavigate } from "react-router-dom";

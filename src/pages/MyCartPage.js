@@ -1,5 +1,4 @@
-import UserContext from "../context/UserContext";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { _loadDetails, _setQuantity, _deleteItem } from "../api/myCartPageAPI";
 import Cookies from "js-cookie";

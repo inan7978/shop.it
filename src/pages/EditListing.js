@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import UserContext from "../context/UserContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { _deleteListing, _editHandler } from "../api/editListingAPI";

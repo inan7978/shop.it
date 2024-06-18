@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { _pushChanges } from "../api/myAccountPageAPI";
 import Cookies from "js-cookie";

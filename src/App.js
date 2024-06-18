@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { UserProvider } from "./context/UserContext";
+// import { UserProvider } from "./context/UserContext";
 import ContactUs from "./pages/ContactUs";
 import StorePage from "./pages/StorePage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -18,29 +18,25 @@ import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
-    <UserProvider>
-      {/* <CartProvider> */}
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route path="/" element={<StorePage />} />
-          <Route path="/store-page" element={<StorePage />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/my-cart" element={<MyCartPage />} />
-          <Route path="/my-account" element={<MyAccountPage />} />
-          <Route path="/my-listings" element={<MyListings />} />
-          <Route path="/edit-listing" element={<EditListing />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/list-item" element={<CreateListingPage />} />
-          <Route path="/sign-up" element={<CreateAccountPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/item-details-page/:id" element={<ItemDetailsPage />} />
-        </Routes>
-        <Footer />
-      </div>
-      {/* </CartProvider> */}
-    </UserProvider>
+    <div className="App">
+      <Header />
+      <Routes>
+        <Route path="/" element={<StorePage />} />
+        <Route path="/store-page" element={<StorePage />} />
+        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/my-cart" element={<MyCartPage />} />
+        <Route path="/my-account" element={<MyAccountPage />} />
+        <Route path="/my-listings" element={<MyListings />} />
+        <Route path="/edit-listing" element={<EditListing />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/list-item" element={<CreateListingPage />} />
+        <Route path="/sign-up" element={<CreateAccountPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/item-details-page/:id" element={<ItemDetailsPage />} />
+      </Routes>
+      <Footer />
+    </div>
   );
 }
 

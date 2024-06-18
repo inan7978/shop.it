@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import ItemListing from "../components/ItemListing";
 import { _loadDetails } from "../api/myListingsAPI";
