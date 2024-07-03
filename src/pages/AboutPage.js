@@ -76,29 +76,6 @@ function AboutPage() {
           it finds it, and the password is correct, the server sends back a JWT
           that the client then stores in a cookie on the browser.
         </p>
-        <h2 className="font-bold underline">Final Words</h2>
-        <p className={pStyles}>
-          &nbsp; &nbsp; &nbsp; I read a book “Think and Grow Rich” and the one
-          thing among many it kept bringing to my attention was that rich people
-          (in health, wealth, relationships, knowledge, etc.) had a habit of
-          being dedicated and persistent. Persistency and dedication must be how
-          one essentially “levels-up” right? I started my dev journey (for the
-          3rd time) about a year ago, with the difference between the other two
-          attempts being me being persistent and dedicated to learning. No
-          matter how much I didn’t feel like it, I did it. Even if it was a
-          little bit. Fast forward to today, I am truly amazed that I’m at a
-          point where I can describe in detail a completed Full Stack project.
-          That I created. I still get a kick out of reading this document
-          because of how I understand what I did and am reading. I feel
-          confident talking about it. Among the many reasons this project was
-          undertaken, the most significant one must be to prove to myself that
-          persistence, dedication, and doing a bit everyday even if it is a
-          little bit, can achieve a lot. Shop.it may not look like much to a
-          more experienced dev, but I am very proud of myself and how far I have
-          come in building it. It shows me that I can go from essentially
-          knowing nothing, to being able to comfortably interact with these
-          technologies. 1% a day truly does add up.
-        </p>
       </div>
     </div>
   );
